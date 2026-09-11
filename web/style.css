@@ -1,0 +1,414 @@
+:root {
+    --background: #050817;
+    --background-secondary: #080d24;
+
+    --card: rgba(13, 19, 52, 0.88);
+    --card-border: rgba(122, 92, 255, 0.28);
+
+    --purple: #7c3cff;
+    --purple-light: #9b6cff;
+    --blue: #2563eb;
+    --blue-light: #38bdf8;
+
+    --text: #ffffff;
+    --text-secondary: #aab3d1;
+
+    --success: #8bffcf;
+    --danger: #ff6b81;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(92, 50, 255, 0.22),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(37, 99, 235, 0.20),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #030611 0%,
+            #070b24 48%,
+            #09051b 100%
+        );
+
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 0%,
+            rgba(124, 60, 255, 0.04) 50%,
+            transparent 100%
+        );
+
+    z-index: 0;
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+/* ================================
+   DOWNLOAD CARD
+================================ */
+
+.download-card {
+    width: 100%;
+    max-width: 440px;
+
+    padding: 42px 30px 32px;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 25, 67, 0.94),
+            rgba(8, 13, 39, 0.94)
+        );
+
+    border: 1px solid var(--card-border);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 50px rgba(103, 64, 255, 0.10);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    animation: card-in 0.7s ease-out;
+}
+
+/* ================================
+   BRAND
+================================ */
+
+.brand {
+    font-size: 31px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 15px rgba(139, 92, 246, 0.55),
+        0 0 35px rgba(79, 70, 229, 0.28);
+}
+
+.brand-line {
+    width: 55px;
+    height: 3px;
+
+    margin: 17px auto 32px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--purple-light)
+        );
+
+    box-shadow:
+        0 0 15px rgba(124, 60, 255, 0.55);
+}
+
+/* ================================
+   MESSAGE
+================================ */
+
+.message {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+/* ================================
+   COUNTDOWN
+================================ */
+
+.countdown {
+    width: 94px;
+    height: 94px;
+
+    margin: 27px auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 40px;
+    font-weight: 700;
+
+    color: #ffffff;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(124, 60, 255, 0.18),
+            rgba(37, 99, 235, 0.06)
+        );
+
+    border: 2px solid rgba(139, 92, 246, 0.42);
+
+    box-shadow:
+        0 0 25px rgba(124, 60, 255, 0.20),
+        inset 0 0 25px rgba(37, 99, 235, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.countdown.tick {
+    transform: scale(1.08);
+
+    border-color:
+        rgba(56, 189, 248, 0.75);
+}
+
+.countdown-text {
+    margin: 0 0 27px;
+
+    color: #737fa8;
+
+    font-size: 13px;
+}
+
+/* ================================
+   DOWNLOAD BUTTON
+================================ */
+
+.download-button {
+    width: 100%;
+
+    min-height: 58px;
+
+    border: 0;
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            100deg,
+            #2563eb,
+            #6d3df5,
+            #8b3dff
+        );
+
+    box-shadow:
+        0 10px 30px rgba(78, 70, 229, 0.28);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease,
+        filter 0.2s ease;
+}
+
+.download-button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.45;
+
+    background:
+        linear-gradient(
+            100deg,
+            #202a4c,
+            #29234b
+        );
+
+    box-shadow: none;
+}
+
+.download-button:not(:disabled):hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 38px rgba(92, 63, 255, 0.42);
+
+    filter: brightness(1.08);
+}
+
+.download-button:not(:disabled):active {
+    transform: translateY(0);
+}
+
+.download-icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+
+    font-size: 25px;
+    line-height: 1;
+}
+
+/* ================================
+   ERROR
+================================ */
+
+.error-message {
+    margin: 18px 0 0;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    color: #ff9aaa;
+
+    background: rgba(255, 70, 100, 0.08);
+
+    border: 1px solid rgba(255, 70, 100, 0.18);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+/* ================================
+   AD AREA
+================================ */
+
+.ad-container {
+    width: 100%;
+    max-width: 440px;
+
+    min-height: 70px;
+
+    margin-top: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #454e72;
+
+    font-size: 10px;
+}
+
+/* ================================
+   ANIMATION
+================================ */
+
+@keyframes card-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+
+    .page {
+        padding: 16px;
+    }
+
+    .download-card {
+        padding:
+            36px
+            22px
+            26px;
+
+        border-radius: 20px;
+    }
+
+    .brand {
+        font-size: 27px;
+        letter-spacing: 4px;
+    }
+
+    .countdown {
+        width: 86px;
+        height: 86px;
+
+        font-size: 36px;
+    }
+}
