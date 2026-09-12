@@ -2,24 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>WALAWWA - Download</title>
 
-    <link rel="stylesheet" href="style.css?v=5">
+    <meta
+        name="description"
+        content="WALAWWA file download page"
+    >
+
+    <!-- Monetag -->
+    <script
+        src="https://quge5.com/88/tag.min.js"
+        data-zone="266058"
+        async
+        data-cfasync="false"
+    ></script>
+
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 
 <body>
 
-    <div class="container">
+    <main class="page">
 
-        <div class="card">
+        <section class="download-card">
 
-            <h1>WALAWWA</h1>
+            <div class="brand">
+                <div class="brand-icon">W</div>
+                <div class="brand-name">WALAWWA</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h1>Your file is ready</h1>
 
             <p class="subtitle">
-                Your file is ready.<br>
-                Click the button below to continue.
+                Click the button below to continue
+                with your download.
             </p>
 
             <div id="downloadArea">
@@ -29,40 +53,55 @@
                     class="download-button"
                     type="button"
                 >
-                    ⬇️ Download
+                    <span class="button-icon">⬇</span>
+                    <span>Download</span>
                 </button>
 
                 <div
                     id="countdown"
                     class="countdown"
-                    style="display:none;"
+                    style="display: none;"
                 >
-                    Please wait
-                    <span id="countdownNumber">5</span>
-                    seconds...
+                    <div class="spinner"></div>
+
+                    <div>
+                        <div class="countdown-title">
+                            Preparing download
+                        </div>
+
+                        <div class="countdown-text">
+                            Please wait
+                            <span id="countdownNumber">5</span>
+                            seconds
+                        </div>
+                    </div>
                 </div>
 
                 <button
                     id="secondDownload"
-                    class="download-button"
+                    class="download-button continue-button"
                     type="button"
-                    style="display:none;"
+                    style="display: none;"
                 >
-                    ⬇️ Continue Download
+                    <span class="button-icon">⬇</span>
+                    <span>Continue Download</span>
                 </button>
 
                 <div
                     id="message"
                     class="message"
-                ></div>
+                    aria-live="polite"
+                >
+                    Click Download to continue.
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
         <footer>
-            WALAWWA
-            <br>
+            <div>WALAWWA</div>
+
             <a
                 href="https://t.me/walawwa_downloadBot"
                 target="_blank"
@@ -72,7 +111,7 @@
             </a>
         </footer>
 
-    </div>
+    </main>
 
     <script src="script.js?v=6"></script>
 
