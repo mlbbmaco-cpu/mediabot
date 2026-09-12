@@ -1,1046 +1,338 @@
-* {
-    box-sizing: border-box;
-}
+"use strict";
 
-html {
-    min-height: 100%;
-}
+const BOT_USERNAME = "walawwa_downloadBot";
+const COUNTDOWN_SECONDS = 5;
 
-body {
-    margin: 0;
-    padding: 0;
+let firstDownload = null;
+let secondDownload = null;
+let countdown = null;
+let countdownNumber = null;
+let message = null;
 
-    min-height: 100vh;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+function getDownloadCode() {
 
-    color: white;
-
-    background:
-        #08050f;
-
-    overflow-x: hidden;
-}
-
-
-/* =========================================
-   ANIMATED BACKGROUND
-========================================= */
-
-.animated-background {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(112, 45, 190, 0.22),
-            transparent 45%
-        ),
-        linear-gradient(
-            135deg,
-            #090511,
-            #160a25,
-            #08050f
-        );
-}
-
-
-/* Large moving purple lights */
-
-.gradient-orb {
-    position: absolute;
-
-    border-radius: 50%;
-
-    filter: blur(70px);
-
-    opacity: 0.55;
-}
-
-
-.orb-1 {
-    width: 420px;
-    height: 420px;
-
-    background:
-        #7c3aed;
-
-    left: -180px;
-    top: -140px;
-
-    animation:
-        orbMoveOne 10s ease-in-out infinite alternate;
-}
-
-
-.orb-2 {
-    width: 380px;
-    height: 380px;
-
-    background:
-        #a855f7;
-
-    right: -160px;
-    top: 25%;
-
-    animation:
-        orbMoveTwo 12s ease-in-out infinite alternate;
-}
-
-
-.orb-3 {
-    width: 430px;
-    height: 430px;
-
-    background:
-        #5b21b6;
-
-    bottom: -220px;
-    left: 30%;
-
-    animation:
-        orbMoveThree 14s ease-in-out infinite alternate;
-}
-
-
-@keyframes orbMoveOne {
-
-    0% {
-        transform:
-            translate(0, 0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate(130px, 100px)
-            scale(1.2);
-    }
-
-    100% {
-        transform:
-            translate(50px, 180px)
-            scale(0.9);
-    }
-}
-
-
-@keyframes orbMoveTwo {
-
-    0% {
-        transform:
-            translate(0, 0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate(-120px, -100px)
-            scale(1.25);
-    }
-
-    100% {
-        transform:
-            translate(-40px, 100px)
-            scale(0.95);
-    }
-}
-
-
-@keyframes orbMoveThree {
-
-    0% {
-        transform:
-            translate(0, 0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate(-100px, -100px)
-            scale(1.2);
-    }
-
-    100% {
-        transform:
-            translate(120px, -50px)
-            scale(0.9);
-    }
-}
-
-
-/* =========================================
-   FLOATING PARTICLES
-========================================= */
-
-.particle {
-    position: absolute;
-
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background: #c084fc;
-
-    box-shadow:
-        0 0 10px #a855f7,
-        0 0 25px #7c3aed;
-
-    opacity: 0.7;
-
-    animation:
-        particleFloat 6s ease-in-out infinite;
-}
-
-
-.particle-1 {
-    left: 10%;
-    top: 20%;
-}
-
-
-.particle-2 {
-    left: 25%;
-    top: 70%;
-
-    animation-delay: -2s;
-}
-
-
-.particle-3 {
-    left: 50%;
-    top: 15%;
-
-    animation-delay: -4s;
-}
-
-
-.particle-4 {
-    right: 20%;
-    top: 35%;
-
-    animation-delay: -1s;
-}
-
-
-.particle-5 {
-    right: 10%;
-    bottom: 20%;
-
-    animation-delay: -3s;
-}
-
-
-.particle-6 {
-    left: 65%;
-    bottom: 12%;
-
-    animation-delay: -5s;
-}
-
-
-@keyframes particleFloat {
-
-    0% {
-        transform:
-            translateY(0)
-            scale(1);
-
-        opacity: 0.25;
-    }
-
-    50% {
-        transform:
-            translateY(-45px)
-            scale(1.7);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translateY(0)
-            scale(1);
-
-        opacity: 0.25;
-    }
-}
-
-
-/* =========================================
-   PAGE
-========================================= */
-
-.page {
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-    min-height: 100vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding:
-        25px 15px;
-}
-
-
-/* =========================================
-   CARD
-========================================= */
-
-.download-card {
-    width: 100%;
-
-    max-width: 460px;
-
-    padding:
-        38px 28px 32px;
-
-    text-align: center;
-
-    background:
-        rgba(15, 10, 24, 0.86);
-
-    border:
-        1px solid
-        rgba(190, 130, 255, 0.18);
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 30px 90px
-        rgba(0, 0, 0, 0.6),
-
-        0 0 50px
-        rgba(124, 58, 237, 0.12),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.05);
-
-    backdrop-filter:
-        blur(18px);
-}
-
-
-/* =========================================
-   WALAWWA HEADER
-========================================= */
-
-.logo {
-    display: inline-block;
-
-    font-size:
-        clamp(28px, 8vw, 38px);
-
-    font-weight:
-        900;
-
-    letter-spacing:
-        4px;
-
-    color: white;
-
-    text-shadow:
-        0 0 10px
-        rgba(168, 85, 247, 0.8),
-
-        0 0 30px
-        rgba(124, 58, 237, 0.6),
-
-        0 0 60px
-        rgba(124, 58, 237, 0.35);
-
-    animation:
-        logoGlow 2.5s ease-in-out infinite alternate;
-}
-
-
-@keyframes logoGlow {
-
-    from {
-        text-shadow:
-            0 0 10px
-            rgba(168, 85, 247, 0.6),
-
-            0 0 25px
-            rgba(124, 58, 237, 0.4);
-    }
-
-    to {
-        text-shadow:
-            0 0 15px
-            rgba(192, 132, 252, 1),
-
-            0 0 40px
-            rgba(124, 58, 237, 0.8),
-
-            0 0 70px
-            rgba(124, 58, 237, 0.45);
-    }
-}
-
-
-.logo-line {
-    width: 65px;
-
-    height: 3px;
-
-    margin:
-        16px auto 28px;
-
-    border-radius:
-        50px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #6d28d9,
-            #c084fc,
-            #6d28d9
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
-    box-shadow:
-        0 0 20px
-        rgba(168, 85, 247, 0.8);
+    let code =
+        params.get("start");
+
+    if (!code) {
+        code =
+            params.get("code");
+    }
+
+    if (!code) {
+        return null;
+    }
+
+    code =
+        code.trim();
+
+    return code || null;
 }
 
 
-/* =========================================
-   HEADING
-========================================= */
+function makeTelegramLink(code) {
 
-h1 {
-    margin: 0;
-
-    font-size:
-        clamp(27px, 7vw, 34px);
-
-    line-height: 1.2;
-
-    font-weight: 800;
+    return (
+        "https://t.me/" +
+        BOT_USERNAME +
+        "?start=" +
+        encodeURIComponent(code)
+    );
 }
 
 
-.subtitle {
-    margin:
-        12px 0 28px;
+function showMessage(
+    text,
+    type = ""
+) {
 
-    color:
-        #aaa1b5;
+    if (!message) {
+        return;
+    }
 
-    font-size:
-        15px;
+    message.textContent =
+        text;
 
-    line-height:
-        1.5;
+    message.className =
+        "message";
+
+    if (type) {
+        message.classList.add(type);
+    }
 }
 
 
-/* =========================================
-   DOWNLOAD AREA
-========================================= */
+function initializeDownloadPage() {
 
-#downloadArea {
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 16px;
-}
+    console.log(
+        "WALAWWA JavaScript loaded"
+    );
 
 
-/* =========================================
-   DOWNLOAD BUTTON
-========================================= */
-
-.download-button {
-    position: relative;
-
-    width: 100%;
-
-    max-width: 350px;
-
-    min-height: 60px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 11px;
-
-    border: none;
-
-    border-radius:
-        16px;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #a855f7,
-            #7c3aed,
-            #5b21b6
+    firstDownload =
+        document.getElementById(
+            "firstDownload"
         );
 
-    background-size:
-        200% 200%;
-
-    font-size:
-        18px;
-
-    font-weight:
-        800;
-
-    cursor: pointer;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 12px 35px
-        rgba(124, 58, 237, 0.45);
-
-    animation:
-        buttonBackground 4s ease infinite,
-        buttonPulse 2s ease-in-out infinite;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-@keyframes buttonBackground {
-
-    0% {
-        background-position:
-            0% 50%;
-    }
-
-    50% {
-        background-position:
-            100% 50%;
-    }
-
-    100% {
-        background-position:
-            0% 50%;
-    }
-}
-
-
-@keyframes buttonPulse {
-
-    0%,
-    100% {
-        box-shadow:
-            0 12px 35px
-            rgba(124, 58, 237, 0.4);
-    }
-
-    50% {
-        box-shadow:
-            0 15px 50px
-            rgba(168, 85, 247, 0.75),
-
-            0 0 30px
-            rgba(168, 85, 247, 0.35);
-    }
-}
-
-
-/* Shine */
-
-.download-button::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-
-    left: -130%;
-
-    width: 70%;
-
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,0.35),
-            transparent
+    secondDownload =
+        document.getElementById(
+            "secondDownload"
         );
 
-    transform:
-        skewX(-20deg);
-
-    animation:
-        buttonShine 3s ease-in-out infinite;
-}
-
-
-@keyframes buttonShine {
-
-    0% {
-        left: -130%;
-    }
-
-    45%,
-    100% {
-        left: 140%;
-    }
-}
-
-
-.download-button:hover {
-
-    transform:
-        translateY(-4px)
-        scale(1.02);
-
-    box-shadow:
-        0 20px 55px
-        rgba(168, 85, 247, 0.65);
-}
-
-
-.download-button:active {
-
-    transform:
-        scale(0.97);
-}
-
-
-.download-button:disabled {
-
-    opacity:
-        0.55;
-
-    cursor:
-        not-allowed;
-
-    animation:
-        none;
-}
-
-
-/* Button contents */
-
-.download-button span {
-
-    position: relative;
-
-    z-index: 2;
-}
-
-
-.download-icon {
-
-    font-size:
-        26px;
-
-    font-weight:
-        900;
-}
-
-
-/* =========================================
-   BIG COUNTDOWN
-========================================= */
-
-.countdown {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: 350px;
-
-    min-height: 205px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius:
-        20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(124, 58, 237, 0.18),
-            rgba(30, 20, 45, 0.85)
+    countdown =
+        document.getElementById(
+            "countdown"
         );
 
-    border:
-        1px solid
-        rgba(168, 85, 247, 0.3);
+    countdownNumber =
+        document.getElementById(
+            "countdownNumber"
+        );
 
-    box-shadow:
-        inset 0 0 35px
-        rgba(124, 58, 237, 0.08),
+    message =
+        document.getElementById(
+            "message"
+        );
 
-        0 15px 45px
-        rgba(0, 0, 0, 0.3);
 
-    overflow: hidden;
+    const code =
+        getDownloadCode();
 
-    animation:
-        countdownAppear 0.4s ease;
-}
 
+    console.log(
+        "Download code:",
+        code
+    );
 
-@keyframes countdownAppear {
 
-    from {
-        opacity: 0;
+    if (
+        !firstDownload ||
+        !secondDownload ||
+        !countdown ||
+        !countdownNumber
+    ) {
 
-        transform:
-            scale(0.9);
-    }
+        console.error(
+            "WALAWWA: required elements missing"
+        );
 
-    to {
-        opacity: 1;
-
-        transform:
-            scale(1);
-    }
-}
-
-
-.countdown::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-
-    height: 180px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(192, 132, 252, 0.15);
-
-    animation:
-        countdownRing 2s ease-in-out infinite;
-}
-
-
-@keyframes countdownRing {
-
-    0%,
-    100% {
-        transform:
-            scale(0.8);
-
-        opacity: 0.2;
-    }
-
-    50% {
-        transform:
-            scale(1.2);
-
-        opacity: 0.8;
-    }
-}
-
-
-.countdown-label {
-
-    position: relative;
-
-    z-index: 2;
-
-    color:
-        #bba5d1;
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        2px;
-
-    margin-bottom:
-        4px;
-}
-
-
-.countdown-number {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-size:
-        clamp(80px, 20vw, 110px);
-
-    line-height:
-        1;
-
-    font-weight:
-        900;
-
-    color:
-        #ffffff;
-
-    text-shadow:
-        0 0 15px
-        rgba(192, 132, 252, 0.9),
-
-        0 0 40px
-        rgba(124, 58, 237, 0.7),
-
-        0 0 80px
-        rgba(124, 58, 237, 0.4);
-
-    animation:
-        numberPulse 1s ease-in-out infinite;
-}
-
-
-@keyframes numberPulse {
-
-    0%,
-    100% {
-        transform:
-            scale(1);
-    }
-
-    50% {
-        transform:
-            scale(1.08);
-    }
-}
-
-
-.countdown-small {
-
-    position: relative;
-
-    z-index: 2;
-
-    margin-top:
-        6px;
-
-    color:
-        #91869d;
-
-    font-size:
-        13px;
-}
-
-
-/* =========================================
-   MESSAGE
-========================================= */
-
-.message {
-
-    min-height:
-        21px;
-
-    color:
-        #918899;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.5;
-}
-
-
-.message.success {
-
-    color:
-        #58e69a;
-}
-
-
-.message.error {
-
-    color:
-        #ff6678;
-}
-
-
-/* =========================================
-   FOOTER
-========================================= */
-
-footer {
-
-    position:
-        relative;
-
-    margin-top:
-        22px;
-
-    color:
-        #756b7e;
-
-    font-size:
-        12px;
-
-    letter-spacing:
-        0.4px;
-}
-
-
-footer strong {
-
-    color:
-        #ad7cff;
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 480px) {
-
-    .page {
-        padding:
-            18px 12px;
+        return;
     }
 
 
-    .download-card {
+    /*
+     * INVALID LINK
+     */
 
-        padding:
-            32px 18px 30px;
+    if (!code) {
 
-        border-radius:
-            22px;
+        firstDownload.disabled =
+            true;
+
+        firstDownload.innerHTML =
+            "<span>Invalid Download Link</span>";
+
+        showMessage(
+            "Please open a valid WALAWWA download link.",
+            "error"
+        );
+
+        return;
     }
 
 
-    .logo {
+    /*
+     * INITIAL STATE
+     *
+     * Continue Download = visible
+     * Download = hidden
+     * Countdown = hidden
+     */
 
-        font-size:
-            30px;
+    firstDownload.style.display =
+        "flex";
 
-        letter-spacing:
-            3px;
-    }
+    firstDownload.disabled =
+        false;
 
+    secondDownload.style.display =
+        "none";
 
-    h1 {
+    secondDownload.disabled =
+        true;
 
-        font-size:
-            27px;
-    }
+    countdown.style.display =
+        "none";
 
-
-    .subtitle {
-
-        font-size:
-            14px;
-
-        margin-bottom:
-            23px;
-    }
-
-
-    .download-button {
-
-        min-height:
-            58px;
-
-        font-size:
-            16px;
-    }
+    showMessage("");
 
 
-    .countdown {
+    /*
+     * CONTINUE DOWNLOAD BUTTON
+     *
+     * Starts the 5 second countdown.
+     */
 
-        min-height:
-            190px;
-    }
+    firstDownload.addEventListener(
+        "click",
+        function () {
+
+            console.log(
+                "Continue Download clicked"
+            );
 
 
-    .countdown-number {
+            /*
+             * Hide Continue Download
+             */
 
-        font-size:
-            90px;
-    }
+            firstDownload.style.display =
+                "none";
+
+
+            /*
+             * Show countdown
+             */
+
+            countdown.style.display =
+                "flex";
+
+
+            let remaining =
+                COUNTDOWN_SECONDS;
+
+
+            countdownNumber.textContent =
+                remaining;
+
+
+            /*
+             * No extra status message.
+             */
+
+            showMessage("");
+
+
+            const timer =
+                setInterval(
+                    function () {
+
+                        remaining--;
+
+                        countdownNumber.textContent =
+                            remaining;
+
+
+                        /*
+                         * Countdown finished
+                         */
+
+                        if (remaining <= 0) {
+
+                            clearInterval(
+                                timer
+                            );
+
+
+                            /*
+                             * Hide countdown
+                             */
+
+                            countdown.style.display =
+                                "none";
+
+
+                            /*
+                             * Show Download button
+                             */
+
+                            secondDownload.style.display =
+                                "flex";
+
+                            secondDownload.disabled =
+                                false;
+
+
+                            /*
+                             * No "Your file is ready"
+                             * message.
+                             */
+
+                            showMessage("");
+
+                        }
+
+                    },
+                    1000
+                );
+
+        }
+    );
+
+
+    /*
+     * DOWNLOAD BUTTON
+     *
+     * Opens Telegram.
+     */
+
+    secondDownload.addEventListener(
+        "click",
+        function () {
+
+            console.log(
+                "Download clicked"
+            );
+
+
+            secondDownload.disabled =
+                true;
+
+
+            /*
+             * No status message.
+             */
+
+            showMessage("");
+
+
+            const telegramLink =
+                makeTelegramLink(code);
+
+
+            console.log(
+                "Opening Telegram:",
+                telegramLink
+            );
+
+
+            window.location.href =
+                telegramLink;
+
+        }
+    );
 
 }
 
 
-/* =========================================
-   SMALL PHONES
-========================================= */
+if (
+    document.readyState ===
+    "loading"
+) {
 
-@media (max-width: 350px) {
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeDownloadPage
+    );
 
-    .download-card {
+} else {
 
-        padding-left:
-            14px;
-
-        padding-right:
-            14px;
-    }
-
-
-    .logo {
-
-        font-size:
-            27px;
-    }
-
-
-    h1 {
-
-        font-size:
-            24px;
-    }
-
-
-    .countdown-number {
-
-        font-size:
-            78px;
-    }
+    initializeDownloadPage();
 
 }
