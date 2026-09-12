@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,12 @@
             min-height: 100vh;
             font-family: Arial, Helvetica, sans-serif;
             background:
-                radial-gradient(circle at top, #24104a 0%, #0d0718 45%, #050308 100%);
+                radial-gradient(
+                    circle at top,
+                    #24104a 0%,
+                    #0d0718 45%,
+                    #050308 100%
+                );
             color: #ffffff;
             display: flex;
             align-items: center;
@@ -101,8 +107,11 @@
                 #8b5cf6,
                 #6d28d9
             );
-            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.35);
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            box-shadow:
+                0 8px 25px rgba(109, 40, 217, 0.35);
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease;
         }
 
         .download-button:hover {
@@ -188,15 +197,6 @@
 
         <section class="card">
 
-            <!--
-                OPTIONAL LOGO
-
-                If you have logo.png in Firebase:
-                keep this line.
-
-                If you don't have logo.png,
-                you can remove this <img>.
-            -->
             <img
                 src="logo.png"
                 alt="WALAWWA"
@@ -252,6 +252,7 @@
                     ⬇️ Continue Download
                 </button>
 
+                <!-- MESSAGE -->
                 <div
                     id="message"
                     class="message"
@@ -276,15 +277,16 @@
 
 
     <!--
-        IMPORTANT:
+        WALAWWA JavaScript
 
-        The ?v=3 prevents Firebase/browser cache
-        from loading the old JavaScript.
+        script.js is in the same Firebase
+        hosting folder as this index.html.
 
-        Make sure app.js is uploaded beside this
-        index.html.
+        ?v=4 forces browsers to load the
+        newest version instead of cached JS.
     -->
-    <script src="app.js?v=3"></script>
+    <script src="script.js?v=4"></script>
 
 </body>
 </html>
+```
