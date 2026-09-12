@@ -22,7 +22,7 @@
         data-cfasync="false"
     ></script>
 
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=11">
 </head>
 
 <body>
@@ -53,31 +53,25 @@
 
             <div class="logo-line"></div>
 
-            <h1>
-                Your file is ready
-            </h1>
-
-            <p class="subtitle">
-                Click the button below to continue
-            </p>
-
 
             <div id="downloadArea">
 
+                <!-- FIRST BUTTON -->
                 <button
                     id="firstDownload"
                     class="download-button"
                     type="button"
                 >
                     <span class="download-icon">↓</span>
-                    <span>Download</span>
+                    <span>Continue Download</span>
                 </button>
 
 
+                <!-- 5 SECOND COUNTDOWN -->
                 <div
                     id="countdown"
                     class="countdown"
-                    style="display:none;"
+                    style="display: none;"
                 >
 
                     <div class="countdown-label">
@@ -98,24 +92,32 @@
                 </div>
 
 
+                <!-- SECOND BUTTON -->
                 <button
                     id="secondDownload"
                     class="download-button continue-button"
                     type="button"
-                    style="display:none;"
+                    style="display: none;"
                 >
                     <span class="download-icon">↓</span>
-                    <span>Continue Download</span>
+                    <span>Download</span>
                 </button>
 
 
                 <div
                     id="message"
                     class="message"
-                >
-                    Click Download to continue.
-                </div>
+                ></div>
 
+            </div>
+
+
+            <!-- Sinhala description -->
+            <div class="sinhala-description">
+                මුලින් Continue Download බොත්තම ක්ලික් කරන්න.
+                ඉන්පසු තත්පර 5ක් රැඳී සිටින්න.
+                තත්පර 5කට පසු Download බොත්තම දිස් වූ විට
+                එය ක්ලික් කර Telegram හරහා ඔබගේ ගොනුව ලබාගන්න.
             </div>
 
         </section>
@@ -128,7 +130,7 @@
     </main>
 
 
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=11"></script>
 
 </body>
 </html>
