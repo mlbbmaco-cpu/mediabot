@@ -24,15 +24,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      # ==============================
-      # DOWNLOAD REPOSITORY
-      # ==============================
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ==============================
-      # CREATE FIREBASE CONFIG
-      # ==============================
       - name: Create Firebase config
         env:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
@@ -55,23 +49,14 @@ jobs:
           };
           EOF
 
-      # ==============================
-      # CONFIGURE GITHUB PAGES
-      # ==============================
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # ==============================
-      # UPLOAD WEB FOLDER
-      # ==============================
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./web
 
-      # ==============================
-      # DEPLOY
-      # ==============================
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
