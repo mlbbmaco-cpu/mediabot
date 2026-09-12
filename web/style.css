@@ -1,35 +1,15 @@
-:root {
-    --background: #050817;
-    --background-secondary: #080d24;
-
-    --card: rgba(13, 19, 52, 0.88);
-    --card-border: rgba(122, 92, 255, 0.28);
-
-    --purple: #7c3cff;
-    --purple-light: #9b6cff;
-    --blue: #2563eb;
-    --blue-light: #38bdf8;
-
-    --text: #ffffff;
-    --text-secondary: #aab3d1;
-
-    --success: #8bffcf;
-    --danger: #ff6b81;
-}
-
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+html {
     min-height: 100%;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+
     min-height: 100vh;
 
     font-family:
@@ -41,374 +21,456 @@ body {
         Arial,
         sans-serif;
 
-    color: var(--text);
-
     background:
         radial-gradient(
-            circle at 15% 15%,
-            rgba(92, 50, 255, 0.22),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(37, 99, 235, 0.20),
-            transparent 35%
-        ),
-        linear-gradient(
-            145deg,
-            #030611 0%,
-            #070b24 48%,
-            #09051b 100%
+            circle at 50% 0%,
+            #292044 0%,
+            #171321 35%,
+            #0d0b11 75%
         );
+
+    color: #ffffff;
 
     overflow-x: hidden;
 }
 
-body::before {
-    content: "";
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
 
-    position: fixed;
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 0%,
-            rgba(124, 60, 255, 0.04) 50%,
-            transparent 100%
-        );
-
-    z-index: 0;
+button {
+    font-family: inherit;
 }
 
 .page {
-    position: relative;
-    z-index: 1;
-
+    width: 100%;
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    padding: 24px;
+    padding: 24px 16px;
 }
 
-/* ================================
-   DOWNLOAD CARD
-================================ */
+/* Main card */
 
 .download-card {
     width: 100%;
-    max-width: 440px;
+    max-width: 460px;
 
-    padding: 42px 30px 32px;
-
-    text-align: center;
-
-    border-radius: 24px;
+    padding: 36px 30px 32px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(18, 25, 67, 0.94),
-            rgba(8, 13, 39, 0.94)
+            rgba(40, 34, 56, 0.96),
+            rgba(20, 17, 27, 0.98)
         );
 
-    border: 1px solid var(--card-border);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 24px;
 
     box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.55),
-        0 0 50px rgba(103, 64, 255, 0.10);
+        0 25px 70px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    text-align: center;
 
-    animation: card-in 0.7s ease-out;
+    backdrop-filter: blur(12px);
 }
 
-/* ================================
-   BRAND
-================================ */
+/* Brand */
 
 .brand {
-    font-size: 31px;
+    display: flex;
 
-    font-weight: 800;
+    align-items: center;
+    justify-content: center;
 
-    letter-spacing: 5px;
+    gap: 11px;
+
+    margin-bottom: 24px;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9b5cff,
+            #6d28d9
+        );
 
     color: #ffffff;
 
-    text-shadow:
-        0 0 15px rgba(139, 92, 246, 0.55),
-        0 0 35px rgba(79, 70, 229, 0.28);
+    font-size: 23px;
+    font-weight: 900;
+
+    box-shadow:
+        0 8px 25px rgba(124, 58, 237, 0.35);
 }
 
-.brand-line {
+.brand-name {
+    font-size: 23px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+/* Divider */
+
+.divider {
     width: 55px;
     height: 3px;
 
-    margin: 17px auto 32px;
+    margin: 0 auto 25px;
 
     border-radius: 10px;
 
     background:
         linear-gradient(
             90deg,
-            var(--blue),
-            var(--purple-light)
+            #7c3aed,
+            #b36cff
         );
-
-    box-shadow:
-        0 0 15px rgba(124, 60, 255, 0.55);
 }
 
-/* ================================
-   MESSAGE
-================================ */
+/* Text */
 
-.message {
+h1 {
     margin: 0;
 
-    color: var(--text-secondary);
+    font-size: clamp(27px, 7vw, 34px);
 
-    font-size: 16px;
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    letter-spacing: -0.6px;
+}
+
+.subtitle {
+    margin: 13px auto 28px;
+
+    max-width: 330px;
+
+    color: #aaa4b6;
+
+    font-size: 15px;
 
     line-height: 1.6;
 }
 
-/* ================================
-   COUNTDOWN
-================================ */
+/* Download area */
 
-.countdown {
-    width: 94px;
-    height: 94px;
-
-    margin: 27px auto 12px;
+#downloadArea {
+    width: 100%;
 
     display: flex;
+    flex-direction: column;
+
     align-items: center;
-    justify-content: center;
 
-    border-radius: 50%;
-
-    font-size: 40px;
-    font-weight: 700;
-
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(124, 60, 255, 0.18),
-            rgba(37, 99, 235, 0.06)
-        );
-
-    border: 2px solid rgba(139, 92, 246, 0.42);
-
-    box-shadow:
-        0 0 25px rgba(124, 60, 255, 0.20),
-        inset 0 0 25px rgba(37, 99, 235, 0.08);
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease;
+    gap: 15px;
 }
 
-.countdown.tick {
-    transform: scale(1.08);
-
-    border-color:
-        rgba(56, 189, 248, 0.75);
-}
-
-.countdown-text {
-    margin: 0 0 27px;
-
-    color: #737fa8;
-
-    font-size: 13px;
-}
-
-/* ================================
-   DOWNLOAD BUTTON
-================================ */
+/* Buttons */
 
 .download-button {
     width: 100%;
+    max-width: 350px;
 
     min-height: 58px;
 
     border: 0;
-    border-radius: 14px;
+    outline: none;
+
+    border-radius: 15px;
+
+    padding: 16px 22px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     gap: 10px;
 
+    background:
+        linear-gradient(
+            135deg,
+            #914fff,
+            #6d28d9
+        );
+
     color: #ffffff;
 
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 750;
 
     cursor: pointer;
 
-    background:
-        linear-gradient(
-            100deg,
-            #2563eb,
-            #6d3df5,
-            #8b3dff
-        );
-
     box-shadow:
-        0 10px 30px rgba(78, 70, 229, 0.28);
+        0 10px 28px rgba(124, 58, 237, 0.28);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        opacity 0.2s ease,
-        filter 0.2s ease;
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        opacity 0.18s ease;
 }
 
-.download-button:disabled {
-    cursor: not-allowed;
-
-    opacity: 0.45;
-
-    background:
-        linear-gradient(
-            100deg,
-            #202a4c,
-            #29234b
-        );
-
-    box-shadow: none;
-}
-
-.download-button:not(:disabled):hover {
+.download-button:hover {
     transform: translateY(-2px);
 
     box-shadow:
-        0 15px 38px rgba(92, 63, 255, 0.42);
-
-    filter: brightness(1.08);
+        0 14px 34px rgba(124, 58, 237, 0.4);
 }
 
-.download-button:not(:disabled):active {
-    transform: translateY(0);
+.download-button:active {
+    transform: scale(0.98);
 }
 
-.download-icon {
-    display: inline-flex;
+.download-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 
-    align-items: center;
-    justify-content: center;
+    transform: none;
+}
 
-    width: 25px;
-    height: 25px;
-
-    font-size: 25px;
+.button-icon {
+    font-size: 22px;
     line-height: 1;
 }
 
-/* ================================
-   ERROR
-================================ */
-
-.error-message {
-    margin: 18px 0 0;
-
-    padding: 12px 14px;
-
-    border-radius: 10px;
-
-    color: #ff9aaa;
-
-    background: rgba(255, 70, 100, 0.08);
-
-    border: 1px solid rgba(255, 70, 100, 0.18);
-
-    font-size: 13px;
-
-    line-height: 1.5;
+.continue-button {
+    background:
+        linear-gradient(
+            135deg,
+            #8b5cf6,
+            #7c3aed
+        );
 }
 
-/* ================================
-   AD AREA
-================================ */
+/* Countdown */
 
-.ad-container {
+.countdown {
     width: 100%;
-    max-width: 440px;
+    max-width: 350px;
 
-    min-height: 70px;
-
-    margin-top: 20px;
+    min-height: 72px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    color: #454e72;
+    gap: 14px;
 
-    font-size: 10px;
+    padding: 13px 18px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ================================
-   ANIMATION
-================================ */
+.countdown-title {
+    font-size: 15px;
 
-@keyframes card-in {
-    from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.98);
-    }
+    font-weight: 700;
 
+    text-align: left;
+
+    color: #ffffff;
+}
+
+.countdown-text {
+    margin-top: 4px;
+
+    font-size: 13px;
+
+    color: #aaa4b6;
+
+    text-align: left;
+}
+
+#countdownNumber {
+    color: #b388ff;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+/* Loading spinner */
+
+.spinner {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border:
+        3px solid rgba(255, 255, 255, 0.12);
+
+    border-top-color: #9b5cff;
+
+    animation:
+        spin 0.8s linear infinite;
+}
+
+@keyframes spin {
     to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: rotate(360deg);
     }
 }
 
-/* ================================
-   MOBILE
-================================ */
+/* Message */
+
+.message {
+    min-height: 22px;
+
+    padding: 0 5px;
+
+    font-size: 13px;
+
+    color: #91899f;
+
+    line-height: 1.5;
+}
+
+.message.success {
+    color: #5eea98;
+}
+
+.message.error {
+    color: #ff6f7d;
+}
+
+/* Footer */
+
+footer {
+    margin-top: 22px;
+
+    text-align: center;
+
+    color: #696271;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+footer a {
+    color: #a678ff;
+
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+}
+
+footer a:hover {
+    color: #c09aff;
+
+    text-decoration: underline;
+}
+
+/* Mobile */
 
 @media (max-width: 480px) {
 
     .page {
-        padding: 16px;
+        padding:
+            18px 13px;
     }
 
     .download-card {
         padding:
-            36px
-            22px
-            26px;
+            30px 19px 27px;
 
-        border-radius: 20px;
+        border-radius: 21px;
     }
 
     .brand {
-        font-size: 27px;
-        letter-spacing: 4px;
+        margin-bottom: 21px;
+    }
+
+    .brand-icon {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 11px;
+
+        font-size: 21px;
+    }
+
+    .brand-name {
+        font-size: 21px;
+    }
+
+    .divider {
+        margin-bottom: 22px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        margin-top: 11px;
+        margin-bottom: 24px;
+
+        font-size: 14px;
+    }
+
+    .download-button {
+        min-height: 56px;
+
+        font-size: 16px;
     }
 
     .countdown {
-        width: 86px;
-        height: 86px;
-
-        font-size: 36px;
+        min-height: 70px;
     }
+
+}
+
+/* Very small phones */
+
+@media (max-width: 350px) {
+
+    .download-card {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .brand-name {
+        font-size: 19px;
+    }
+
+    .download-button {
+        font-size: 15px;
+    }
+
 }
