@@ -22,31 +22,45 @@
         data-cfasync="false"
     ></script>
 
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 
 <body>
 
-    <div class="background">
-        <div class="glow glow-one"></div>
-        <div class="glow glow-two"></div>
-        <div class="glow glow-three"></div>
+    <div class="animated-background">
 
-        <div class="orb orb-one"></div>
-        <div class="orb orb-two"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+        <div class="particle particle-6"></div>
+
     </div>
+
 
     <main class="page">
 
         <section class="download-card">
 
-            <div class="top-line"></div>
+            <div class="logo">
+                WALAWWA
+            </div>
 
-            <h1>Your file is ready</h1>
+            <div class="logo-line"></div>
+
+            <h1>
+                Your file is ready
+            </h1>
 
             <p class="subtitle">
                 Click the button below to continue
             </p>
+
 
             <div id="downloadArea">
 
@@ -55,39 +69,45 @@
                     class="download-button"
                     type="button"
                 >
-                    <span class="button-icon">⬇</span>
+                    <span class="download-icon">↓</span>
                     <span>Download</span>
                 </button>
+
 
                 <div
                     id="countdown"
                     class="countdown"
-                    style="display: none;"
+                    style="display:none;"
                 >
-                    <div class="spinner"></div>
 
-                    <div class="countdown-info">
-                        <div class="countdown-title">
-                            Preparing download
-                        </div>
-
-                        <div class="countdown-text">
-                            Please wait
-                            <span id="countdownNumber">5</span>
-                            seconds
-                        </div>
+                    <div class="countdown-label">
+                        PREPARING DOWNLOAD
                     </div>
+
+                    <div
+                        id="countdownNumber"
+                        class="countdown-number"
+                    >
+                        5
+                    </div>
+
+                    <div class="countdown-small">
+                        Please wait...
+                    </div>
+
                 </div>
+
 
                 <button
                     id="secondDownload"
                     class="download-button continue-button"
                     type="button"
-                    style="display: none;"
+                    style="display:none;"
                 >
-                    <span class="button-icon">⬇</span>
+                    <span class="download-icon">↓</span>
                     <span>Continue Download</span>
                 </button>
+
 
                 <div
                     id="message"
@@ -100,13 +120,15 @@
 
         </section>
 
+
         <footer>
             Powered by <strong>Maco</strong>
         </footer>
 
     </main>
 
-    <script src="script.js?v=7"></script>
+
+    <script src="script.js?v=8"></script>
 
 </body>
 </html>
