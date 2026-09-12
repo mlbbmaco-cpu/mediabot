@@ -3,13 +3,11 @@
 const BOT_USERNAME = "walawwa_downloadBot";
 const COUNTDOWN_SECONDS = 5;
 
-let firstDownload = null;
-let secondDownload = null;
-let countdown = null;
-let countdownNumber = null;
-let message = null;
-let fileInfo = null;
-let countdownTimer = null;
+let firstDownload;
+let secondDownload;
+let countdown;
+let countdownNumber;
+let message;
 
 
 function getDownloadCode() {
@@ -27,11 +25,7 @@ function getDownloadCode() {
 
     code = code.trim();
 
-    if (!code) {
-        return null;
-    }
-
-    return code;
+    return code || null;
 }
 
 
@@ -45,7 +39,7 @@ function makeTelegramLink(code) {
 }
 
 
-function showMessage(text, type = "") {
+function showMessage(text, type) {
     if (!message) {
         return;
     }
@@ -59,122 +53,36 @@ function showMessage(text, type = "") {
 }
 
 
-function setupElements() {
+function initializeDownloadPage() {
+
+    console.log("WALAWWA JavaScript loaded.");
+
     firstDownload = document.getElementById("firstDownload");
     secondDownload = document.getElementById("secondDownload");
     countdown = document.getElementById("countdown");
     countdownNumber = document.getElementById("countdownNumber");
     message = document.getElementById("message");
-    fileInfo = document.getElementById("fileInfo");
-
-    if (!firstDownload) {
-        console.error("WALAWWA: firstDownload element not found.");
-    }
-
-    if (!secondDownload) {
-        console.error("WALAWWA: secondDownload element not found.");
-    }
-
-    if (!countdown) {
-        console.error("WALAWWA: countdown element not found.");
-    }
-
-    if (!countdownNumber) {
-        console.error("WALAWWA: countdownNumber element not found.");
-    }
-
-    if (!message) {
-        console.error("WALAWWA: message element not found.");
-    }
-}
-
-
-function startCountdown(code) {
-    if (
-        !firstDownload ||
-        !secondDownload ||
-        !countdown ||
-        !countdownNumber
-    ) {
-        console.error("WALAWWA: Required download elements are missing.");
-        return;
-    }
-
-    if (!code) {
-        showMessage("Invalid download link.", "error");
-        return;
-    }
-
-    if (countdownTimer) {
-        clearInterval(countdownTimer);
-        countdownTimer = null;
-    }
-
-    firstDownload.disabled = true;
-    firstDownload.style.display = "none";
-
-    secondDownload.disabled = true;
-    secondDownload.style.display = "none";
-
-    countdown.style.display = "flex";
-
-    let remaining = COUNTDOWN_SECONDS;
-
-    countdownNumber.textContent = remaining;
-
-    showMessage("Preparing your download...");
-
-    countdownTimer = setInterval(function () {
-        remaining--;
-
-        if (remaining > 0) {
-            countdownNumber.textContent = remaining;
-            return;
-        }
-
-        clearInterval(countdownTimer);
-        countdownTimer = null;
-
-        countdown.style.display = "none";
-
-        secondDownload.style.display = "flex";
-        secondDownload.disabled = false;
-
-        showMessage("Your download is ready.", "success");
-    }, 1000);
-}
-
-
-function openTelegram(code) {
-    if (!code) {
-        showMessage("Invalid download link.", "error");
-        return;
-    }
-
-    const telegramLink = makeTelegramLink(code);
-
-    console.log("WALAWWA Telegram link:", telegramLink);
-
-    showMessage("Opening Telegram...", "success");
-
-    window.location.href = telegramLink;
-}
-
-
-function initializeDownloadPage() {
-    setupElements();
 
     const code = getDownloadCode();
 
-    console.log("WALAWWA website loaded.");
     console.log("Download code:", code);
 
+
+    if (!firstDownload) {
+        console.error("firstDownload not found");
+        return;
+    }
+
+    if (!secondDownload) {
+        console.error("secondDownload not found");
+        return;
+    }
+
+
     if (!code) {
-        if (firstDownload) {
-            firstDownload.disabled = true;
-            firstDownload.textContent = "Invalid Download Link";
-            firstDownload.style.opacity = "0.6";
-        }
+
+        firstDownload.disabled = true;
+        firstDownload.textContent = "Invalid Download Link";
 
         showMessage(
             "Please open a valid WALAWWA download link.",
@@ -184,60 +92,91 @@ function initializeDownloadPage() {
         return;
     }
 
-    if (fileInfo) {
-        fileInfo.style.display = "none";
-    }
-
-    if (!firstDownload || !secondDownload) {
-        return;
-    }
-
-    firstDownload.style.display = "flex";
-    firstDownload.disabled = false;
-
-    secondDownload.style.display = "none";
-    secondDownload.disabled = true;
-
-    if (countdown) {
-        countdown.style.display = "none";
-    }
 
     firstDownload.onclick = function () {
-        console.log("WALAWWA: Download button clicked.");
 
-        if (firstDownload.disabled) {
-            return;
-        }
+        console.log("Download button clicked.");
 
-        startCountdown(code);
+        firstDownload.style.display = "none";
+
+        countdown.style.display = "flex";
+
+        let remaining = COUNTDOWN_SECONDS;
+
+        countdownNumber.textContent = remaining;
+
+        showMessage("Preparing your download...");
+
+
+        const timer = setInterval(function () {
+
+            remaining--;
+
+            countdownNumber.textContent = remaining;
+
+
+            if (remaining <= 0) {
+
+                clearInterval(timer);
+
+                countdown.style.display = "none";
+
+                secondDownload.style.display = "flex";
+
+                secondDownload.disabled = false;
+
+                showMessage(
+                    "Your download is ready.",
+                    "success"
+                );
+
+            }
+
+        }, 1000);
+
     };
 
 
     secondDownload.onclick = function () {
-        console.log("WALAWWA: Continue Download button clicked.");
 
-        if (secondDownload.disabled) {
-            return;
-        }
+        console.log("Continue Download clicked.");
 
         secondDownload.disabled = true;
 
-        openTelegram(code);
+        showMessage(
+            "Opening Telegram...",
+            "success"
+        );
+
+
+        const telegramLink = makeTelegramLink(code);
+
+        console.log(
+            "Telegram URL:",
+            telegramLink
+        );
+
+
+        window.location.href = telegramLink;
+
     };
 
 
     showMessage("Click Download to continue.");
 
-    console.log("WALAWWA download page ready.");
-    console.log("Telegram bot:", BOT_USERNAME);
+    console.log("WALAWWA download page initialized.");
 }
 
 
 if (document.readyState === "loading") {
+
     document.addEventListener(
         "DOMContentLoaded",
         initializeDownloadPage
     );
+
 } else {
+
     initializeDownloadPage();
+
 }
