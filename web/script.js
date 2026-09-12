@@ -27,7 +27,6 @@
  */
 
 const BOT_USERNAME = "walawwa_downloadBot";
-
 const COUNTDOWN_SECONDS = 5;
 
 
@@ -37,16 +36,6 @@ const COUNTDOWN_SECONDS = 5;
 
 function getDownloadCode() {
     const params = new URLSearchParams(window.location.search);
-
-    /*
-     * Supports:
-     *
-     * https://walwwa.web.app/?start=ABC123
-     *
-     * and:
-     *
-     * https://walwwa.web.app/?code=ABC123
-     */
 
     let code = params.get("start");
 
@@ -93,7 +82,6 @@ function showMessage(text, type = "") {
     }
 
     message.textContent = text;
-
     message.className = "message";
 
     if (type) {
@@ -115,15 +103,6 @@ function setupElements() {
     message = document.getElementById("message");
     fileInfo = document.getElementById("fileInfo");
 
-
-    /*
-     * If the HTML doesn't contain the buttons,
-     * create them automatically.
-     *
-     * This also makes the app.js more resistant
-     * to an older/different index.html.
-     */
-
     const downloadArea = document.getElementById("downloadArea");
 
     if (!downloadArea) {
@@ -141,11 +120,8 @@ function setupElements() {
         firstDownload = document.createElement("button");
 
         firstDownload.id = "firstDownload";
-
         firstDownload.className = "download-button";
-
         firstDownload.type = "button";
-
         firstDownload.textContent = "⬇️ Download";
 
         downloadArea.insertBefore(
@@ -164,9 +140,7 @@ function setupElements() {
         countdown = document.createElement("div");
 
         countdown.id = "countdown";
-
         countdown.className = "countdown";
-
         countdown.style.display = "none";
 
         countdown.innerHTML =
@@ -189,14 +163,9 @@ function setupElements() {
         secondDownload = document.createElement("button");
 
         secondDownload.id = "secondDownload";
-
         secondDownload.className = "download-button";
-
         secondDownload.type = "button";
-
-        secondDownload.textContent =
-            "⬇️ Continue Download";
-
+        secondDownload.textContent = "⬇️ Continue Download";
         secondDownload.style.display = "none";
 
         downloadArea.appendChild(secondDownload);
@@ -212,7 +181,6 @@ function setupElements() {
         message = document.createElement("div");
 
         message.id = "message";
-
         message.className = "message";
 
         downloadArea.appendChild(message);
@@ -226,11 +194,12 @@ function setupElements() {
 
 function startCountdown(code) {
 
-    if (!firstDownload ||
+    if (
+        !firstDownload ||
         !secondDownload ||
         !countdown ||
-        !countdownNumber) {
-
+        !countdownNumber
+    ) {
         console.error(
             "WALAWWA: Download elements are missing."
         );
@@ -251,10 +220,10 @@ function startCountdown(code) {
 
     // Show countdown
 
-    countdown.style.display = "block";
+    countdown.style.display = "flex";
 
 
-    // Make sure second button is hidden
+    // Hide second button
 
     secondDownload.style.display = "none";
 
@@ -274,6 +243,7 @@ function startCountdown(code) {
 
         remaining--;
 
+
         if (remaining > 0) {
 
             countdownNumber.textContent =
@@ -290,7 +260,7 @@ function startCountdown(code) {
 
 
         secondDownload.style.display =
-            "block";
+            "flex";
 
 
         secondDownload.disabled = false;
@@ -333,9 +303,7 @@ function openTelegram(code) {
 
 
     /*
-     * Open Telegram bot.
-     *
-     * The BOT receives:
+     * The Telegram bot receives:
      *
      * /start CODE
      *
@@ -391,7 +359,6 @@ function initializeDownloadPage() {
     // ---------------------------------------------
 
     if (fileInfo) {
-
         fileInfo.style.display = "none";
     }
 
@@ -401,10 +368,6 @@ function initializeDownloadPage() {
     // ---------------------------------------------
 
     firstDownload.onclick = function () {
-
-        /*
-         * Prevent double clicking.
-         */
 
         if (firstDownload.disabled) {
             return;
@@ -438,13 +401,16 @@ function initializeDownloadPage() {
     // ---------------------------------------------
 
     firstDownload.style.display =
-        "block";
+        "flex";
 
     firstDownload.disabled =
         false;
 
     secondDownload.style.display =
         "none";
+
+    secondDownload.disabled =
+        true;
 
     countdown.style.display =
         "none";
@@ -455,6 +421,10 @@ function initializeDownloadPage() {
         ""
     );
 
+
+    // ---------------------------------------------
+    // DEBUG INFORMATION
+    // ---------------------------------------------
 
     console.log(
         "WALAWWA download page ready."
