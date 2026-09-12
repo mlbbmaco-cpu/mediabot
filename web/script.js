@@ -1,182 +1,399 @@
+```javascript
 "use strict";
 
+
 const BOT_USERNAME = "walawwa_downloadBot";
+
 const COUNTDOWN_SECONDS = 5;
 
-let firstDownload;
-let secondDownload;
-let countdown;
-let countdownNumber;
-let message;
+
+let firstDownload = null;
+
+let secondDownload = null;
+
+let countdown = null;
+
+let countdownNumber = null;
+
+let message = null;
+
 
 
 function getDownloadCode() {
-    const params = new URLSearchParams(window.location.search);
 
-    let code = params.get("start");
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    let code =
+        params.get("start");
+
 
     if (!code) {
-        code = params.get("code");
+
+        code =
+            params.get("code");
+
     }
 
+
     if (!code) {
+
         return null;
+
     }
 
-    code = code.trim();
+
+    code =
+        code.trim();
+
 
     return code || null;
+
 }
 
 
+
 function makeTelegramLink(code) {
+
     return (
         "https://t.me/" +
         BOT_USERNAME +
         "?start=" +
         encodeURIComponent(code)
     );
+
 }
 
 
-function showMessage(text, type) {
+
+function showMessage(
+    text,
+    type = ""
+) {
+
     if (!message) {
+
         return;
+
     }
 
-    message.textContent = text;
-    message.className = "message";
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "message";
+
 
     if (type) {
-        message.classList.add(type);
+
+        message.classList.add(
+            type
+        );
+
     }
+
 }
+
 
 
 function initializeDownloadPage() {
 
-    console.log("WALAWWA JavaScript loaded.");
 
-    firstDownload = document.getElementById("firstDownload");
-    secondDownload = document.getElementById("secondDownload");
-    countdown = document.getElementById("countdown");
-    countdownNumber = document.getElementById("countdownNumber");
-    message = document.getElementById("message");
-
-    const code = getDownloadCode();
-
-    console.log("Download code:", code);
+    console.log(
+        "WALAWWA JavaScript loaded"
+    );
 
 
-    if (!firstDownload) {
-        console.error("firstDownload not found");
+    firstDownload =
+        document.getElementById(
+            "firstDownload"
+        );
+
+
+    secondDownload =
+        document.getElementById(
+            "secondDownload"
+        );
+
+
+    countdown =
+        document.getElementById(
+            "countdown"
+        );
+
+
+    countdownNumber =
+        document.getElementById(
+            "countdownNumber"
+        );
+
+
+    message =
+        document.getElementById(
+            "message"
+        );
+
+
+    const code =
+        getDownloadCode();
+
+
+    console.log(
+        "Download code:",
+        code
+    );
+
+
+
+    if (
+        !firstDownload ||
+        !secondDownload ||
+        !countdown ||
+        !countdownNumber
+    ) {
+
+        console.error(
+            "WALAWWA: required elements missing"
+        );
+
         return;
+
     }
 
-    if (!secondDownload) {
-        console.error("secondDownload not found");
-        return;
-    }
 
+
+    /*
+     * INVALID LINK
+     */
 
     if (!code) {
 
-        firstDownload.disabled = true;
-        firstDownload.textContent = "Invalid Download Link";
+        firstDownload.disabled =
+            true;
+
+
+        firstDownload.innerHTML =
+            "<span>Invalid Download Link</span>";
+
 
         showMessage(
             "Please open a valid WALAWWA download link.",
             "error"
         );
 
+
         return;
+
     }
 
 
-    firstDownload.onclick = function () {
 
-        console.log("Download button clicked.");
+    /*
+     * INITIAL STATE
+     */
 
-        firstDownload.style.display = "none";
-
-        countdown.style.display = "flex";
-
-        let remaining = COUNTDOWN_SECONDS;
-
-        countdownNumber.textContent = remaining;
-
-        showMessage("Preparing your download...");
+    firstDownload.style.display =
+        "flex";
 
 
-        const timer = setInterval(function () {
-
-            remaining--;
-
-            countdownNumber.textContent = remaining;
+    firstDownload.disabled =
+        false;
 
 
-            if (remaining <= 0) {
+    secondDownload.style.display =
+        "none";
 
-                clearInterval(timer);
 
-                countdown.style.display = "none";
+    secondDownload.disabled =
+        true;
 
-                secondDownload.style.display = "flex";
 
-                secondDownload.disabled = false;
+    countdown.style.display =
+        "none";
 
-                showMessage(
-                    "Your download is ready.",
-                    "success"
+
+    /*
+     * No old status message.
+     */
+
+    showMessage("");
+
+
+
+    /*
+     * CONTINUE DOWNLOAD
+     */
+
+    firstDownload.addEventListener(
+        "click",
+        function () {
+
+
+            console.log(
+                "Continue Download clicked"
+            );
+
+
+            /*
+             * Hide Continue Download
+             */
+
+            firstDownload.style.display =
+                "none";
+
+
+            /*
+             * Show countdown
+             */
+
+            countdown.style.display =
+                "flex";
+
+
+            let remaining =
+                COUNTDOWN_SECONDS;
+
+
+            countdownNumber.textContent =
+                remaining;
+
+
+            /*
+             * Keep message empty.
+             */
+
+            showMessage("");
+
+
+            const timer =
+                setInterval(
+                    function () {
+
+
+                        remaining--;
+
+
+                        countdownNumber.textContent =
+                            remaining;
+
+
+                        /*
+                         * Countdown finished
+                         */
+
+                        if (
+                            remaining <= 0
+                        ) {
+
+
+                            clearInterval(
+                                timer
+                            );
+
+
+                            /*
+                             * Hide countdown
+                             */
+
+                            countdown.style.display =
+                                "none";
+
+
+                            /*
+                             * Show Download button
+                             */
+
+                            secondDownload.style.display =
+                                "flex";
+
+
+                            secondDownload.disabled =
+                                false;
+
+
+                            /*
+                             * No "ready" message.
+                             */
+
+                            showMessage("");
+
+
+                        }
+
+
+                    },
+                    1000
                 );
 
-            }
 
-        }, 1000);
-
-    };
+        }
+    );
 
 
-    secondDownload.onclick = function () {
 
-        console.log("Continue Download clicked.");
+    /*
+     * DOWNLOAD
+     */
 
-        secondDownload.disabled = true;
-
-        showMessage(
-            "Opening Telegram...",
-            "success"
-        );
+    secondDownload.addEventListener(
+        "click",
+        function () {
 
 
-        const telegramLink = makeTelegramLink(code);
-
-        console.log(
-            "Telegram URL:",
-            telegramLink
-        );
+            console.log(
+                "Download clicked"
+            );
 
 
-        window.location.href = telegramLink;
+            secondDownload.disabled =
+                true;
 
-    };
+
+            const telegramLink =
+                makeTelegramLink(
+                    code
+                );
 
 
-    showMessage("Click Download to continue.");
+            console.log(
+                "Opening Telegram:",
+                telegramLink
+            );
 
-    console.log("WALAWWA download page initialized.");
+
+            window.location.href =
+                telegramLink;
+
+
+        }
+    );
+
+
 }
 
 
-if (document.readyState === "loading") {
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
 
     document.addEventListener(
         "DOMContentLoaded",
         initializeDownloadPage
     );
 
+
 } else {
+
 
     initializeDownloadPage();
 
 }
+```
