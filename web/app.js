@@ -1,1020 +1,490 @@
 ```javascript
-// ============================================================
-// WALAWWA WEB DOWNLOAD
-// ============================================================
-//
-// FLOW:
-//
-// Telegram post
-//      ↓
-// https://walwwa.web.app/?start=CODE
-//      ↓
-// User opens website
-//      ↓
-// Presses FIRST "Download" button
-//      ↓
-// 5 second countdown
-//      ↓
-// SECOND "Download" button appears
-//      ↓
-// User presses SECOND "Download"
-//      ↓
-// Telegram bot opens:
-//
-// https://t.me/walawwa_downloadBot?start=CODE
-//
-//      ↓
-// Bot receives CODE
-//      ↓
-// Bot finds the stored Telegram message
-//      ↓
-// Bot sends the video to the user
-//
-// IMPORTANT:
-// The website does NOT download the video.
-// The video remains stored in Telegram.
-// ============================================================
+"use strict";
 
+/*
+ * WALAWWA WEBSITE
+ *
+ * Flow:
+ *
+ * Website
+ *   ↓
+ * First Download button
+ *   ↓
+ * 5 second countdown
+ *   ↓
+ * Second Download button
+ *   ↓
+ * Telegram Bot deep link
+ *   ↓
+ * Bot receives CODE
+ *   ↓
+ * Bot sends the stored Telegram file
+ *
+ * IMPORTANT:
+ * This JavaScript does NOT download the video.
+ * It does NOT use Northflank.
+ * It does NOT store the video.
+ */
 
-const TELEGRAM_BOT = "walawwa_downloadBot";
-
-
-// ============================================================
-// SETTINGS
-// ============================================================
+const BOT_USERNAME = "walawwa_downloadBot";
 
 const COUNTDOWN_SECONDS = 5;
 
 
-// ============================================================
-// VARIABLES
-// ============================================================
-
-let downloadButton = null;
-let secondDownloadButton = null;
-let countdownElement = null;
-let errorBox = null;
-let statusBox = null;
-
-let countdownRunning = false;
-let countdownFinished = false;
-
-
-// ============================================================
-// GET DOWNLOAD CODE
-// ============================================================
+// ----------------------------------------------------
+// GET CODE FROM URL
+// ----------------------------------------------------
 
 function getDownloadCode() {
-
     const params = new URLSearchParams(window.location.search);
 
-    // Main format:
-    // ?start=XXXXXXXX
+    /*
+     * Supports:
+     *
+     * https://walwwa.web.app/?start=ABC123
+     *
+     * and:
+     *
+     * https://walwwa.web.app/?code=ABC123
+     */
 
-    const startCode = params.get("start");
+    let code = params.get("start");
 
-    if (startCode) {
-        return startCode.trim();
+    if (!code) {
+        code = params.get("code");
     }
 
-
-    // Also support:
-    // ?code=XXXXXXXX
-
-    const code = params.get("code");
-
-    if (code) {
-        return code.trim();
+    if (!code) {
+        return null;
     }
 
-
-    return "";
+    return code.trim();
 }
 
 
-// ============================================================
-// SHOW ERROR
-// ============================================================
+// ----------------------------------------------------
+// TELEGRAM LINK
+// ----------------------------------------------------
 
-function showError(message) {
+function makeTelegramLink(code) {
+    return `https://t.me/${BOT_USERNAME}?start=${encodeURIComponent(code)}`;
+}
 
-    if (errorBox) {
 
-        errorBox.textContent = message;
-        errorBox.style.display = "block";
+// ----------------------------------------------------
+// ELEMENTS
+// ----------------------------------------------------
 
-    } else {
+let firstDownload;
+let secondDownload;
+let countdown;
+let countdownNumber;
+let message;
+let fileInfo;
 
-        alert(message);
 
+// ----------------------------------------------------
+// SHOW MESSAGE
+// ----------------------------------------------------
+
+function showMessage(text, type = "") {
+    if (!message) {
+        return;
+    }
+
+    message.textContent = text;
+
+    message.className = "message";
+
+    if (type) {
+        message.classList.add(type);
     }
 }
 
 
-// ============================================================
-// HIDE ERROR
-// ============================================================
+// ----------------------------------------------------
+// CREATE / FIND DOWNLOAD UI
+// ----------------------------------------------------
 
-function hideError() {
+function setupElements() {
 
-    if (errorBox) {
+    firstDownload = document.getElementById("firstDownload");
+    secondDownload = document.getElementById("secondDownload");
+    countdown = document.getElementById("countdown");
+    countdownNumber = document.getElementById("countdownNumber");
+    message = document.getElementById("message");
+    fileInfo = document.getElementById("fileInfo");
 
-        errorBox.textContent = "";
-        errorBox.style.display = "none";
 
+    /*
+     * If the HTML doesn't contain the buttons,
+     * create them automatically.
+     *
+     * This also makes the app.js more resistant
+     * to an older/different index.html.
+     */
+
+    const downloadArea = document.getElementById("downloadArea");
+
+    if (!downloadArea) {
+        console.error("WALAWWA: #downloadArea was not found.");
+        return;
     }
 
+
+    // ---------------------------------------------
+    // FIRST BUTTON
+    // ---------------------------------------------
+
+    if (!firstDownload) {
+
+        firstDownload = document.createElement("button");
+
+        firstDownload.id = "firstDownload";
+
+        firstDownload.className = "download-button";
+
+        firstDownload.type = "button";
+
+        firstDownload.textContent = "⬇️ Download";
+
+        downloadArea.insertBefore(
+            firstDownload,
+            downloadArea.firstChild
+        );
+    }
+
+
+    // ---------------------------------------------
+    // COUNTDOWN
+    // ---------------------------------------------
+
+    if (!countdown) {
+
+        countdown = document.createElement("div");
+
+        countdown.id = "countdown";
+
+        countdown.className = "countdown";
+
+        countdown.style.display = "none";
+
+        countdown.innerHTML =
+            `Please wait <span id="countdownNumber" class="countdown-number">${COUNTDOWN_SECONDS}</span> seconds...`;
+
+        downloadArea.appendChild(countdown);
+    }
+
+
+    countdownNumber =
+        document.getElementById("countdownNumber");
+
+
+    // ---------------------------------------------
+    // SECOND BUTTON
+    // ---------------------------------------------
+
+    if (!secondDownload) {
+
+        secondDownload = document.createElement("button");
+
+        secondDownload.id = "secondDownload";
+
+        secondDownload.className = "download-button";
+
+        secondDownload.type = "button";
+
+        secondDownload.textContent =
+            "⬇️ Continue Download";
+
+        secondDownload.style.display = "none";
+
+        downloadArea.appendChild(secondDownload);
+    }
+
+
+    // ---------------------------------------------
+    // MESSAGE
+    // ---------------------------------------------
+
+    if (!message) {
+
+        message = document.createElement("div");
+
+        message.id = "message";
+
+        message.className = "message";
+
+        downloadArea.appendChild(message);
+    }
 }
 
 
-// ============================================================
-// SHOW STATUS
-// ============================================================
-
-function showStatus(message) {
-
-    if (statusBox) {
-
-        statusBox.textContent = message;
-        statusBox.style.display = "block";
-
-    }
-
-}
-
-
-// ============================================================
-// HIDE STATUS
-// ============================================================
-
-function hideStatus() {
-
-    if (statusBox) {
-
-        statusBox.textContent = "";
-        statusBox.style.display = "none";
-
-    }
-
-}
-
-
-// ============================================================
-// FIND ERROR BOX
-// ============================================================
-
-function findErrorBox() {
-
-    let element =
-        document.getElementById("error");
-
-    if (element) {
-        return element;
-    }
-
-
-    element =
-        document.getElementById("error-message");
-
-    if (element) {
-        return element;
-    }
-
-
-    element =
-        document.querySelector(".error");
-
-    if (element) {
-        return element;
-    }
-
-
-    element =
-        document.querySelector(".error-message");
-
-    if (element) {
-        return element;
-    }
-
-
-    return null;
-}
-
-
-// ============================================================
-// FIND STATUS BOX
-// ============================================================
-
-function findStatusBox() {
-
-    let element =
-        document.getElementById("status");
-
-    if (element) {
-        return element;
-    }
-
-
-    element =
-        document.getElementById("status-message");
-
-    if (element) {
-        return element;
-    }
-
-
-    element =
-        document.querySelector(".status");
-
-    if (element) {
-        return element;
-    }
-
-
-    element =
-        document.querySelector(".status-message");
-
-    if (element) {
-        return element;
-    }
-
-
-    return null;
-}
-
-
-// ============================================================
-// FIND FIRST DOWNLOAD BUTTON
-// ============================================================
-
-function findDownloadButton() {
-
-    let button =
-        document.getElementById("download-btn");
-
-    if (button) {
-        return button;
-    }
-
-
-    button =
-        document.getElementById("downloadButton");
-
-    if (button) {
-        return button;
-    }
-
-
-    button =
-        document.getElementById("download");
-
-    if (button) {
-        return button;
-    }
-
-
-    button =
-        document.querySelector(".download-btn");
-
-    if (button) {
-        return button;
-    }
-
-
-    button =
-        document.querySelector(".download-button");
-
-    if (button) {
-        return button;
-    }
-
-
-    // Fallback: find a button containing Download.
-
-    const buttons =
-        document.querySelectorAll("button");
-
-
-    for (const buttonElement of buttons) {
-
-        const text =
-            (buttonElement.textContent || "")
-            .toLowerCase();
-
-
-        if (
-            text.includes("download") ||
-            text.includes("get file")
-        ) {
-
-            return buttonElement;
-
-        }
-
-    }
-
-
-    return null;
-}
-
-
-// ============================================================
-// CREATE SECOND DOWNLOAD BUTTON
-// ============================================================
-
-function createSecondDownloadButton() {
-
-    // If it already exists, don't create another one.
-
-    if (secondDownloadButton) {
-        return secondDownloadButton;
-    }
-
-
-    // Create button.
-
-    const button =
-        document.createElement("button");
-
-
-    button.type = "button";
-
-    button.id =
-        "second-download-btn";
-
-    button.className =
-        "download-button second-download-button";
-
-
-    button.textContent =
-        "Download";
-
-
-    // Hide initially.
-
-    button.style.display =
-        "none";
-
-
-    // Basic styling so it works even without CSS changes.
-
-    button.style.cursor =
-        "pointer";
-
-
-    button.style.padding =
-        "12px 24px";
-
-
-    button.style.marginTop =
-        "15px";
-
-
-    // Put it after the first button.
-
-    if (downloadButton &&
-        downloadButton.parentNode) {
-
-        downloadButton.parentNode.insertBefore(
-            button,
-            downloadButton.nextSibling
+// ----------------------------------------------------
+// START COUNTDOWN
+// ----------------------------------------------------
+
+function startCountdown(code) {
+
+    if (!firstDownload ||
+        !secondDownload ||
+        !countdown ||
+        !countdownNumber) {
+
+        console.error(
+            "WALAWWA: Download elements are missing."
         );
 
-    } else {
-
-        document.body.appendChild(button);
-
+        return;
     }
 
 
-    secondDownloadButton =
-        button;
+    // Disable first button
+
+    firstDownload.disabled = true;
 
 
-    // Add click event.
+    // Hide first button
 
-    button.addEventListener(
-        "click",
-        openTelegramDownload
+    firstDownload.style.display = "none";
+
+
+    // Show countdown
+
+    countdown.style.display = "block";
+
+
+    // Make sure second button is hidden
+
+    secondDownload.style.display = "none";
+
+
+    let remaining = COUNTDOWN_SECONDS;
+
+    countdownNumber.textContent = remaining;
+
+
+    showMessage(
+        "Preparing your download...",
+        ""
     );
 
 
-    return button;
-}
+    const timer = setInterval(() => {
+
+        remaining--;
+
+        if (remaining > 0) {
+
+            countdownNumber.textContent =
+                remaining;
+
+            return;
+        }
 
 
-// ============================================================
-// CREATE COUNTDOWN ELEMENT
-// ============================================================
-
-function createCountdownElement() {
-
-    if (countdownElement) {
-        return countdownElement;
-    }
+        clearInterval(timer);
 
 
-    const element =
-        document.createElement("div");
+        countdown.style.display = "none";
 
 
-    element.id =
-        "download-countdown";
+        secondDownload.style.display =
+            "block";
 
 
-    element.className =
-        "download-countdown";
+        secondDownload.disabled = false;
 
 
-    element.style.display =
-        "none";
-
-
-    element.style.marginTop =
-        "15px";
-
-
-    element.style.fontSize =
-        "18px";
-
-
-    element.style.fontWeight =
-        "bold";
-
-
-    element.textContent =
-        "Please wait...";
-
-
-    // Put after first button.
-
-    if (downloadButton &&
-        downloadButton.parentNode) {
-
-        downloadButton.parentNode.insertBefore(
-            element,
-            downloadButton.nextSibling
+        showMessage(
+            "Your download is ready.",
+            "success"
         );
 
-    } else {
-
-        document.body.appendChild(element);
-
-    }
-
-
-    countdownElement =
-        element;
-
-
-    return element;
+    }, 1000);
 }
 
 
-// ============================================================
-// FIRST DOWNLOAD BUTTON
-// ============================================================
-//
-// User presses this button.
-// It DOES NOT open Telegram yet.
-//
-// It starts the 5-second countdown.
-// ============================================================
+// ----------------------------------------------------
+// OPEN TELEGRAM
+// ----------------------------------------------------
 
-function startCountdown(event) {
-
-    if (event) {
-
-        event.preventDefault();
-        event.stopPropagation();
-
-    }
-
-
-    // Don't allow countdown twice.
-
-    if (countdownRunning) {
-        return false;
-    }
-
-
-    // Already finished.
-
-    if (countdownFinished) {
-        return false;
-    }
-
-
-    hideError();
-    hideStatus();
-
-
-    // Check code.
-
-    const code =
-        getDownloadCode();
-
+function openTelegram(code) {
 
     if (!code) {
 
-        showError(
-            "Invalid or missing download link."
+        showMessage(
+            "Invalid download link.",
+            "error"
         );
 
-        return false;
-
+        return;
     }
 
 
-    countdownRunning = true;
+    const telegramLink =
+        makeTelegramLink(code);
 
 
-    // Make sure countdown element exists.
-
-    createCountdownElement();
-
-    createSecondDownloadButton();
-
-
-    // Hide second button.
-
-    secondDownloadButton.style.display =
-        "none";
+    showMessage(
+        "Opening Telegram...",
+        "success"
+    );
 
 
-    // Disable first button.
+    /*
+     * Open Telegram bot.
+     *
+     * The BOT receives:
+     *
+     * /start CODE
+     *
+     * The bot then finds the stored Telegram
+     * message and sends the file.
+     */
 
-    if (downloadButton) {
+    window.location.href = telegramLink;
+}
 
-        downloadButton.disabled =
-            true;
 
-        downloadButton.style.cursor =
-            "default";
+// ----------------------------------------------------
+// INITIALIZE
+// ----------------------------------------------------
 
+function initializeDownloadPage() {
+
+    setupElements();
+
+
+    const code = getDownloadCode();
+
+
+    // ---------------------------------------------
+    // NO CODE
+    // ---------------------------------------------
+
+    if (!code) {
+
+        if (firstDownload) {
+
+            firstDownload.disabled = true;
+
+            firstDownload.textContent =
+                "Invalid Download Link";
+
+            firstDownload.style.opacity =
+                "0.6";
+        }
+
+
+        showMessage(
+            "Please open a valid WALAWWA download link.",
+            "error"
+        );
+
+        return;
     }
 
 
-    // Start at 5.
+    // ---------------------------------------------
+    // OPTIONAL FILE INFO
+    // ---------------------------------------------
 
-    let seconds =
-        COUNTDOWN_SECONDS;
+    if (fileInfo) {
+
+        fileInfo.style.display = "none";
+    }
 
 
-    countdownElement.style.display =
+    // ---------------------------------------------
+    // FIRST DOWNLOAD
+    // ---------------------------------------------
+
+    firstDownload.onclick = function () {
+
+        /*
+         * Prevent double clicking.
+         */
+
+        if (firstDownload.disabled) {
+            return;
+        }
+
+
+        startCountdown(code);
+    };
+
+
+    // ---------------------------------------------
+    // SECOND DOWNLOAD
+    // ---------------------------------------------
+
+    secondDownload.onclick = function () {
+
+        if (secondDownload.disabled) {
+            return;
+        }
+
+
+        secondDownload.disabled = true;
+
+
+        openTelegram(code);
+    };
+
+
+    // ---------------------------------------------
+    // INITIAL STATE
+    // ---------------------------------------------
+
+    firstDownload.style.display =
         "block";
 
+    firstDownload.disabled =
+        false;
 
-    countdownElement.textContent =
-        "Please wait " +
-        seconds +
-        " seconds...";
+    secondDownload.style.display =
+        "none";
 
-
-    // Countdown timer.
-
-    const timer =
-        setInterval(function () {
-
-            seconds--;
+    countdown.style.display =
+        "none";
 
 
-            if (seconds > 0) {
-
-                countdownElement.textContent =
-                    "Please wait " +
-                    seconds +
-                    " seconds...";
-
-                return;
-
-            }
-
-
-            // Countdown finished.
-
-            clearInterval(timer);
-
-
-            countdownRunning =
-                false;
-
-            countdownFinished =
-                true;
-
-
-            // Hide countdown.
-
-            countdownElement.style.display =
-                "none";
-
-
-            // Hide first button.
-
-            if (downloadButton) {
-
-                downloadButton.style.display =
-                    "none";
-
-            }
-
-
-            // Show second button.
-
-            secondDownloadButton.style.display =
-                "inline-block";
-
-
-            secondDownloadButton.disabled =
-                false;
-
-
-            secondDownloadButton.textContent =
-                "Download";
-
-
-            showStatus(
-                "Your download is ready."
-            );
-
-
-        }, 1000);
-
-
-    return false;
-}
-
-
-// ============================================================
-// OPEN TELEGRAM DOWNLOAD
-// ============================================================
-//
-// This is the SECOND button.
-//
-// It opens:
-// https://t.me/walawwa_downloadBot?start=CODE
-//
-// The bot handles the actual file delivery.
-// ============================================================
-
-function openTelegramDownload(event) {
-
-    if (event) {
-
-        event.preventDefault();
-        event.stopPropagation();
-
-    }
-
-
-    hideError();
-
-
-    const code =
-        getDownloadCode();
-
-
-    if (!code) {
-
-        showError(
-            "Invalid or missing download code."
-        );
-
-        return false;
-
-    }
-
-
-    // Telegram deep link.
-
-    const telegramUrl =
-        "https://t.me/" +
-        TELEGRAM_BOT +
-        "?start=" +
-        encodeURIComponent(code);
-
-
-    // Update button.
-
-    if (secondDownloadButton) {
-
-        secondDownloadButton.disabled =
-            true;
-
-        secondDownloadButton.textContent =
-            "Opening Telegram...";
-
-    }
-
-
-    showStatus(
-        "Opening Telegram..."
+    showMessage(
+        "Click Download to continue.",
+        ""
     );
 
 
-    // Open Telegram.
-
-    window.location.href =
-        telegramUrl;
-
-
-    return false;
-}
-
-
-// ============================================================
-// DISPLAY DOWNLOAD CODE
-// ============================================================
-
-function displayDownloadCode() {
-
-    const code =
-        getDownloadCode();
-
-
-    if (!code) {
-        return;
-    }
-
-
-    const elements = [
-
-        document.getElementById(
-            "download-code"
-        ),
-
-        document.getElementById(
-            "code"
-        ),
-
-        document.getElementById(
-            "file-code"
-        ),
-
-        document.querySelector(
-            ".download-code"
-        ),
-
-        document.querySelector(
-            ".file-code"
-        )
-
-    ];
-
-
-    for (const element of elements) {
-
-        if (element) {
-
-            element.textContent =
-                code;
-
-        }
-
-    }
-
-}
-
-
-// ============================================================
-// COPY DOWNLOAD CODE
-// ============================================================
-
-async function copyDownloadCode() {
-
-    const code =
-        getDownloadCode();
-
-
-    if (!code) {
-
-        showError(
-            "No download code found."
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        await navigator.clipboard.writeText(
-            code
-        );
-
-
-        showStatus(
-            "Download code copied."
-        );
-
-
-        setTimeout(function () {
-
-            hideStatus();
-
-        }, 2500);
-
-
-    } catch (error) {
-
-        showError(
-            "Unable to copy the download code."
-        );
-
-    }
-
-}
-
-
-// ============================================================
-// SETUP COPY BUTTON
-// ============================================================
-
-function setupCopyButton() {
-
-    const copyButton =
-        document.getElementById(
-            "copy-code"
-        ) ||
-        document.getElementById(
-            "copyCode"
-        ) ||
-        document.querySelector(
-            ".copy-code"
-        );
-
-
-    if (!copyButton) {
-        return;
-    }
-
-
-    copyButton.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            copyDownloadCode();
-
-        }
+    console.log(
+        "WALAWWA download page ready."
     );
 
-}
-
-
-// ============================================================
-// SETUP DOWNLOAD SYSTEM
-// ============================================================
-
-function setupDownloadSystem() {
-
-    // Find existing first button.
-
-    downloadButton =
-        findDownloadButton();
-
-
-    if (!downloadButton) {
-
-        console.warn(
-            "Download button was not found."
-        );
-
-        return;
-
-    }
-
-
-    // Create countdown.
-
-    createCountdownElement();
-
-
-    // Create second button.
-
-    createSecondDownloadButton();
-
-
-    // First button starts countdown.
-
-    downloadButton.addEventListener(
-        "click",
-        startCountdown
+    console.log(
+        "Download code:",
+        code
     );
 
-
-    // Second button opens Telegram.
-
-    // Already connected inside
-    // createSecondDownloadButton().
-
-}
-
-
-// ============================================================
-// KEYBOARD SUPPORT
-// ============================================================
-
-function setupKeyboardSupport() {
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "Enter" &&
-                document.activeElement ===
-                downloadButton
-            ) {
-
-                startCountdown(event);
-
-            }
-
-        }
+    console.log(
+        "Telegram bot:",
+        BOT_USERNAME
     );
-
 }
 
 
-// ============================================================
-// INITIALIZE PAGE
-// ============================================================
+// ----------------------------------------------------
+// START WHEN PAGE LOADS
+// ----------------------------------------------------
 
-function initializePage() {
-
-    // Find page elements.
-
-    errorBox =
-        findErrorBox();
-
-
-    statusBox =
-        findStatusBox();
-
-
-    // Show code if available.
-
-    displayDownloadCode();
-
-
-    // Setup download system.
-
-    setupDownloadSystem();
-
-
-    // Setup copy button.
-
-    setupCopyButton();
-
-
-    // Keyboard support.
-
-    setupKeyboardSupport();
-
-
-    // Check URL.
-
-    const code =
-        getDownloadCode();
-
-
-    if (!code) {
-
-        console.warn(
-            "No download code found in URL."
-        );
-
-    } else {
-
-        console.log(
-            "WALAWWA download code detected:",
-            code
-        );
-
-    }
-
-}
-
-
-// ============================================================
-// START APPLICATION
-// ============================================================
-
-if (
-    document.readyState === "loading"
-) {
+if (document.readyState === "loading") {
 
     document.addEventListener(
         "DOMContentLoaded",
-        initializePage
+        initializeDownloadPage
     );
 
 } else {
 
-    initializePage();
-
+    initializeDownloadPage();
 }
 ```
