@@ -56,7 +56,7 @@ print(
 # CONFIG
 # ======================================
 
-POST_CHANNEL_ID = -1004435606523
+POST_CHANNEL_ID = -1004401856873
 
 VIP_TAG = "💎 VIP CONTENT"
 
