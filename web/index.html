@@ -6,192 +6,39 @@
 
     <title>WALAWWA - Download</title>
 
-    <meta
-        name="description"
-        content="WALAWWA download page"
-    >
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #111;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .card {
-            background: #1c1c1c;
-            border-radius: 20px;
-            padding: 35px 25px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
-        }
-
-        .logo {
-            width: 90px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            margin: 0 0 10px;
-            font-size: 32px;
-        }
-
-        .subtitle {
-            color: #aaa;
-            margin: 0 0 25px;
-            line-height: 1.5;
-        }
-
-        #downloadArea {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .download-button {
-            width: 100%;
-            max-width: 330px;
-            min-height: 55px;
-            border: none;
-            border-radius: 12px;
-            background: #7c3aed;
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 15px 20px;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-
-        .download-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .download-button:active {
-            transform: translateY(0);
-        }
-
-        .download-button:disabled {
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .countdown {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 330px;
-            min-height: 55px;
-            border-radius: 12px;
-            background: #292929;
-            color: #ddd;
-            font-size: 17px;
-        }
-
-        .countdown-number {
-            display: inline-block;
-            min-width: 25px;
-            color: #a78bfa;
-            font-weight: bold;
-            font-size: 22px;
-            margin: 0 5px;
-        }
-
-        .message {
-            min-height: 24px;
-            font-size: 14px;
-            color: #aaa;
-        }
-
-        .message.success {
-            color: #4ade80;
-        }
-
-        .message.error {
-            color: #f87171;
-        }
-
-        #fileInfo {
-            display: none;
-        }
-
-        footer {
-            margin-top: 20px;
-            color: #777;
-            font-size: 13px;
-        }
-
-        footer a {
-            color: #a78bfa;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
 
-    <main class="container">
-        <section class="card">
+    <div class="container">
+
+        <div class="card">
+
+            <h1>WALAWWA</h1>
+
+            <p class="subtitle">
+                Your file is ready.<br>
+                Click the button below to continue.
+            </p>
 
             <div id="downloadArea">
-
-                <h1>WALAWWA</h1>
-
-                <p class="subtitle">
-                    Your file is ready.<br>
-                    Click the button below to continue.
-                </p>
-
-                <div id="fileInfo"></div>
 
                 <button
                     id="firstDownload"
                     class="download-button"
                     type="button"
                 >
-                    Download
+                    ⬇️ Download
                 </button>
 
                 <div
                     id="countdown"
                     class="countdown"
-                    aria-live="polite"
+                    style="display:none;"
                 >
                     Please wait
-                    <span
-                        id="countdownNumber"
-                        class="countdown-number"
-                    >5</span>
+                    <span id="countdownNumber">5</span>
                     seconds...
                 </div>
 
@@ -199,20 +46,19 @@
                     id="secondDownload"
                     class="download-button"
                     type="button"
-                    style="display: none;"
+                    style="display:none;"
                 >
-                    Continue Download
+                    ⬇️ Continue Download
                 </button>
 
                 <div
                     id="message"
                     class="message"
-                    aria-live="polite"
                 ></div>
 
             </div>
 
-        </section>
+        </div>
 
         <footer>
             WALAWWA
@@ -225,9 +71,10 @@
                 Telegram Bot
             </a>
         </footer>
-    </main>
 
-    <script src="script.js?v=5"></script>
+    </div>
+
+    <script src="script.js?v=6"></script>
 
 </body>
 </html>
