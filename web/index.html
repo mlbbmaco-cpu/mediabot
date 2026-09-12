@@ -1,490 +1,233 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-```
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<meta
-    name="description"
-    content="WALAWWA Download"
->
-
-<title>WALAWWA Download</title>
-
-
-<style>
-
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-
-    body {
-
-        min-height: 100vh;
-
-        font-family:
-            Arial,
-            Helvetica,
-            sans-serif;
-
-        background:
-            radial-gradient(
-                circle at top,
-                #24104a 0%,
-                #0d0718 45%,
-                #050308 100%
-            );
-
-        color: #ffffff;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        padding: 20px;
-    }
-
-
-    .container {
-
-        width: 100%;
-
-        max-width: 520px;
-    }
-
-
-    .card {
-
-        background:
-            rgba(
-                20,
-                12,
-                35,
-                0.96
-            );
-
-        border:
-            1px solid
-            rgba(
-                168,
-                85,
-                247,
-                0.35
-            );
-
-        border-radius: 22px;
-
-        padding: 32px 24px;
-
-        text-align: center;
-
-        box-shadow:
-            0 20px 60px
-            rgba(0, 0, 0, 0.55),
-
-            0 0 35px
-            rgba(124, 58, 237, 0.15);
-    }
-
-
-    .logo {
-
-        width: 100px;
-
-        height: 100px;
-
-        border-radius: 22px;
-
-        object-fit: cover;
-
-        margin-bottom: 18px;
-
-        border:
-            2px solid
-            rgba(
-                168,
-                85,
-                247,
-                0.5
-            );
-    }
-
-
-    h1 {
-
-        font-size: 30px;
-
-        margin-bottom: 10px;
-
-        font-weight: 800;
-    }
-
-
-    .subtitle {
-
-        color: #bdb5c9;
-
-        font-size: 15px;
-
-        line-height: 1.6;
-
-        margin-bottom: 25px;
-    }
-
-
-    .file-info {
-
-        display: none;
-
-        background:
-            rgba(
-                255,
-                255,
-                255,
-                0.05
-            );
-
-        border-radius: 14px;
-
-        padding: 14px;
-
-        margin-bottom: 20px;
-
-        color: #d9d1e3;
-
-        font-size: 14px;
-
-        word-break: break-word;
-    }
-
-
-    .download-area {
-
-        width: 100%;
-    }
-
-
-    .download-button {
-
-        width: 100%;
-
-        border: none;
-
-        border-radius: 14px;
-
-        padding: 16px 20px;
-
-        font-size: 17px;
-
-        font-weight: 700;
-
-        cursor: pointer;
-
-        color: #ffffff;
-
-        background:
-            linear-gradient(
-                135deg,
-                #8b5cf6,
-                #6d28d9
-            );
-
-        box-shadow:
-            0 8px 25px
-            rgba(
-                109,
-                40,
-                217,
-                0.35
-            );
-
-        transition:
-            transform 0.2s ease,
-            opacity 0.2s ease;
-    }
-
-
-    .download-button:hover {
-
-        transform:
-            translateY(-2px);
-    }
-
-
-    .download-button:active {
-
-        transform:
-            translateY(0);
-    }
-
-
-    .download-button:disabled {
-
-        cursor:
-            not-allowed;
-
-        opacity:
-            0.65;
-
-        transform:
-            none;
-    }
-
-
-    #secondDownload {
-
-        display: none;
-    }
-
-
-    .countdown {
-
-        display: none;
-
-        margin: 18px 0;
-
-        color: #c4b5fd;
-
-        font-size: 15px;
-
-        line-height: 1.6;
-
-        align-items: center;
-
-        justify-content: center;
-    }
-
-
-    .countdown-number {
-
-        display: inline-block;
-
-        min-width: 32px;
-
-        font-size: 22px;
-
-        font-weight: 800;
-
-        color: #ffffff;
-    }
-
-
-    .message {
-
-        margin-top: 18px;
-
-        font-size: 14px;
-
-        line-height: 1.5;
-
-        color: #aaa0b7;
-    }
-
-
-    .message.error {
-
-        color: #fca5a5;
-    }
-
-
-    .message.success {
-
-        color: #86efac;
-    }
-
-
-    .footer {
-
-        margin-top: 24px;
-
-        color: #71687c;
-
-        font-size: 12px;
-    }
-
-
-    .footer a {
-
-        color: #a78bfa;
-
-        text-decoration: none;
-    }
-
-
-    .footer a:hover {
-
-        text-decoration: underline;
-    }
-
-
-    @media (max-width: 480px) {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WALAWWA - Download</title>
+
+    <meta
+        name="description"
+        content="WALAWWA download page"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
 
         .card {
-
-            padding:
-                28px 18px;
+            background: #1c1c1c;
+            border-radius: 20px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
         }
-
-
-        h1 {
-
-            font-size: 26px;
-        }
-
 
         .logo {
-
-            width: 85px;
-
-            height: 85px;
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 15px;
         }
-    }
 
-</style>
-```
+        h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
 
+        .subtitle {
+            color: #aaa;
+            margin: 0 0 25px;
+            line-height: 1.5;
+        }
+
+        #downloadArea {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .download-button {
+            width: 100%;
+            max-width: 330px;
+            min-height: 55px;
+            border: none;
+            border-radius: 12px;
+            background: #7c3aed;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 15px 20px;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .download-button:active {
+            transform: translateY(0);
+        }
+
+        .download-button:disabled {
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .countdown {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 330px;
+            min-height: 55px;
+            border-radius: 12px;
+            background: #292929;
+            color: #ddd;
+            font-size: 17px;
+        }
+
+        .countdown-number {
+            display: inline-block;
+            min-width: 25px;
+            color: #a78bfa;
+            font-weight: bold;
+            font-size: 22px;
+            margin: 0 5px;
+        }
+
+        .message {
+            min-height: 24px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .message.success {
+            color: #4ade80;
+        }
+
+        .message.error {
+            color: #f87171;
+        }
+
+        #fileInfo {
+            display: none;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
 
-```
-<main class="container">
+    <main class="container">
+        <section class="card">
 
+            <div id="downloadArea">
 
-    <section class="card">
+                <h1>WALAWWA</h1>
 
+                <p class="subtitle">
+                    Your file is ready.<br>
+                    Click the button below to continue.
+                </p>
 
-        <img
-            src="logo.png"
-            alt="WALAWWA"
-            class="logo"
-            onerror="this.style.display='none'"
-        >
+                <div id="fileInfo"></div>
 
+                <button
+                    id="firstDownload"
+                    class="download-button"
+                    type="button"
+                >
+                    Download
+                </button>
 
-        <h1>
+                <div
+                    id="countdown"
+                    class="countdown"
+                    aria-live="polite"
+                >
+                    Please wait
+                    <span
+                        id="countdownNumber"
+                        class="countdown-number"
+                    >5</span>
+                    seconds...
+                </div>
+
+                <button
+                    id="secondDownload"
+                    class="download-button"
+                    type="button"
+                    style="display: none;"
+                >
+                    Continue Download
+                </button>
+
+                <div
+                    id="message"
+                    class="message"
+                    aria-live="polite"
+                ></div>
+
+            </div>
+
+        </section>
+
+        <footer>
             WALAWWA
-        </h1>
-
-
-        <p class="subtitle">
-
-            Your download is ready.
-            Click the button below to continue.
-
-        </p>
-
-
-        <div
-            id="fileInfo"
-            class="file-info"
-        ></div>
-
-
-        <div
-            id="downloadArea"
-            class="download-area"
-        >
-
-
-            <button
-                id="firstDownload"
-                class="download-button"
-                type="button"
-            >
-                ⬇️ Download
-            </button>
-
-
-            <div
-                id="countdown"
-                class="countdown"
-                aria-live="polite"
-            >
-
-                Please wait
-
-                <span
-                    id="countdownNumber"
-                    class="countdown-number"
-                >5</span>
-
-                seconds...
-
-            </div>
-
-
-            <button
-                id="secondDownload"
-                class="download-button"
-                type="button"
-                style="display: none;"
-            >
-                ⬇️ Continue Download
-            </button>
-
-
-            <div
-                id="message"
-                class="message"
-                aria-live="polite"
-            >
-                Click Download to continue.
-            </div>
-
-
-        </div>
-
-
-        <div class="footer">
-
-            Powered by
-
+            <br>
             <a
                 href="https://t.me/walawwa_downloadBot"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                WALAWWA
+                Telegram Bot
             </a>
+        </footer>
+    </main>
 
-        </div>
-
-
-    </section>
-
-
-</main>
-
-
-<!--
-    IMPORTANT:
-
-    script.js is in the same Firebase
-    hosting folder as this index.html.
-
-    Do NOT change this to app.js.
-
-    The ?v=5 forces the browser to
-    load the newest JavaScript.
--->
-
-<script src="script.js?v=5"></script>
-```
+    <script src="script.js?v=5"></script>
 
 </body>
-
 </html>
