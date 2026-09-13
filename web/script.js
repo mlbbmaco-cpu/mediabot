@@ -38,7 +38,7 @@ BOT_USERNAME +
 encodeURIComponent(code)
 );
 }
-
+ 
 function showMessage(text, type = "") {
 if (!message) {
 return;
