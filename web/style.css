@@ -1,5 +1,5 @@
 /* =========================================================
-   WALAWWA - COMPLETE STYLE.CSS
+   WALAWWA - FULL STYLE.CSS
    ========================================================= */
 
 :root {
@@ -7,6 +7,7 @@
     --bg-soft: #10091c;
 
     --card: rgba(22, 10, 38, 0.94);
+    --card-2: rgba(29, 12, 49, 0.96);
 
     --text: #ffffff;
     --muted: rgba(255, 255, 255, 0.58);
@@ -67,11 +68,13 @@ body {
             rgba(160, 60, 255, 0.14),
             transparent 27%
         ),
+
         radial-gradient(
             circle at 85% 25%,
             rgba(190, 65, 255, 0.09),
             transparent 25%
         ),
+
         linear-gradient(
             135deg,
             #07040d 0%,
@@ -131,6 +134,7 @@ svg {
             rgba(126, 45, 255, 0.16),
             transparent 38%
         ),
+
         radial-gradient(
             circle at 10% 90%,
             rgba(101, 24, 220, 0.12),
@@ -140,7 +144,7 @@ svg {
 
 
 /* =========================================================
-   PURPLE ORBS
+   ORBS
    ========================================================= */
 
 .gradient-orb {
@@ -157,8 +161,6 @@ svg {
     will-change: transform;
 }
 
-
-/* ORB 1 */
 
 .orb-1 {
     width: 430px;
@@ -180,8 +182,6 @@ svg {
 }
 
 
-/* ORB 2 */
-
 .orb-2 {
     width: 500px;
     height: 500px;
@@ -201,8 +201,6 @@ svg {
         orbTwo 11s ease-in-out infinite alternate;
 }
 
-
-/* ORB 3 */
 
 .orb-3 {
     width: 390px;
@@ -225,7 +223,7 @@ svg {
 
 
 /* =========================================================
-   ORB ANIMATIONS
+   ORB ANIMATION
    ========================================================= */
 
 @keyframes orbOne {
@@ -405,7 +403,7 @@ svg {
 
 
 /* =========================================================
-   MAIN PAGE
+   MAIN
    ========================================================= */
 
 .download-page {
@@ -426,14 +424,15 @@ svg {
 
     justify-content: center;
 
-    padding: 24px 18px;
+    padding:
+        24px 18px;
 
     overflow-x: hidden;
 }
 
 
 /* =========================================================
-   DOWNLOAD CARD
+   CARD
    ========================================================= */
 
 .download-card {
@@ -444,7 +443,8 @@ svg {
 
     margin: 0 auto;
 
-    padding: 32px 28px 28px;
+    padding:
+        32px 28px 28px;
 
     border:
         1px solid
@@ -478,10 +478,6 @@ svg {
     overflow: hidden;
 }
 
-
-/* =========================================================
-   CARD TOP LIGHT
-   ========================================================= */
 
 .download-card::after {
     content: "";
@@ -569,7 +565,7 @@ svg {
 
 
 /* =========================================================
-   DOWNLOAD BUTTON
+   BUTTON
    ========================================================= */
 
 .download-button {
@@ -587,7 +583,8 @@ svg {
 
     gap: 10px;
 
-    padding: 14px 18px;
+    padding:
+        14px 18px;
 
     border:
         1px solid
@@ -652,9 +649,11 @@ svg {
             transparent
         );
 
-    filter: blur(5px);
+    filter:
+        blur(5px);
 
-    transform: skewX(-20deg);
+    transform:
+        skewX(-20deg);
 
     pointer-events: none;
 
@@ -704,7 +703,8 @@ svg {
 
     z-index: 2;
 
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
     font-size: 24px;
 
@@ -728,7 +728,7 @@ svg {
 
 
 /* =========================================================
-   BUTTON ANIMATION
+   BUTTON ANIMATIONS
    ========================================================= */
 
 @keyframes buttonPulse {
@@ -801,7 +801,8 @@ svg {
         1px solid
         rgba(172, 76, 255, 0.20);
 
-    border-radius: 18px;
+    border-radius:
+        18px;
 
     background:
         rgba(87, 29, 139, 0.08);
@@ -811,13 +812,17 @@ svg {
 
 
 .countdown-label {
-    margin-bottom: 10px;
+    margin-bottom:
+        10px;
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    letter-spacing: 2.5px;
+    letter-spacing:
+        2.5px;
 
     color:
         rgba(221, 183, 255, 0.75);
@@ -825,13 +830,17 @@ svg {
 
 
 .countdown-number {
-    font-size: 82px;
+    font-size:
+        82px;
 
-    line-height: 1;
+    line-height:
+        1;
 
-    font-weight: 900;
+    font-weight:
+        900;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     text-shadow:
         0 0 12px rgba(210, 127, 255, 0.95),
@@ -843,9 +852,11 @@ svg {
 
 
 .countdown-small {
-    margin-top: 12px;
+    margin-top:
+        12px;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
     color:
         rgba(255, 255, 255, 0.55);
@@ -856,13 +867,19 @@ svg {
 
     0%,
     100% {
-        transform: scale(1);
-        opacity: 0.9;
+        transform:
+            scale(1);
+
+        opacity:
+            0.9;
     }
 
     50% {
-        transform: scale(1.08);
-        opacity: 1;
+        transform:
+            scale(1.08);
+
+        opacity:
+            1;
     }
 }
 
@@ -874,21 +891,29 @@ svg {
 .message {
     width: 100%;
 
-    min-height: 20px;
+    min-height:
+        20px;
 
-    margin-top: 12px;
+    margin-top:
+        12px;
 
-    text-align: center;
+    text-align:
+        center;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
 
     color:
         rgba(255, 255, 255, 0.65);
 
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
 }
 
 
@@ -905,15 +930,18 @@ svg {
 .sinhala-description {
     width: 100%;
 
-    margin-top: 22px;
+    margin-top:
+        22px;
 
-    padding: 16px 17px;
+    padding:
+        16px 17px;
 
     border:
         1px solid
         rgba(178, 82, 255, 0.17);
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
     background:
         rgba(116, 36, 184, 0.09);
@@ -921,14 +949,20 @@ svg {
     color:
         rgba(246, 231, 255, 0.76);
 
-    font-size: 14px;
+    font-size:
+        14px;
 
-    line-height: 1.8;
+    line-height:
+        1.8;
 
-    text-align: center;
+    text-align:
+        center;
 
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
 }
 
 
@@ -939,17 +973,23 @@ svg {
 .download-footer {
     width: 100%;
 
-    max-width: 460px;
+    max-width:
+        460px;
 
-    margin-top: 20px;
+    margin-top:
+        20px;
 
-    padding: 0 5px;
+    padding:
+        0 5px;
 
-    text-align: center;
+    text-align:
+        center;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
 
     color:
         rgba(255, 255, 255, 0.45);
@@ -960,7 +1000,8 @@ svg {
     color:
         rgba(216, 169, 255, 0.85);
 
-    font-weight: 700;
+    font-weight:
+        700;
 }
 
 
@@ -969,7 +1010,8 @@ svg {
    ========================================================= */
 
 [hidden] {
-    display: none !important;
+    display:
+        none !important;
 }
 
 
@@ -1059,15 +1101,17 @@ svg {
 
 
 /* =========================================================
-   MOBILE
+   MOBILE - FORCE WHOLE CARD DOWN
    ========================================================= */
 
 @media (max-width: 520px) {
 
     .download-page {
-        position: relative;
+        position:
+            relative;
 
-        width: 100%;
+        width:
+            100%;
 
         min-height:
             100svh;
@@ -1085,18 +1129,20 @@ svg {
             flex-start;
 
         /*
-         * THIS MOVES THE ENTIRE CARD DOWN.
-         *
-         * The red-marked area in your screenshot
-         * starts around here.
+         * NO TOP PADDING USED FOR POSITIONING.
+         * CARD ITSELF IS MOVED WITH MARGIN-TOP.
          */
         padding:
-            390px 12px 35px;
+            0 12px 35px;
 
         overflow-x:
             hidden;
     }
 
+
+    /* =========================================
+       THIS IS THE IMPORTANT PART
+       ========================================= */
 
     .download-card {
         position:
@@ -1108,8 +1154,20 @@ svg {
         max-width:
             360px;
 
-        margin:
-            0 auto;
+        /*
+         * FORCE THE ENTIRE WALAWWA BOX DOWN
+         */
+        margin-top:
+            390px !important;
+
+        margin-right:
+            auto !important;
+
+        margin-bottom:
+            0;
+
+        margin-left:
+            auto !important;
 
         padding:
             17px 12px 14px;
@@ -1117,15 +1175,14 @@ svg {
         border-radius:
             17px;
 
-        /*
-         * DO NOT USE TRANSLATE HERE.
-         */
         transform:
-            none;
+            none !important;
     }
 
 
-    /* LOGO */
+    /* =========================================
+       LOGO
+       ========================================= */
 
     .logo {
         font-size:
@@ -1148,7 +1205,9 @@ svg {
     }
 
 
-    /* BUTTON */
+    /* =========================================
+       BUTTON
+       ========================================= */
 
     .download-button {
         min-height:
@@ -1183,7 +1242,9 @@ svg {
     }
 
 
-    /* COUNTDOWN */
+    /* =========================================
+       COUNTDOWN
+       ========================================= */
 
     .countdown {
         min-height:
@@ -1227,7 +1288,9 @@ svg {
     }
 
 
-    /* MESSAGE */
+    /* =========================================
+       MESSAGE
+       ========================================= */
 
     .message {
         margin-top:
@@ -1241,7 +1304,9 @@ svg {
     }
 
 
-    /* SINHALA */
+    /* =========================================
+       SINHALA
+       ========================================= */
 
     .sinhala-description {
         margin-top:
@@ -1261,7 +1326,9 @@ svg {
     }
 
 
-    /* FOOTER */
+    /* =========================================
+       FOOTER
+       ========================================= */
 
     .download-footer {
         width:
@@ -1278,7 +1345,9 @@ svg {
     }
 
 
-    /* MOBILE BACKGROUND */
+    /* =========================================
+       MOBILE ORBS
+       ========================================= */
 
     .gradient-orb {
         filter:
@@ -1331,13 +1400,16 @@ svg {
 
     .download-page {
         padding:
-            360px 10px 25px;
+            0 10px 25px;
     }
 
 
     .download-card {
         max-width:
             330px;
+
+        margin-top:
+            360px !important;
 
         padding:
             15px 10px 12px;
@@ -1452,13 +1524,16 @@ svg {
 
     .download-page {
         padding:
-            330px 9px 20px;
+            0 9px 20px;
     }
 
 
     .download-card {
         max-width:
             305px;
+
+        margin-top:
+            330px !important;
 
         padding:
             14px 8px 10px;
@@ -1563,7 +1638,7 @@ svg {
 
 
 /* =========================================================
-   LANDSCAPE MOBILE
+   LANDSCAPE PHONE
    ========================================================= */
 
 @media (max-height: 520px) and (max-width: 900px) {
@@ -1573,7 +1648,7 @@ svg {
             100svh;
 
         padding:
-            45px 12px 20px;
+            0 12px 20px;
 
         justify-content:
             flex-start;
@@ -1584,14 +1659,14 @@ svg {
         max-width:
             350px;
 
-        margin:
-            0 auto;
+        margin-top:
+            45px !important;
 
         padding:
             13px 10px 10px;
 
         transform:
-            none;
+            none !important;
     }
 
 
@@ -1693,7 +1768,7 @@ svg {
 
 
 /* =========================================================
-   KEEP ANIMATIONS RUNNING
+   FORCE ANIMATIONS TO RUN
    ========================================================= */
 
 .animated-background .gradient-orb,
