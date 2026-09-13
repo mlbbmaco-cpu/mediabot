@@ -5,15 +5,14 @@
 :root {
     --bg: #08050f;
     --bg-soft: #10091c;
-
     --card: rgba(22, 10, 38, 0.94);
     --card-2: rgba(29, 12, 49, 0.96);
 
     --text: #ffffff;
-    --muted: rgba(255, 255, 255, 0.58);
+    --muted: rgba(255,255,255,.58);
 
-    --line: rgba(255, 255, 255, 0.08);
-    --line-purple: rgba(174, 86, 255, 0.28);
+    --line: rgba(255,255,255,.08);
+    --line-purple: rgba(174,86,255,.28);
 
     --accent: #8c35ef;
     --accent-2: #b04cff;
@@ -22,7 +21,7 @@
     --radius-small: 14px;
 
     --shadow:
-        0 25px 70px rgba(0, 0, 0, 0.48);
+        0 25px 70px rgba(0,0,0,.48);
 }
 
 
@@ -65,16 +64,14 @@ body {
     background:
         radial-gradient(
             circle at 15% 10%,
-            rgba(160, 60, 255, 0.14),
+            rgba(160,60,255,.14),
             transparent 27%
         ),
-
         radial-gradient(
             circle at 85% 25%,
-            rgba(190, 65, 255, 0.09),
+            rgba(190,65,255,.09),
             transparent 25%
         ),
-
         linear-gradient(
             135deg,
             #07040d 0%,
@@ -116,14 +113,12 @@ svg {
 
 .animated-background {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
     height: 100%;
 
     pointer-events: none;
-
     overflow: hidden;
 
     z-index: 0;
@@ -131,13 +126,12 @@ svg {
     background:
         radial-gradient(
             circle at 50% 20%,
-            rgba(126, 45, 255, 0.16),
+            rgba(126,45,255,.16),
             transparent 38%
         ),
-
         radial-gradient(
             circle at 10% 90%,
-            rgba(101, 24, 220, 0.12),
+            rgba(101,24,220,.12),
             transparent 35%
         );
 }
@@ -155,12 +149,10 @@ svg {
     pointer-events: none;
 
     filter: blur(2px);
-
     mix-blend-mode: screen;
 
     will-change: transform;
 }
-
 
 .orb-1 {
     width: 430px;
@@ -172,15 +164,14 @@ svg {
     background:
         radial-gradient(
             circle,
-            rgba(190, 70, 255, 0.62) 0%,
-            rgba(120, 35, 230, 0.28) 42%,
+            rgba(190,70,255,.62) 0%,
+            rgba(120,35,230,.28) 42%,
             transparent 72%
         );
 
     animation:
         orbOne 9s ease-in-out infinite alternate;
 }
-
 
 .orb-2 {
     width: 500px;
@@ -192,15 +183,14 @@ svg {
     background:
         radial-gradient(
             circle,
-            rgba(145, 50, 255, 0.58) 0%,
-            rgba(90, 25, 210, 0.25) 44%,
+            rgba(145,50,255,.58) 0%,
+            rgba(90,25,210,.25) 44%,
             transparent 72%
         );
 
     animation:
         orbTwo 11s ease-in-out infinite alternate;
 }
-
 
 .orb-3 {
     width: 390px;
@@ -212,8 +202,8 @@ svg {
     background:
         radial-gradient(
             circle,
-            rgba(210, 80, 255, 0.52) 0%,
-            rgba(120, 35, 230, 0.22) 45%,
+            rgba(210,80,255,.52) 0%,
+            rgba(120,35,230,.22) 45%,
             transparent 72%
         );
 
@@ -223,71 +213,48 @@ svg {
 
 
 /* =========================================================
-   ORB ANIMATION
+   ORB ANIMATIONS
    ========================================================= */
 
 @keyframes orbOne {
-
     0% {
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
+        transform: translate3d(0,0,0) scale(1);
     }
 
     50% {
-        transform:
-            translate3d(90px, 70px, 0)
-            scale(1.08);
+        transform: translate3d(90px,70px,0) scale(1.08);
     }
 
     100% {
-        transform:
-            translate3d(170px, 115px, 0)
-            scale(1.16);
+        transform: translate3d(170px,115px,0) scale(1.16);
     }
 }
-
 
 @keyframes orbTwo {
-
     0% {
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
+        transform: translate3d(0,0,0) scale(1);
     }
 
     50% {
-        transform:
-            translate3d(-85px, -55px, 0)
-            scale(1.08);
+        transform: translate3d(-85px,-55px,0) scale(1.08);
     }
 
     100% {
-        transform:
-            translate3d(-165px, -105px, 0)
-            scale(1.15);
+        transform: translate3d(-165px,-105px,0) scale(1.15);
     }
 }
 
-
 @keyframes orbThree {
-
     0% {
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
+        transform: translate3d(0,0,0) scale(1);
     }
 
     50% {
-        transform:
-            translate3d(65px, -70px, 0)
-            scale(1.08);
+        transform: translate3d(65px,-70px,0) scale(1.08);
     }
 
     100% {
-        transform:
-            translate3d(125px, -125px, 0)
-            scale(1.17);
+        transform: translate3d(125px,-125px,0) scale(1.17);
     }
 }
 
@@ -304,12 +271,11 @@ svg {
 
     border-radius: 50%;
 
-    background:
-        rgba(214, 137, 255, 0.9);
+    background: rgba(214,137,255,.9);
 
     box-shadow:
-        0 0 8px rgba(196, 92, 255, 0.9),
-        0 0 18px rgba(173, 60, 255, 0.65);
+        0 0 8px rgba(196,92,255,.9),
+        0 0 18px rgba(173,60,255,.65);
 
     pointer-events: none;
 
@@ -320,7 +286,6 @@ svg {
     animation:
         particleFloat 6s ease-in-out infinite;
 }
-
 
 .particle-1 {
     left: 12%;
@@ -357,47 +322,28 @@ svg {
     animation-delay: -5s;
 }
 
-
-/* =========================================================
-   PARTICLE ANIMATION
-   ========================================================= */
-
 @keyframes particleFloat {
-
     0% {
-        transform:
-            translate3d(0, 15px, 0)
-            scale(0.7);
-
-        opacity: 0.2;
+        transform: translate3d(0,15px,0) scale(.7);
+        opacity: .2;
     }
 
     25% {
-        transform:
-            translate3d(15px, -15px, 0)
-            scale(1);
+        transform: translate3d(15px,-15px,0) scale(1);
     }
 
     50% {
-        transform:
-            translate3d(-10px, -35px, 0)
-            scale(1.3);
-
+        transform: translate3d(-10px,-35px,0) scale(1.3);
         opacity: 1;
     }
 
     75% {
-        transform:
-            translate3d(-20px, -15px, 0)
-            scale(0.9);
+        transform: translate3d(-20px,-15px,0) scale(.9);
     }
 
     100% {
-        transform:
-            translate3d(0, 15px, 0)
-            scale(0.7);
-
-        opacity: 0.2;
+        transform: translate3d(0,15px,0) scale(.7);
+        opacity: .2;
     }
 }
 
@@ -417,15 +363,12 @@ svg {
     min-height: 100svh;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
-    padding:
-        24px 18px;
+    padding: 24px 18px;
 
     overflow-x: hidden;
 }
@@ -443,41 +386,29 @@ svg {
 
     margin: 0 auto;
 
-    padding:
-        32px 28px 28px;
+    padding: 32px 28px 28px;
 
-    border:
-        1px solid
-        var(--line-purple);
+    border: 1px solid var(--line-purple);
 
-    border-radius:
-        var(--radius);
+    border-radius: var(--radius);
 
     background:
         linear-gradient(
             145deg,
-            rgba(35, 14, 58, 0.94),
-            rgba(12, 7, 21, 0.96)
+            rgba(35,14,58,.94),
+            rgba(12,7,21,.96)
         );
 
     box-shadow:
-        0 0 0 1px
-        rgba(122, 45, 210, 0.06),
-
+        0 0 0 1px rgba(122,45,210,.06),
         var(--shadow),
+        0 0 55px rgba(132,42,255,.17);
 
-        0 0 55px
-        rgba(132, 42, 255, 0.17);
-
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     overflow: hidden;
 }
-
 
 .download-card::after {
     content: "";
@@ -494,7 +425,7 @@ svg {
         linear-gradient(
             90deg,
             transparent,
-            rgba(211, 150, 255, 0.8),
+            rgba(211,150,255,.8),
             transparent
         );
 }
@@ -509,8 +440,7 @@ svg {
 
     text-align: center;
 
-    font-size:
-        clamp(32px, 9vw, 52px);
+    font-size: clamp(32px,9vw,52px);
 
     line-height: 1;
 
@@ -518,23 +448,21 @@ svg {
 
     letter-spacing: 5px;
 
-    color: #ffffff;
+    color: #fff;
 
     text-shadow:
-        0 0 8px rgba(194, 94, 255, 0.95),
-        0 0 24px rgba(151, 48, 255, 0.75),
-        0 0 50px rgba(116, 34, 220, 0.50);
+        0 0 8px rgba(194,94,255,.95),
+        0 0 24px rgba(151,48,255,.75),
+        0 0 50px rgba(116,34,220,.50);
 
     overflow-wrap: anywhere;
 }
-
 
 .logo-line {
     width: 90px;
     height: 3px;
 
-    margin:
-        17px auto 28px;
+    margin: 17px auto 28px;
 
     border-radius: 50%;
 
@@ -549,8 +477,8 @@ svg {
         );
 
     box-shadow:
-        0 0 10px rgba(174, 72, 255, 0.8),
-        0 0 25px rgba(128, 35, 220, 0.45);
+        0 0 10px rgba(174,72,255,.8),
+        0 0 25px rgba(128,35,220,.45);
 }
 
 
@@ -578,27 +506,21 @@ svg {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 10px;
 
-    padding:
-        14px 18px;
+    padding: 14px 18px;
 
-    border:
-        1px solid
-        rgba(226, 190, 255, 0.35);
+    border: 1px solid rgba(226,190,255,.35);
 
-    border-radius:
-        var(--radius-small);
+    border-radius: var(--radius-small);
 
     overflow: hidden;
 
-    color: #ffffff;
+    color: #fff;
 
     font-size: 16px;
-
     font-weight: 800;
 
     background:
@@ -610,25 +532,17 @@ svg {
         );
 
     box-shadow:
-        0 10px 30px
-        rgba(122, 30, 226, 0.35),
-
-        0 0 22px
-        rgba(159, 56, 255, 0.25);
+        0 10px 30px rgba(122,30,226,.35),
+        0 0 22px rgba(159,56,255,.25);
 
     transition:
-        transform 0.2s ease,
-        filter 0.2s ease,
-        box-shadow 0.2s ease;
+        transform .2s ease,
+        filter .2s ease,
+        box-shadow .2s ease;
 
     animation:
         buttonPulse 2.8s ease-in-out infinite;
 }
-
-
-/* =========================================================
-   BUTTON SHINE
-   ========================================================= */
 
 .download-button::before {
     content: "";
@@ -645,15 +559,13 @@ svg {
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.26),
+            rgba(255,255,255,.26),
             transparent
         );
 
-    filter:
-        blur(5px);
+    filter: blur(5px);
 
-    transform:
-        skewX(-20deg);
+    transform: skewX(-20deg);
 
     pointer-events: none;
 
@@ -663,29 +575,19 @@ svg {
         buttonShine 3.8s ease-in-out infinite;
 }
 
-
 .download-button:hover {
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
-    filter:
-        brightness(1.08);
+    filter: brightness(1.08);
 
     box-shadow:
-        0 14px 35px
-        rgba(122, 30, 226, 0.45),
-
-        0 0 28px
-        rgba(159, 56, 255, 0.35);
+        0 14px 35px rgba(122,30,226,.45),
+        0 0 28px rgba(159,56,255,.35);
 }
-
 
 .download-button:active {
-    transform:
-        translateY(1px)
-        scale(0.99);
+    transform: translateY(1px) scale(.99);
 }
-
 
 .continue-button {
     background:
@@ -697,24 +599,18 @@ svg {
         );
 }
 
-
 .download-icon {
     position: relative;
-
     z-index: 2;
 
-    flex:
-        0 0 auto;
+    flex: 0 0 auto;
 
     font-size: 24px;
-
     line-height: 1;
 }
 
-
 .button-text {
     position: relative;
-
     z-index: 2;
 
     min-width: 0;
@@ -726,36 +622,21 @@ svg {
     word-break: break-word;
 }
 
-
-/* =========================================================
-   BUTTON ANIMATIONS
-   ========================================================= */
-
 @keyframes buttonPulse {
-
-    0%,
-    100% {
+    0%,100% {
         box-shadow:
-            0 10px 30px
-            rgba(122, 30, 226, 0.35),
-
-            0 0 22px
-            rgba(159, 56, 255, 0.25);
+            0 10px 30px rgba(122,30,226,.35),
+            0 0 22px rgba(159,56,255,.25);
     }
 
     50% {
         box-shadow:
-            0 13px 36px
-            rgba(137, 31, 245, 0.48),
-
-            0 0 32px
-            rgba(177, 63, 255, 0.40);
+            0 13px 36px rgba(137,31,245,.48),
+            0 0 32px rgba(177,63,255,.40);
     }
 }
 
-
 @keyframes buttonShine {
-
     0% {
         left: -45%;
         opacity: 0;
@@ -770,8 +651,7 @@ svg {
         opacity: 1;
     }
 
-    60%,
-    100% {
+    60%,100% {
         left: 115%;
         opacity: 0;
     }
@@ -788,98 +668,67 @@ svg {
     min-height: 220px;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 
-    border:
-        1px solid
-        rgba(172, 76, 255, 0.20);
+    border: 1px solid rgba(172,76,255,.20);
 
-    border-radius:
-        18px;
+    border-radius: 18px;
 
-    background:
-        rgba(87, 29, 139, 0.08);
+    background: rgba(87,29,139,.08);
 
     overflow: hidden;
 }
 
-
 .countdown-label {
-    margin-bottom:
-        10px;
+    margin-bottom: 10px;
 
-    font-size:
-        12px;
+    font-size: 12px;
+    font-weight: 800;
 
-    font-weight:
-        800;
+    letter-spacing: 2.5px;
 
-    letter-spacing:
-        2.5px;
-
-    color:
-        rgba(221, 183, 255, 0.75);
+    color: rgba(221,183,255,.75);
 }
 
-
 .countdown-number {
-    font-size:
-        82px;
+    font-size: 82px;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    font-weight:
-        900;
+    font-weight: 900;
 
-    color:
-        #ffffff;
+    color: #fff;
 
     text-shadow:
-        0 0 12px rgba(210, 127, 255, 0.95),
-        0 0 35px rgba(153, 48, 255, 0.70);
+        0 0 12px rgba(210,127,255,.95),
+        0 0 35px rgba(153,48,255,.70);
 
     animation:
         countdownGlow 1s ease-in-out infinite;
 }
 
-
 .countdown-small {
-    margin-top:
-        12px;
+    margin-top: 12px;
 
-    font-size:
-        13px;
+    font-size: 13px;
 
-    color:
-        rgba(255, 255, 255, 0.55);
+    color: rgba(255,255,255,.55);
 }
 
-
 @keyframes countdownGlow {
-
-    0%,
-    100% {
-        transform:
-            scale(1);
-
-        opacity:
-            0.9;
+    0%,100% {
+        transform: scale(1);
+        opacity: .9;
     }
 
     50% {
-        transform:
-            scale(1.08);
-
-        opacity:
-            1;
+        transform: scale(1.08);
+        opacity: 1;
     }
 }
 
@@ -891,78 +740,54 @@ svg {
 .message {
     width: 100%;
 
-    min-height:
-        20px;
+    min-height: 20px;
 
-    margin-top:
-        12px;
+    margin-top: 12px;
 
-    text-align:
-        center;
+    text-align: center;
 
-    font-size:
-        13px;
+    font-size: 13px;
 
-    line-height:
-        1.5;
+    line-height: 1.5;
 
-    color:
-        rgba(255, 255, 255, 0.65);
+    color: rgba(255,255,255,.65);
 
-    overflow-wrap:
-        anywhere;
-
-    word-break:
-        break-word;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
-
 .message.error {
-    color:
-        #ff8bca;
+    color: #ff8bca;
 }
 
 
 /* =========================================================
-   SINHALA DESCRIPTION
+   SINHALA
    ========================================================= */
 
 .sinhala-description {
     width: 100%;
 
-    margin-top:
-        22px;
+    margin-top: 22px;
 
-    padding:
-        16px 17px;
+    padding: 16px 17px;
 
-    border:
-        1px solid
-        rgba(178, 82, 255, 0.17);
+    border: 1px solid rgba(178,82,255,.17);
 
-    border-radius:
-        15px;
+    border-radius: 15px;
 
-    background:
-        rgba(116, 36, 184, 0.09);
+    background: rgba(116,36,184,.09);
 
-    color:
-        rgba(246, 231, 255, 0.76);
+    color: rgba(246,231,255,.76);
 
-    font-size:
-        14px;
+    font-size: 14px;
 
-    line-height:
-        1.8;
+    line-height: 1.8;
 
-    text-align:
-        center;
+    text-align: center;
 
-    overflow-wrap:
-        anywhere;
-
-    word-break:
-        break-word;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 
@@ -972,36 +797,24 @@ svg {
 
 .download-footer {
     width: 100%;
+    max-width: 460px;
 
-    max-width:
-        460px;
+    margin-top: 20px;
 
-    margin-top:
-        20px;
+    padding: 0 5px;
 
-    padding:
-        0 5px;
+    text-align: center;
 
-    text-align:
-        center;
+    font-size: 13px;
 
-    font-size:
-        13px;
+    line-height: 1.5;
 
-    line-height:
-        1.5;
-
-    color:
-        rgba(255, 255, 255, 0.45);
+    color: rgba(255,255,255,.45);
 }
 
-
 .download-footer strong {
-    color:
-        rgba(216, 169, 255, 0.85);
-
-    font-weight:
-        700;
+    color: rgba(216,169,255,.85);
+    font-weight: 700;
 }
 
 
@@ -1010,8 +823,7 @@ svg {
    ========================================================= */
 
 [hidden] {
-    display:
-        none !important;
+    display: none !important;
 }
 
 
@@ -1019,375 +831,208 @@ svg {
    TABLET
    ========================================================= */
 
-@media (max-width: 800px) and (min-width: 521px) {
+@media (max-width:800px) and (min-width:521px) {
 
     .download-page {
-        padding:
-            30px 16px;
+        padding: 30px 16px;
     }
 
     .download-card {
-        max-width:
-            400px;
-
-        padding:
-            24px 20px 20px;
-
-        border-radius:
-            20px;
+        max-width: 400px;
+        padding: 24px 20px 20px;
+        border-radius: 20px;
     }
 
     .logo {
-        font-size:
-            38px;
-
-        letter-spacing:
-            3px;
+        font-size: 38px;
+        letter-spacing: 3px;
     }
 
     .logo-line {
-        width:
-            70px;
-
-        margin:
-            13px auto 21px;
+        width: 70px;
+        margin: 13px auto 21px;
     }
 
     .download-button {
-        min-height:
-            56px;
-
-        font-size:
-            15px;
+        min-height: 56px;
+        font-size: 15px;
     }
 
     .download-icon {
-        font-size:
-            22px;
+        font-size: 22px;
     }
 
     .countdown {
-        min-height:
-            180px;
+        min-height: 180px;
     }
 
     .countdown-number {
-        font-size:
-            68px;
+        font-size: 68px;
     }
 
     .sinhala-description {
-        margin-top:
-            16px;
-
-        padding:
-            12px 13px;
-
-        font-size:
-            12px;
-
-        line-height:
-            1.7;
+        margin-top: 16px;
+        padding: 12px 13px;
+        font-size: 12px;
+        line-height: 1.7;
     }
 
     .download-footer {
-        margin-top:
-            12px;
-
-        font-size:
-            11px;
+        margin-top: 12px;
+        font-size: 11px;
     }
 }
 
 
 /* =========================================================
-   MOBILE - FORCE WHOLE CARD DOWN
+   MOBILE BASE
    ========================================================= */
 
-@media (max-width: 520px) {
+@media (max-width:520px) {
 
     .download-page {
-        position:
-            relative;
+        position: relative;
 
-        width:
-            100%;
+        width: 100%;
 
-        min-height:
-            100svh;
+        min-height: 100svh;
 
-        display:
-            flex;
+        display: flex;
+        flex-direction: column;
 
-        flex-direction:
-            column;
+        align-items: center;
+        justify-content: flex-start;
 
-        align-items:
-            center;
+        padding: 0 12px 35px;
 
-        justify-content:
-            flex-start;
-
-        /*
-         * NO TOP PADDING USED FOR POSITIONING.
-         * CARD ITSELF IS MOVED WITH MARGIN-TOP.
-         */
-        padding:
-            0 12px 35px;
-
-        overflow-x:
-            hidden;
+        overflow-x: hidden;
     }
-
-
-    /* =========================================
-       THIS IS THE IMPORTANT PART
-       ========================================= */
 
     .download-card {
-        position:
-            relative;
+        position: relative;
 
-        width:
-            100%;
-
-        max-width:
-            360px;
-
-        /*
-         * FORCE THE ENTIRE WALAWWA BOX DOWN
-         */
-        margin-top:
-            390px !important;
-
-        margin-right:
-            auto !important;
-
-        margin-bottom:
-            0;
-
-        margin-left:
-            auto !important;
-
-        padding:
-            17px 12px 14px;
-
-        border-radius:
-            17px;
-
-        transform:
-            none !important;
-    }
-
-
-    /* =========================================
-       LOGO
-       ========================================= */
-
-    .logo {
-        font-size:
-            28px;
-
-        letter-spacing:
-            1.8px;
-    }
-
-
-    .logo-line {
-        width:
-            58px;
-
-        height:
-            2px;
+        width: 100%;
+        max-width: 360px;
 
         margin:
-            10px auto 14px;
+            390px auto 0 !important;
+
+        padding: 17px 12px 14px;
+
+        border-radius: 17px;
+
+        transform: none !important;
     }
 
+    .logo {
+        font-size: 28px;
+        letter-spacing: 1.8px;
+    }
 
-    /* =========================================
-       BUTTON
-       ========================================= */
+    .logo-line {
+        width: 58px;
+        height: 2px;
+
+        margin: 10px auto 14px;
+    }
 
     .download-button {
-        min-height:
-            48px;
+        min-height: 48px;
 
-        padding:
-            9px;
+        padding: 9px;
 
-        gap:
-            7px;
+        gap: 7px;
 
-        border-radius:
-            12px;
+        border-radius: 12px;
 
-        font-size:
-            13px;
+        font-size: 13px;
     }
-
 
     .download-icon {
-        font-size:
-            19px;
+        font-size: 19px;
     }
-
 
     .button-text {
-        font-size:
-            13px;
-
-        line-height:
-            1.2;
+        font-size: 13px;
+        line-height: 1.2;
     }
-
-
-    /* =========================================
-       COUNTDOWN
-       ========================================= */
 
     .countdown {
-        min-height:
-            140px;
+        min-height: 140px;
 
-        padding:
-            10px 6px;
+        padding: 10px 6px;
 
-        border-radius:
-            13px;
+        border-radius: 13px;
     }
-
 
     .countdown-label {
-        margin-bottom:
-            5px;
+        margin-bottom: 5px;
 
-        font-size:
-            8px;
+        font-size: 8px;
 
-        letter-spacing:
-            1.3px;
+        letter-spacing: 1.3px;
 
-        line-height:
-            1.3;
+        line-height: 1.3;
     }
-
 
     .countdown-number {
-        font-size:
-            52px;
+        font-size: 52px;
     }
-
 
     .countdown-small {
-        margin-top:
-            5px;
-
-        font-size:
-            9px;
+        margin-top: 5px;
+        font-size: 9px;
     }
-
-
-    /* =========================================
-       MESSAGE
-       ========================================= */
 
     .message {
-        margin-top:
-            7px;
-
-        font-size:
-            10px;
-
-        line-height:
-            1.4;
+        margin-top: 7px;
+        font-size: 10px;
+        line-height: 1.4;
     }
-
-
-    /* =========================================
-       SINHALA
-       ========================================= */
 
     .sinhala-description {
-        margin-top:
-            10px;
+        margin-top: 10px;
 
-        padding:
-            9px 8px;
+        padding: 9px 8px;
 
-        border-radius:
-            11px;
+        border-radius: 11px;
 
-        font-size:
-            10px;
+        font-size: 10px;
 
-        line-height:
-            1.55;
+        line-height: 1.55;
     }
-
-
-    /* =========================================
-       FOOTER
-       ========================================= */
 
     .download-footer {
-        width:
-            100%;
+        width: 100%;
+        max-width: 360px;
 
-        max-width:
-            360px;
+        margin-top: 14px;
 
-        margin-top:
-            14px;
-
-        font-size:
-            9px;
+        font-size: 9px;
     }
-
-
-    /* =========================================
-       MOBILE ORBS
-       ========================================= */
 
     .gradient-orb {
-        filter:
-            blur(1px);
+        filter: blur(1px);
     }
-
 
     .orb-1 {
-        width:
-            290px;
-
-        height:
-            290px;
+        width: 290px;
+        height: 290px;
     }
-
 
     .orb-2 {
-        width:
-            330px;
-
-        height:
-            330px;
+        width: 330px;
+        height: 330px;
     }
-
 
     .orb-3 {
-        width:
-            270px;
-
-        height:
-            270px;
+        width: 270px;
+        height: 270px;
     }
 
-
     .particle {
-        width:
-            3px;
-
-        height:
-            3px;
+        width: 3px;
+        height: 3px;
     }
 }
 
@@ -1396,122 +1041,78 @@ svg {
    SMALL PHONES
    ========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width:380px) {
 
     .download-page {
-        padding:
-            0 10px 25px;
+        padding: 0 10px 25px;
     }
-
 
     .download-card {
-        max-width:
-            330px;
+        max-width: 330px;
 
         margin-top:
-            360px !important;
+            390px !important;
 
-        padding:
-            15px 10px 12px;
+        padding: 15px 10px 12px;
     }
-
 
     .logo {
-        font-size:
-            25px;
-
-        letter-spacing:
-            1.2px;
+        font-size: 25px;
+        letter-spacing: 1.2px;
     }
-
 
     .logo-line {
-        width:
-            52px;
-
-        margin:
-            9px auto 12px;
+        width: 52px;
+        margin: 9px auto 12px;
     }
-
 
     .download-button {
-        min-height:
-            45px;
+        min-height: 45px;
 
-        padding:
-            8px 7px;
+        padding: 8px 7px;
 
-        gap:
-            6px;
+        gap: 6px;
 
-        border-radius:
-            11px;
+        border-radius: 11px;
 
-        font-size:
-            12px;
+        font-size: 12px;
     }
-
 
     .download-icon {
-        font-size:
-            17px;
+        font-size: 17px;
     }
-
 
     .button-text {
-        font-size:
-            12px;
+        font-size: 12px;
     }
-
 
     .countdown {
-        min-height:
-            125px;
+        min-height: 125px;
     }
-
 
     .countdown-number {
-        font-size:
-            47px;
+        font-size: 47px;
     }
-
 
     .countdown-label {
-        font-size:
-            7.5px;
-
-        letter-spacing:
-            1.1px;
+        font-size: 7.5px;
+        letter-spacing: 1.1px;
     }
-
 
     .countdown-small {
-        font-size:
-            8.5px;
+        font-size: 8.5px;
     }
-
 
     .sinhala-description {
-        margin-top:
-            9px;
-
-        padding:
-            7px 6px;
-
-        font-size:
-            9.5px;
-
-        line-height:
-            1.5;
+        margin-top: 9px;
+        padding: 7px 6px;
+        font-size: 9.5px;
+        line-height: 1.5;
     }
 
-
     .download-footer {
-        margin-top:
-            12px;
-
-        font-size:
-            8.5px;
+        margin-top: 12px;
+        font-size: 8.5px;
     }
 }
 
@@ -1520,255 +1121,205 @@ svg {
    VERY SMALL PHONES
    ========================================================= */
 
-@media (max-width: 340px) {
+@media (max-width:340px) {
 
     .download-page {
-        padding:
-            0 9px 20px;
+        padding: 0 9px 20px;
     }
-
 
     .download-card {
-        max-width:
-            305px;
+        max-width: 305px;
 
         margin-top:
-            330px !important;
+            390px !important;
 
-        padding:
-            14px 8px 10px;
+        padding: 14px 8px 10px;
     }
-
 
     .logo {
-        font-size:
-            22px;
-
-        letter-spacing:
-            0.9px;
+        font-size: 22px;
+        letter-spacing: .9px;
     }
-
 
     .logo-line {
-        width:
-            47px;
-
-        margin:
-            8px auto 10px;
+        width: 47px;
+        margin: 8px auto 10px;
     }
-
 
     .download-button {
-        min-height:
-            42px;
+        min-height: 42px;
 
-        padding:
-            7px 6px;
+        padding: 7px 6px;
 
-        gap:
-            5px;
+        gap: 5px;
 
-        font-size:
-            11.5px;
+        font-size: 11.5px;
     }
-
 
     .download-icon {
-        font-size:
-            16px;
+        font-size: 16px;
     }
-
 
     .button-text {
-        font-size:
-            11.5px;
+        font-size: 11.5px;
     }
-
 
     .countdown {
-        min-height:
-            115px;
+        min-height: 115px;
     }
-
 
     .countdown-number {
-        font-size:
-            43px;
+        font-size: 43px;
     }
-
 
     .countdown-label {
-        font-size:
-            7px;
-
-        letter-spacing:
-            1px;
+        font-size: 7px;
+        letter-spacing: 1px;
     }
-
 
     .countdown-small {
-        font-size:
-            8px;
+        font-size: 8px;
     }
-
 
     .sinhala-description {
-        margin-top:
-            8px;
-
-        padding:
-            6px;
-
-        font-size:
-            9px;
-
-        line-height:
-            1.5;
+        margin-top: 8px;
+        padding: 6px;
+        font-size: 9px;
+        line-height: 1.5;
     }
 
-
     .download-footer {
-        margin-top:
-            10px;
-
-        font-size:
-            8px;
+        margin-top: 10px;
+        font-size: 8px;
     }
 }
 
 
 /* =========================================================
-   LANDSCAPE PHONE
+   LANDSCAPE
    ========================================================= */
 
-@media (max-height: 520px) and (max-width: 900px) {
+/*
+   IMPORTANT:
+   Landscape no longer changes card position.
+   This prevents the 45px rule from overriding mobile.
+*/
+
+@media (max-height:520px) and (max-width:900px) {
 
     .download-page {
-        min-height:
-            100svh;
-
-        padding:
-            0 12px 20px;
-
-        justify-content:
-            flex-start;
+        min-height: 100svh;
+        padding: 0 12px 20px;
+        justify-content: flex-start;
     }
 
+    .download-card {
+        max-width: 350px;
+
+        padding: 13px 10px 10px;
+
+        transform: none !important;
+    }
+
+    .logo {
+        font-size: 23px;
+        letter-spacing: 1px;
+    }
+
+    .logo-line {
+        width: 46px;
+        height: 2px;
+        margin: 7px auto 9px;
+    }
+
+    .download-button {
+        min-height: 40px;
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .download-icon {
+        font-size: 15px;
+    }
+
+    .button-text {
+        font-size: 11px;
+    }
+
+    .countdown {
+        min-height: 100px;
+    }
+
+    .countdown-number {
+        font-size: 38px;
+    }
+
+    .countdown-label {
+        font-size: 7px;
+    }
+
+    .countdown-small {
+        margin-top: 3px;
+        font-size: 8px;
+    }
+
+    .sinhala-description {
+        margin-top: 6px;
+        padding: 5px;
+        font-size: 8.5px;
+        line-height: 1.45;
+    }
+
+    .download-footer {
+        margin-top: 8px;
+        font-size: 8px;
+    }
+}
+
+
+/* =========================================================
+   FINAL MOBILE POSITION OVERRIDE
+   ========================================================= */
+
+/*
+   THIS MUST BE LAST.
+
+   It guarantees the whole WALAWWA card is moved down.
+*/
+
+@media (max-width:520px) {
+
+    .download-page {
+        justify-content: flex-start !important;
+        padding-top: 0 !important;
+    }
 
     .download-card {
-        max-width:
-            350px;
-
         margin-top:
-            45px !important;
+            390px !important;
 
-        padding:
-            13px 10px 10px;
+        margin-right:
+            auto !important;
+
+        margin-bottom:
+            0 !important;
+
+        margin-left:
+            auto !important;
 
         transform:
             none !important;
     }
 
-
-    .logo {
-        font-size:
-            23px;
-
-        letter-spacing:
-            1px;
-    }
-
-
-    .logo-line {
-        width:
-            46px;
-
-        height:
-            2px;
-
-        margin:
-            7px auto 9px;
-    }
-
-
-    .download-button {
-        min-height:
-            40px;
-
-        padding:
-            6px;
-
-        font-size:
-            11px;
-    }
-
-
-    .download-icon {
-        font-size:
-            15px;
-    }
-
-
-    .button-text {
-        font-size:
-            11px;
-    }
-
-
-    .countdown {
-        min-height:
-            100px;
-    }
-
-
-    .countdown-number {
-        font-size:
-            38px;
-    }
-
-
-    .countdown-label {
-        font-size:
-            7px;
-    }
-
-
-    .countdown-small {
-        margin-top:
-            3px;
-
-        font-size:
-            8px;
-    }
-
-
-    .sinhala-description {
-        margin-top:
-            6px;
-
-        padding:
-            5px;
-
-        font-size:
-            8.5px;
-
-        line-height:
-            1.45;
-    }
-
-
     .download-footer {
-        margin-top:
-            8px;
-
-        font-size:
-            8px;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 
 
 /* =========================================================
-   FORCE ANIMATIONS TO RUN
+   FORCE ANIMATIONS
    ========================================================= */
 
 .animated-background .gradient-orb,
@@ -1776,6 +1327,5 @@ svg {
 .download-button,
 .countdown-number,
 .download-button::before {
-    animation-play-state:
-        running;
+    animation-play-state: running;
 }
