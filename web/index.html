@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -18,8 +19,206 @@
 
     <link
         rel="stylesheet"
-        href="style.css?v=43"
+        href="style.css?v=44"
     >
+
+
+    <!-- =====================================================
+         MOBILE POSITION OVERRIDE
+         
+         This is intentionally inside index.html.
+         It guarantees the card position even if an older
+         CSS file is cached or Monetag adds elements.
+         ===================================================== -->
+
+    <style>
+
+        @media (max-width: 520px) {
+
+            html,
+            body {
+                width: 100%;
+                min-height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+
+            /*
+             * Main page becomes the positioning area.
+             */
+            .download-page {
+                position: relative !important;
+
+                width: 100% !important;
+
+                min-height: 1500px !important;
+
+                height: 1500px !important;
+
+                display: block !important;
+
+                margin: 0 !important;
+
+                padding: 0 12px 40px !important;
+
+                overflow-x: hidden !important;
+            }
+
+
+            /*
+             * =================================================
+             * WALAWWA CARD POSITION
+             * =================================================
+             *
+             * Target:
+             * approximately 470px from the webpage content top.
+             *
+             * This is the red-marked area from your screenshot.
+             */
+
+            .download-card {
+                position: absolute !important;
+
+                top: 470px !important;
+
+                left: 50% !important;
+
+                right: auto !important;
+
+                bottom: auto !important;
+
+                width: calc(100% - 24px) !important;
+
+                max-width: 360px !important;
+
+                margin: 0 !important;
+
+                padding: 17px 12px 14px !important;
+
+                transform: translateX(-50%) !important;
+
+                z-index: 20 !important;
+            }
+
+
+            /*
+             * =================================================
+             * FOOTER
+             * =================================================
+             */
+
+            .download-footer {
+                position: absolute !important;
+
+                top: 900px !important;
+
+                left: 50% !important;
+
+                right: auto !important;
+
+                bottom: auto !important;
+
+                width: calc(100% - 24px) !important;
+
+                max-width: 360px !important;
+
+                margin: 0 !important;
+
+                padding: 0 5px !important;
+
+                transform: translateX(-50%) !important;
+
+                z-index: 20 !important;
+            }
+
+        }
+
+
+        /*
+         * =====================================================
+         * SMALL PHONES
+         * =====================================================
+         */
+
+        @media (max-width: 380px) {
+
+            .download-card {
+                top: 470px !important;
+
+                width: calc(100% - 20px) !important;
+
+                max-width: 330px !important;
+            }
+
+            .download-footer {
+                top: 885px !important;
+
+                width: calc(100% - 20px) !important;
+
+                max-width: 330px !important;
+            }
+
+        }
+
+
+        /*
+         * =====================================================
+         * VERY SMALL PHONES
+         * =====================================================
+         */
+
+        @media (max-width: 340px) {
+
+            .download-card {
+                top: 470px !important;
+
+                width: calc(100% - 18px) !important;
+
+                max-width: 305px !important;
+            }
+
+            .download-footer {
+                top: 860px !important;
+
+                width: calc(100% - 18px) !important;
+
+                max-width: 305px !important;
+            }
+
+        }
+
+
+        /*
+         * =====================================================
+         * LANDSCAPE PHONE
+         * =====================================================
+         */
+
+        @media (max-height: 520px) and (max-width: 900px) {
+
+            .download-page {
+                min-height: 1100px !important;
+
+                height: 1100px !important;
+            }
+
+            .download-card {
+                top: 300px !important;
+
+                max-width: 350px !important;
+            }
+
+            .download-footer {
+                top: 700px !important;
+
+                max-width: 350px !important;
+            }
+
+        }
+
+    </style>
 
 
     <!-- =====================================================
@@ -48,16 +247,12 @@
         aria-hidden="true"
     >
 
-        <!-- MOVING PURPLE ORBS -->
-
         <div class="gradient-orb orb-1"></div>
 
         <div class="gradient-orb orb-2"></div>
 
         <div class="gradient-orb orb-3"></div>
 
-
-        <!-- FLOATING PARTICLES -->
 
         <div class="particle particle-1"></div>
 
@@ -101,7 +296,9 @@
             </div>
 
 
-            <!-- LOGO LINE -->
+            <!-- =============================================
+                 LOGO LINE
+                 ============================================= -->
 
             <div
                 class="logo-line"
@@ -131,7 +328,6 @@
                         class="download-icon"
                         aria-hidden="true"
                     >↓</span>
-
 
                     <span class="button-text">
                         Continue Download
@@ -188,7 +384,6 @@
                         class="download-icon"
                         aria-hidden="true"
                     >↓</span>
-
 
                     <span class="button-text">
                         Download
@@ -257,7 +452,7 @@
          ===================================================== -->
 
     <script
-        src="script.js?v=43"
+        src="script.js?v=44"
     ></script>
 
 
