@@ -19,35 +19,38 @@
 
     <link
         rel="stylesheet"
-        href="style.css?v=44"
+        href="style.css?v=45"
     >
 
 
     <!-- =====================================================
-         MOBILE POSITION OVERRIDE
-         
-         This is intentionally inside index.html.
-         It guarantees the card position even if an older
-         CSS file is cached or Monetag adds elements.
+         EXACT MOBILE POSITION OVERRIDE
          ===================================================== -->
 
     <style>
+
+        /* =================================================
+           MOBILE
+           ================================================= */
 
         @media (max-width: 520px) {
 
             html,
             body {
-                width: 100%;
-                min-height: 100%;
-                margin: 0;
-                padding: 0;
-                overflow-x: hidden;
+                width: 100% !important;
+                min-height: 100% !important;
+
+                margin: 0 !important;
+                padding: 0 !important;
+
+                overflow-x: hidden !important;
             }
 
 
             /*
-             * Main page becomes the positioning area.
+             * MAIN POSITIONING AREA
              */
+
             .download-page {
                 position: relative !important;
 
@@ -61,7 +64,7 @@
 
                 margin: 0 !important;
 
-                padding: 0 12px 40px !important;
+                padding: 0 !important;
 
                 overflow-x: hidden !important;
             }
@@ -69,19 +72,19 @@
 
             /*
              * =================================================
-             * WALAWWA CARD POSITION
+             * WALAWWA CARD
              * =================================================
              *
-             * Target:
-             * approximately 470px from the webpage content top.
+             * EXACT TARGET POSITION
              *
-             * This is the red-marked area from your screenshot.
+             * The red box in your screenshot starts around
+             * this position.
              */
 
             .download-card {
                 position: absolute !important;
 
-                top: 470px !important;
+                top: 90px !important;
 
                 left: 50% !important;
 
@@ -95,11 +98,9 @@
 
                 margin: 0 !important;
 
-                padding: 17px 12px 14px !important;
-
                 transform: translateX(-50%) !important;
 
-                z-index: 20 !important;
+                z-index: 50 !important;
             }
 
 
@@ -112,7 +113,7 @@
             .download-footer {
                 position: absolute !important;
 
-                top: 900px !important;
+                top: 520px !important;
 
                 left: 50% !important;
 
@@ -126,34 +127,31 @@
 
                 margin: 0 !important;
 
-                padding: 0 5px !important;
-
                 transform: translateX(-50%) !important;
 
-                z-index: 20 !important;
+                z-index: 50 !important;
             }
 
         }
 
 
-        /*
-         * =====================================================
-         * SMALL PHONES
-         * =====================================================
-         */
+        /* =================================================
+           SMALL PHONES
+           ================================================= */
 
         @media (max-width: 380px) {
 
             .download-card {
-                top: 470px !important;
+                top: 90px !important;
 
                 width: calc(100% - 20px) !important;
 
                 max-width: 330px !important;
             }
 
+
             .download-footer {
-                top: 885px !important;
+                top: 505px !important;
 
                 width: calc(100% - 20px) !important;
 
@@ -163,24 +161,23 @@
         }
 
 
-        /*
-         * =====================================================
-         * VERY SMALL PHONES
-         * =====================================================
-         */
+        /* =================================================
+           VERY SMALL PHONES
+           ================================================= */
 
         @media (max-width: 340px) {
 
             .download-card {
-                top: 470px !important;
+                top: 90px !important;
 
                 width: calc(100% - 18px) !important;
 
                 max-width: 305px !important;
             }
 
+
             .download-footer {
-                top: 860px !important;
+                top: 490px !important;
 
                 width: calc(100% - 18px) !important;
 
@@ -190,11 +187,9 @@
         }
 
 
-        /*
-         * =====================================================
-         * LANDSCAPE PHONE
-         * =====================================================
-         */
+        /* =================================================
+           LANDSCAPE
+           ================================================= */
 
         @media (max-height: 520px) and (max-width: 900px) {
 
@@ -204,14 +199,16 @@
                 height: 1100px !important;
             }
 
+
             .download-card {
-                top: 300px !important;
+                top: 90px !important;
 
                 max-width: 350px !important;
             }
 
+
             .download-footer {
-                top: 700px !important;
+                top: 500px !important;
 
                 max-width: 350px !important;
             }
@@ -278,7 +275,7 @@
 
 
         <!-- =================================================
-             COMPLETE WALAWWA CARD
+             WALAWWA CARD
              ================================================= -->
 
         <section
@@ -452,7 +449,7 @@
          ===================================================== -->
 
     <script
-        src="script.js?v=44"
+        src="script.js?v=45"
     ></script>
 
 
