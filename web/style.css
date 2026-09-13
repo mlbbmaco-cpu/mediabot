@@ -1,6 +1,6 @@
 /* =========================================================
    WALAWWA DOWNLOAD PAGE
-   RESPONSIVE MAIN STYLES
+   FULL RESPONSIVE STYLES
    ========================================================= */
 
 
@@ -37,8 +37,7 @@ body {
 
     color: #ffffff;
 
-    background:
-        #08050f;
+    background: #08050f;
 }
 
 *,
@@ -279,41 +278,31 @@ svg {
 .particle-2 {
     left: 82%;
     top: 18%;
-
-    animation-delay:
-        1.2s;
+    animation-delay: 1.2s;
 }
 
 .particle-3 {
     left: 24%;
     top: 72%;
-
-    animation-delay:
-        2.4s;
+    animation-delay: 2.4s;
 }
 
 .particle-4 {
     left: 72%;
     top: 65%;
-
-    animation-delay:
-        3.1s;
+    animation-delay: 3.1s;
 }
 
 .particle-5 {
     left: 52%;
     top: 35%;
-
-    animation-delay:
-        4s;
+    animation-delay: 4s;
 }
 
 .particle-6 {
     left: 90%;
     top: 82%;
-
-    animation-delay:
-        5s;
+    animation-delay: 5s;
 }
 
 @keyframes particleFloat {
@@ -1008,7 +997,7 @@ svg {
 
     .download-page {
         padding:
-            20px 16px;
+            60px 16px 20px;
     }
 
     .download-card {
@@ -1096,6 +1085,7 @@ svg {
 
 /* =========================================================
    MOBILE
+   CARD NOTICEABLY LOWER
    ========================================================= */
 
 @media (max-width: 600px) {
@@ -1113,9 +1103,6 @@ svg {
         min-height:
             100svh;
 
-        padding:
-            12px 14px;
-
         display:
             flex;
 
@@ -1124,6 +1111,16 @@ svg {
 
         justify-content:
             center;
+
+        /*
+         * NOTICEABLY LOWER
+         *
+         * The card stays horizontally centered.
+         * Extra top padding shifts the whole content downward.
+         */
+
+        padding:
+            150px 14px 10px;
     }
 
     .download-card {
@@ -1144,9 +1141,9 @@ svg {
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        MOBILE LOGO
-       ----------------------------------------- */
+       ===================================================== */
 
     .logo {
         width:
@@ -1177,9 +1174,9 @@ svg {
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        MOBILE BUTTON
-       ----------------------------------------- */
+       ===================================================== */
 
     .download-button {
         width:
@@ -1221,9 +1218,9 @@ svg {
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        MOBILE COUNTDOWN
-       ----------------------------------------- */
+       ===================================================== */
 
     .countdown {
         width:
@@ -1273,9 +1270,9 @@ svg {
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        MOBILE MESSAGE
-       ----------------------------------------- */
+       ===================================================== */
 
     .message {
         margin-top:
@@ -1289,9 +1286,9 @@ svg {
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        MOBILE SINHALA
-       ----------------------------------------- */
+       ===================================================== */
 
     .sinhala-description {
         width:
@@ -1320,9 +1317,9 @@ svg {
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        MOBILE FOOTER
-       ----------------------------------------- */
+       ===================================================== */
 
     .download-footer {
         margin-top:
@@ -1341,11 +1338,8 @@ svg {
 @media (max-width: 380px) {
 
     .download-page {
-        padding-left:
-            12px;
-
-        padding-right:
-            12px;
+        padding:
+            140px 12px 8px;
     }
 
     .download-card {
@@ -1462,11 +1456,8 @@ svg {
 @media (max-width: 340px) {
 
     .download-page {
-        padding-left:
-            10px;
-
-        padding-right:
-            10px;
+        padding:
+            130px 10px 6px;
     }
 
     .download-card {
@@ -1566,7 +1557,6 @@ svg {
 
 /* =========================================================
    LANDSCAPE MOBILE
-   PREVENT HUGE CARD
    ========================================================= */
 
 @media (max-height: 520px) and (max-width: 900px) {
@@ -1576,7 +1566,7 @@ svg {
             100svh;
 
         padding:
-            8px 12px;
+            15px 12px;
 
         justify-content:
             flex-start;
@@ -1584,7 +1574,7 @@ svg {
 
     .download-card {
         margin-top:
-            3px;
+            8px;
 
         max-width:
             340px;
