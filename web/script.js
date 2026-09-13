@@ -3,119 +3,16 @@
 const BOT_USERNAME = "walawwa_downloadBot";
 const COUNTDOWN_SECONDS = 5;
 
-let firstDownload = null;
-let secondDownload = null;
-let countdown = null;
-let countdownNumber = null;
-let message = null;
-
-function getDownloadCode() {
+document.addEventListener("DOMContentLoaded", function () {
 
 ```
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
+const firstDownload = document.getElementById("firstDownload");
+const secondDownload = document.getElementById("secondDownload");
+const countdown = document.getElementById("countdown");
+const countdownNumber = document.getElementById("countdownNumber");
+const message = document.getElementById("message");
 
-let code =
-    params.get("start");
-
-if (!code) {
-    code =
-        params.get("code");
-}
-
-if (!code) {
-    return null;
-}
-
-code =
-    code.trim();
-
-return code || null;
-```
-
-}
-
-function makeTelegramLink(code) {
-
-```
-return (
-    "https://t.me/" +
-    BOT_USERNAME +
-    "?start=" +
-    encodeURIComponent(code)
-);
-```
-
-}
-
-function showMessage(
-text,
-type = ""
-) {
-
-```
-if (!message) {
-    return;
-}
-
-message.textContent =
-    text;
-
-message.className =
-    "message";
-
-if (type) {
-    message.classList.add(type);
-}
-```
-
-}
-
-function initializeDownloadPage() {
-
-```
-console.log(
-    "WALAWWA JavaScript loaded"
-);
-
-
-firstDownload =
-    document.getElementById(
-        "firstDownload"
-    );
-
-secondDownload =
-    document.getElementById(
-        "secondDownload"
-    );
-
-countdown =
-    document.getElementById(
-        "countdown"
-    );
-
-countdownNumber =
-    document.getElementById(
-        "countdownNumber"
-    );
-
-message =
-    document.getElementById(
-        "message"
-    );
-
-
-const code =
-    getDownloadCode();
-
-
-console.log(
-    "Download code:",
-    code
-);
-
+console.log("WALAWWA JavaScript loaded");
 
 if (
     !firstDownload ||
@@ -123,169 +20,97 @@ if (
     !countdown ||
     !countdownNumber
 ) {
-
-    console.error(
-        "WALAWWA: required elements missing"
-    );
-
+    console.error("WALAWWA: required elements missing");
     return;
 }
 
+const params = new URLSearchParams(window.location.search);
+
+let code = params.get("start");
 
 if (!code) {
+    code = params.get("code");
+}
 
-    firstDownload.disabled =
-        true;
+if (code) {
+    code = code.trim();
+}
 
-    firstDownload.innerHTML =
-        "<span>Invalid Download Link</span>";
+console.log("Download code:", code);
 
-    showMessage(
-        "Please open a valid WALAWWA download link.",
-        "error"
-    );
+if (!code) {
+    firstDownload.disabled = true;
+    firstDownload.innerHTML = "<span>Invalid Download Link</span>";
+
+    if (message) {
+        message.textContent =
+            "Please open a valid WALAWWA download link.";
+        message.className = "message error";
+    }
 
     return;
 }
 
+firstDownload.style.display = "flex";
+firstDownload.disabled = false;
 
-firstDownload.style.display =
-    "flex";
+secondDownload.style.display = "none";
+secondDownload.disabled = true;
 
-firstDownload.disabled =
-    false;
+countdown.style.display = "none";
 
-secondDownload.style.display =
-    "none";
+firstDownload.addEventListener("click", function () {
 
-secondDownload.disabled =
-    true;
+    console.log("Continue Download clicked");
 
-countdown.style.display =
-    "none";
+    firstDownload.style.display = "none";
+    firstDownload.disabled = true;
 
-showMessage("");
+    countdown.style.display = "flex";
 
+    let remaining = COUNTDOWN_SECONDS;
 
-firstDownload.addEventListener(
-    "click",
-    function () {
+    countdownNumber.textContent = remaining;
 
-        console.log(
-            "Continue Download clicked"
-        );
+    const timer = setInterval(function () {
 
+        remaining--;
 
-        firstDownload.style.display =
-            "none";
+        countdownNumber.textContent = remaining;
 
+        if (remaining <= 0) {
 
-        countdown.style.display =
-            "flex";
+            clearInterval(timer);
 
+            countdown.style.display = "none";
 
-        let remaining =
-            COUNTDOWN_SECONDS;
+            secondDownload.style.display = "flex";
+            secondDownload.disabled = false;
 
+            console.log("Download button ready");
+        }
 
-        countdownNumber.textContent =
-            remaining;
+    }, 1000);
 
+});
 
-        showMessage("");
+secondDownload.addEventListener("click", function () {
 
+    console.log("Download clicked");
 
-        const timer =
-            setInterval(
-                function () {
+    secondDownload.disabled = true;
 
-                    remaining--;
+    const telegramLink =
+        "https://t.me/" +
+        BOT_USERNAME +
+        "?start=" +
+        encodeURIComponent(code);
 
-                    countdownNumber.textContent =
-                        remaining;
+    console.log("Opening Telegram:", telegramLink);
 
+    window.location.href = telegramLink;
 
-                    if (remaining <= 0) {
-
-                        clearInterval(
-                            timer
-                        );
-
-
-                        countdown.style.display =
-                            "none";
-
-
-                        secondDownload.style.display =
-                            "flex";
-
-                        secondDownload.disabled =
-                            false;
-
-
-                        showMessage("");
-
-                    }
-
-                },
-                1000
-            );
-
-    }
-);
-
-
-secondDownload.addEventListener(
-    "click",
-    function () {
-
-        console.log(
-            "Download clicked"
-        );
-
-
-        secondDownload.disabled =
-            true;
-
-
-        showMessage("");
-
-
-        const telegramLink =
-            makeTelegramLink(code);
-
-
-        console.log(
-            "Opening Telegram:",
-            telegramLink
-        );
-
-
-        window.location.href =
-            telegramLink;
-
-    }
-);
+});
 ```
 
-}
-
-if (
-document.readyState ===
-"loading"
-) {
-
-```
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeDownloadPage
-);
-```
-
-} else {
-
-```
-initializeDownloadPage();
-```
-
-}
+});
