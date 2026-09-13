@@ -3,11 +3,11 @@
 const BOT_USERNAME = "walawwa_downloadBot";
 const COUNTDOWN_SECONDS = 5;
 
-let firstDownload = null;
-let secondDownload = null;
-let countdown = null;
-let countdownNumber = null;
-let message = null;
+let firstDownload;
+let secondDownload;
+let countdown;
+let countdownNumber;
+let message;
 
 function getDownloadCode() {
 const params = new URLSearchParams(window.location.search);
@@ -38,7 +38,7 @@ BOT_USERNAME +
 encodeURIComponent(code)
 );
 }
- 
+
 function showMessage(text, type = "") {
 if (!message) {
 return;
@@ -56,7 +56,7 @@ if (type) {
 }
 
 function initializeDownloadPage() {
-console.log("WALAWWA JavaScript loaded");
+console.log("WALAWWA: JavaScript loaded");
 
 ```
 firstDownload = document.getElementById("firstDownload");
@@ -69,23 +69,21 @@ if (
     !firstDownload ||
     !secondDownload ||
     !countdown ||
-    !countdownNumber
+    !countdownNumber ||
+    !message
 ) {
-    console.error(
-        "WALAWWA: required elements missing"
-    );
+    console.error("WALAWWA: Required elements are missing.");
     return;
 }
 
 const code = getDownloadCode();
 
-console.log("Download code:", code);
+console.log("WALAWWA: Download code =", code);
 
 if (!code) {
     firstDownload.disabled = true;
-
     firstDownload.innerHTML =
-        "<span>Invalid Download Link</span>";
+        '<span class="download-icon">!</span><span>Invalid Download Link</span>';
 
     showMessage(
         "Please open a valid WALAWWA download link.",
@@ -105,68 +103,49 @@ countdown.style.display = "none";
 
 showMessage("");
 
-firstDownload.addEventListener(
-    "click",
-    function () {
-        console.log("Continue Download clicked");
+firstDownload.addEventListener("click", function () {
+    console.log("WALAWWA: Continue Download clicked");
 
-        firstDownload.style.display = "none";
-        firstDownload.disabled = true;
+    firstDownload.style.display = "none";
+    firstDownload.disabled = true;
 
-        countdown.style.display = "flex";
+    countdown.style.display = "flex";
 
-        let remaining = COUNTDOWN_SECONDS;
+    let remaining = COUNTDOWN_SECONDS;
+
+    countdownNumber.textContent = remaining;
+
+    showMessage("");
+
+    const timer = setInterval(function () {
+        remaining--;
 
         countdownNumber.textContent = remaining;
 
-        showMessage("");
+        if (remaining <= 0) {
+            clearInterval(timer);
 
-        const timer = setInterval(
-            function () {
-                remaining--;
+            countdown.style.display = "none";
 
-                countdownNumber.textContent = remaining;
+            secondDownload.style.display = "flex";
+            secondDownload.disabled = false;
 
-                if (remaining <= 0) {
-                    clearInterval(timer);
+            console.log("WALAWWA: Download button ready");
+        }
+    }, 1000);
+});
 
-                    countdown.style.display = "none";
+secondDownload.addEventListener("click", function () {
+    console.log("WALAWWA: Download clicked");
 
-                    secondDownload.style.display = "flex";
-                    secondDownload.disabled = false;
+    secondDownload.disabled = true;
 
-                    showMessage("");
+    const telegramLink = makeTelegramLink(code);
 
-                    console.log(
-                        "Download button ready"
-                    );
-                }
-            },
-            1000
-        );
-    }
-);
+    console.log("WALAWWA: Opening Telegram:", telegramLink);
 
-secondDownload.addEventListener(
-    "click",
-    function () {
-        console.log("Download clicked");
-
-        secondDownload.disabled = true;
-
-        showMessage("");
-
-        const telegramLink =
-            makeTelegramLink(code);
-
-        console.log(
-            "Opening Telegram:",
-            telegramLink
-        );
-
-        window.location.href = telegramLink;
-    }
-);
+    window.location.href = telegramLink;
+});
 ```
 
 }
