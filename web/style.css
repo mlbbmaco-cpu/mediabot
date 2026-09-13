@@ -4,14 +4,20 @@
 }
 
 html {
+  width: 100%;
   min-height: 100%;
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   overflow-x: hidden;
   font-family:
     Inter,
@@ -40,6 +46,8 @@ ANIMATED BACKGROUND
 .animated-background {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
@@ -69,6 +77,7 @@ ANIMATED BACKGROUND
   opacity: 0.55;
   mix-blend-mode: screen;
   will-change: transform;
+  pointer-events: none;
 }
 
 .orb-1 {
@@ -217,17 +226,25 @@ PAGE
 .page {
   position: relative;
   z-index: 2;
-  min-height: 100vh;
   width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 32px 18px 24px;
+  overflow-x: hidden;
 }
 
+/* =========================
+CARD
+========================= */
+
 .download-card {
-  width: min(100%, 460px);
+  width: 100%;
+  max-width: 460px;
+  min-width: 0;
   padding: 32px 28px 28px;
   border: 1px solid rgba(174, 86, 255, 0.28);
   border-radius: 26px;
@@ -243,6 +260,7 @@ PAGE
     0 0 55px rgba(132, 42, 255, 0.2);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  overflow: hidden;
 }
 
 /* =========================
@@ -250,6 +268,8 @@ LOGO
 ========================= */
 
 .logo {
+  width: 100%;
+  max-width: 100%;
   text-align: center;
   font-size: clamp(32px, 9vw, 52px);
   line-height: 1;
@@ -260,10 +280,12 @@ LOGO
     0 0 8px rgba(194, 94, 255, 0.95),
     0 0 24px rgba(151, 48, 255, 0.75),
     0 0 50px rgba(116, 34, 220, 0.5);
+  overflow: hidden;
 }
 
 .logo-line {
   width: 90px;
+  max-width: 100%;
   height: 3px;
   margin: 17px auto 28px;
   border-radius: 50%;
@@ -286,11 +308,15 @@ BUTTONS
 
 #downloadArea {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .download-button {
   position: relative;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 64px;
   display: flex;
   align-items: center;
@@ -355,6 +381,7 @@ BUTTONS
 .download-icon {
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
   font-size: 25px;
   line-height: 1;
   font-weight: 900;
@@ -363,6 +390,8 @@ BUTTONS
 .download-button > span:last-child {
   position: relative;
   z-index: 1;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .continue-button {
@@ -406,6 +435,8 @@ COUNTDOWN
 .countdown {
   min-height: 220px;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -414,9 +445,11 @@ COUNTDOWN
   border: 1px solid rgba(172, 76, 255, 0.2);
   border-radius: 18px;
   background: rgba(87, 29, 139, 0.08);
+  overflow: hidden;
 }
 
 .countdown-label {
+  max-width: 100%;
   margin-bottom: 10px;
   font-size: 12px;
   font-weight: 800;
@@ -425,6 +458,7 @@ COUNTDOWN
 }
 
 .countdown-number {
+  max-width: 100%;
   font-size: 82px;
   line-height: 1;
   font-weight: 900;
@@ -436,6 +470,7 @@ COUNTDOWN
 }
 
 .countdown-small {
+  max-width: 100%;
   margin-top: 12px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.55);
@@ -454,22 +489,32 @@ COUNTDOWN
 }
 
 /* =========================
-MESSAGE / DESCRIPTION
+MESSAGE
 ========================= */
 
 .message {
+  width: 100%;
+  max-width: 100%;
   min-height: 20px;
   margin-top: 12px;
+  padding: 0;
   text-align: center;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.65);
+  overflow-wrap: anywhere;
 }
 
 .message.error {
   color: #ff8bca;
 }
 
+/* =========================
+DESCRIPTION
+========================= */
+
 .sinhala-description {
+  width: 100%;
+  max-width: 100%;
   margin-top: 22px;
   padding: 16px 17px;
   border: 1px solid rgba(178, 82, 255, 0.17);
@@ -479,13 +524,21 @@ MESSAGE / DESCRIPTION
   font-size: 14px;
   line-height: 1.8;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
+/* =========================
+FOOTER
+========================= */
+
 footer {
+  width: 100%;
+  max-width: 100%;
   margin-top: 20px;
   text-align: center;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.45);
+  overflow-wrap: anywhere;
 }
 
 footer strong {
@@ -494,7 +547,7 @@ footer strong {
 }
 
 /* =========================
-MOBILE RESPONSIVE
+MOBILE
 ========================= */
 
 @media (max-width: 600px) {
@@ -502,125 +555,118 @@ MOBILE RESPONSIVE
   html,
   body {
     width: 100%;
-    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .page {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
-    padding: 18px 12px 18px;
-    justify-content: center;
+    padding: 16px 10px 16px;
+    overflow-x: hidden;
   }
 
   .download-card {
     width: 100%;
     max-width: 460px;
-    padding: 26px 17px 20px;
-    border-radius: 22px;
+    min-width: 0;
+    padding: 24px 14px 19px;
+    border-radius: 21px;
   }
-
-  /* LOGO */
 
   .logo {
     width: 100%;
-    font-size: clamp(31px, 10vw, 40px);
-    line-height: 1;
-    letter-spacing: clamp(2px, 1.2vw, 4px);
+    max-width: 100%;
+    font-size: clamp(27px, 9vw, 38px);
+    letter-spacing: clamp(1px, 0.9vw, 3px);
     white-space: nowrap;
+    overflow: hidden;
   }
 
   .logo-line {
-    width: 75px;
+    width: 70px;
     height: 3px;
-    margin: 14px auto 22px;
+    margin: 13px auto 21px;
   }
-
-  /* BUTTON */
 
   #downloadArea {
     width: 100%;
+    max-width: 100%;
   }
 
   .download-button {
     width: 100%;
-    min-height: 60px;
-    padding: 14px 15px;
-    gap: 10px;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 58px;
+    padding: 13px 12px;
+    gap: 9px;
     border-radius: 15px;
-    font-size: clamp(15px, 4.2vw, 17px);
+    font-size: clamp(14px, 4vw, 16px);
   }
 
   .download-icon {
-    flex-shrink: 0;
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .download-button > span:last-child {
+    min-width: 0;
+    max-width: calc(100% - 30px);
     text-align: center;
     line-height: 1.25;
+    overflow-wrap: anywhere;
   }
-
-  /* COUNTDOWN */
 
   .countdown {
     width: 100%;
-    min-height: 195px;
-    padding: 20px 10px;
+    max-width: 100%;
+    min-height: 190px;
+    padding: 18px 8px;
     border-radius: 17px;
   }
 
   .countdown-label {
-    margin-bottom: 9px;
-    font-size: 11px;
-    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-size: 10px;
+    letter-spacing: 1.8px;
   }
 
   .countdown-number {
-    font-size: clamp(62px, 20vw, 78px);
-    line-height: 1;
+    font-size: clamp(58px, 19vw, 74px);
   }
 
   .countdown-small {
-    margin-top: 11px;
-    font-size: 12px;
-    line-height: 1.5;
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.45;
   }
-
-  /* MESSAGE */
 
   .message {
-    width: 100%;
-    min-height: 20px;
-    margin-top: 10px;
-    padding: 0 4px;
+    margin-top: 9px;
+    padding: 0 3px;
     font-size: 12px;
     line-height: 1.5;
   }
-
-  /* SINHALA DESCRIPTION */
 
   .sinhala-description {
     width: 100%;
-    margin-top: 17px;
-    padding: 13px 12px;
+    max-width: 100%;
+    margin-top: 16px;
+    padding: 12px 10px;
     border-radius: 14px;
-    font-size: clamp(12.5px, 3.5vw, 14px);
+    font-size: clamp(11.5px, 3.5vw, 13px);
     line-height: 1.8;
-    overflow-wrap: break-word;
-    word-break: normal;
+    overflow-wrap: anywhere;
   }
 
-  /* FOOTER */
-
   footer {
-    width: 100%;
-    margin-top: 15px;
-    padding: 0 5px;
-    font-size: 12px;
+    margin-top: 14px;
+    padding: 0 3px;
+    font-size: 11px;
     line-height: 1.5;
   }
 }
-
 
 /* =========================
 SMALL PHONES
@@ -629,67 +675,71 @@ SMALL PHONES
 @media (max-width: 380px) {
 
   .page {
-    padding: 14px 9px 14px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
 
   .download-card {
-    padding: 23px 13px 18px;
-    border-radius: 20px;
+    padding: 21px 11px 17px;
+    border-radius: 19px;
   }
 
   .logo {
-    font-size: clamp(28px, 10vw, 34px);
-    letter-spacing: 2.5px;
+    font-size: clamp(25px, 9.5vw, 32px);
+    letter-spacing: 1.5px;
   }
 
   .logo-line {
-    width: 65px;
-    margin-top: 12px;
-    margin-bottom: 19px;
+    width: 62px;
+    margin-top: 11px;
+    margin-bottom: 18px;
   }
 
   .download-button {
-    min-height: 56px;
-    padding: 13px 12px;
-    font-size: 15px;
-    border-radius: 14px;
+    min-height: 55px;
+    padding: 12px 9px;
+    gap: 7px;
+    font-size: 14px;
   }
 
   .download-icon {
-    font-size: 21px;
+    font-size: 20px;
+  }
+
+  .download-button > span:last-child {
+    max-width: calc(100% - 27px);
   }
 
   .countdown {
-    min-height: 180px;
-    padding: 17px 8px;
+    min-height: 175px;
+    padding: 15px 6px;
   }
 
   .countdown-label {
-    font-size: 10px;
-    letter-spacing: 1.7px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
   }
 
   .countdown-number {
-    font-size: 62px;
+    font-size: 58px;
   }
 
   .countdown-small {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .sinhala-description {
-    margin-top: 15px;
-    padding: 12px 10px;
-    font-size: 12px;
+    margin-top: 14px;
+    padding: 11px 8px;
+    font-size: 11.5px;
     line-height: 1.75;
   }
 
   footer {
-    margin-top: 13px;
-    font-size: 11px;
+    margin-top: 12px;
+    font-size: 10.5px;
   }
 }
-
 
 /* =========================
 VERY SMALL PHONES
@@ -698,43 +748,43 @@ VERY SMALL PHONES
 @media (max-width: 340px) {
 
   .page {
-    padding-left: 7px;
-    padding-right: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .download-card {
-    padding-left: 11px;
-    padding-right: 11px;
+    padding-left: 9px;
+    padding-right: 9px;
   }
 
   .logo {
-    font-size: 27px;
-    letter-spacing: 2px;
+    font-size: 25px;
+    letter-spacing: 1px;
   }
 
   .download-button {
-    min-height: 54px;
-    font-size: 14px;
-    gap: 8px;
+    min-height: 53px;
+    padding: 11px 7px;
+    font-size: 13.5px;
+    gap: 6px;
   }
 
   .download-icon {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .countdown {
-    min-height: 170px;
+    min-height: 165px;
   }
 
   .countdown-number {
-    font-size: 58px;
+    font-size: 55px;
   }
 
   .sinhala-description {
-    font-size: 11.5px;
+    font-size: 11px;
   }
 }
-
 
 /* =========================
 LANDSCAPE PHONES
@@ -744,43 +794,43 @@ LANDSCAPE PHONES
 
   .page {
     min-height: 100vh;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     justify-content: flex-start;
   }
 
   .download-card {
-    margin-top: 5px;
-    padding-top: 20px;
+    margin-top: 4px;
+    padding-top: 18px;
+    padding-bottom: 16px;
   }
 
   .logo {
-    font-size: 30px;
+    font-size: 29px;
   }
 
   .logo-line {
-    margin-top: 10px;
-    margin-bottom: 16px;
+    margin-top: 9px;
+    margin-bottom: 14px;
   }
 
   .countdown {
-    min-height: 150px;
+    min-height: 145px;
   }
 
   .countdown-number {
-    font-size: 55px;
+    font-size: 52px;
   }
 
   .sinhala-description {
-    margin-top: 12px;
-    padding: 10px;
+    margin-top: 10px;
+    padding: 9px;
   }
 
   footer {
-    margin-top: 10px;
+    margin-top: 9px;
   }
 }
-
 
 /* =========================
 REDUCE MOTION
