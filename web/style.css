@@ -32,6 +32,10 @@ button {
 font: inherit;
 }
 
+/* =========================
+ANIMATED BACKGROUND
+========================= */
+
 .animated-background {
 position: fixed;
 inset: 0;
@@ -63,6 +67,7 @@ border-radius: 50%;
 filter: blur(2px);
 opacity: 0.55;
 mix-blend-mode: screen;
+will-change: transform;
 }
 
 .orb-1 {
@@ -111,8 +116,7 @@ animation: orbThree 15s ease-in-out infinite;
 }
 
 @keyframes orbOne {
-0%,
-100% {
+0%, 100% {
 transform: translate(0, 0) scale(1);
 }
 
@@ -125,8 +129,7 @@ transform: translate(0, 0) scale(1);
 }
 
 @keyframes orbTwo {
-0%,
-100% {
+0%, 100% {
 transform: translate(0, 0) scale(1);
 }
 
@@ -139,8 +142,7 @@ transform: translate(0, 0) scale(1);
 }
 
 @keyframes orbThree {
-0%,
-100% {
+0%, 100% {
 transform: translate(0, 0) scale(1);
 }
 
@@ -152,6 +154,10 @@ transform: translate(0, 0) scale(1);
 
 }
 
+/* =========================
+PARTICLES
+========================= */
+
 .particle {
 position: absolute;
 width: 4px;
@@ -162,12 +168,12 @@ box-shadow:
 0 0 8px rgba(175, 70, 255, 0.8),
 0 0 18px rgba(144, 44, 255, 0.35);
 animation: particleFloat 7s ease-in-out infinite;
+will-change: transform, opacity;
 }
 
 .particle-1 {
 left: 12%;
 top: 20%;
-animation-delay: 0s;
 }
 
 .particle-2 {
@@ -201,8 +207,7 @@ animation-delay: 5s;
 }
 
 @keyframes particleFloat {
-0%,
-100% {
+0%, 100% {
 transform: translateY(0) translateX(0);
 opacity: 0.3;
 }
@@ -215,6 +220,10 @@ opacity: 0.3;
 ```
 
 }
+
+/* =========================
+PAGE
+========================= */
 
 .page {
 position: relative;
@@ -247,6 +256,10 @@ backdrop-filter: blur(18px);
 -webkit-backdrop-filter: blur(18px);
 }
 
+/* =========================
+LOGO
+========================= */
+
 .logo {
 text-align: center;
 font-size: clamp(32px, 9vw, 52px);
@@ -277,6 +290,10 @@ box-shadow:
 0 0 10px rgba(174, 72, 255, 0.8),
 0 0 25px rgba(128, 35, 220, 0.45);
 }
+
+/* =========================
+BUTTONS
+========================= */
 
 #downloadArea {
 width: 100%;
@@ -336,9 +353,6 @@ animation: buttonShine 3.5s ease-in-out infinite;
 .download-button:hover {
 transform: translateY(-2px);
 filter: brightness(1.08);
-box-shadow:
-0 12px 36px rgba(135, 31, 245, 0.52),
-0 0 32px rgba(176, 64, 255, 0.42);
 }
 
 .download-button:active {
@@ -362,9 +376,18 @@ position: relative;
 z-index: 1;
 }
 
+.continue-button {
+background:
+linear-gradient(
+135deg,
+#8e2cf4,
+#b34dff,
+#7623db
+);
+}
+
 @keyframes buttonPulse {
-0%,
-100% {
+0%, 100% {
 box-shadow:
 0 8px 28px rgba(122, 30, 226, 0.38),
 0 0 20px rgba(159, 56, 255, 0.28);
@@ -381,29 +404,21 @@ box-shadow:
 }
 
 @keyframes buttonShine {
-0%,
-45% {
+0%, 45% {
 left: -120%;
 }
 
 ```
-70%,
-100% {
+70%, 100% {
     left: 150%;
 }
 ```
 
 }
 
-.continue-button {
-background:
-linear-gradient(
-135deg,
-#8e2cf4,
-#b34dff,
-#7623db
-);
-}
+/* =========================
+COUNTDOWN
+========================= */
 
 .countdown {
 min-height: 220px;
@@ -444,8 +459,7 @@ color: rgba(255, 255, 255, 0.55);
 }
 
 @keyframes countdownGlow {
-0%,
-100% {
+0%, 100% {
 transform: scale(1);
 opacity: 0.9;
 }
@@ -458,6 +472,10 @@ opacity: 0.9;
 ```
 
 }
+
+/* =========================
+MESSAGE / DESCRIPTION
+========================= */
 
 .message {
 min-height: 20px;
@@ -494,6 +512,10 @@ footer strong {
 color: rgba(216, 169, 255, 0.85);
 font-weight: 700;
 }
+
+/* =========================
+MOBILE
+========================= */
 
 @media (max-width: 600px) {
 .page {
@@ -575,6 +597,10 @@ padding-right: 14px;
 ```
 
 }
+
+/* =========================
+REDUCE MOTION
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
 *,
