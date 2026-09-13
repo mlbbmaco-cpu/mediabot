@@ -1,24 +1,24 @@
-```css
-* {
-  box-sizing: border-box;
-}
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
 
-html {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
+html,
 body {
   width: 100%;
   max-width: 100%;
-  min-height: 100vh;
+  min-width: 0;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
   font-family:
     Inter,
     -apple-system,
@@ -30,6 +30,13 @@ body {
   background: #08050f;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -39,18 +46,35 @@ button {
   font: inherit;
 }
 
-/* =========================
-ANIMATED BACKGROUND
-========================= */
+img,
+video,
+iframe,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   ANIMATED BACKGROUND
+========================================================= */
 
 .animated-background {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
   width: 100%;
+  max-width: 100%;
   height: 100%;
+
   z-index: 0;
-  overflow: hidden;
+
+  overflow: hidden !important;
   pointer-events: none;
+
   background:
     radial-gradient(
       circle at 50% 20%,
@@ -83,8 +107,10 @@ ANIMATED BACKGROUND
 .orb-1 {
   width: 420px;
   height: 420px;
+
   top: -180px;
   left: -120px;
+
   background:
     radial-gradient(
       circle,
@@ -92,14 +118,17 @@ ANIMATED BACKGROUND
       rgba(105, 30, 220, 0.22) 45%,
       transparent 72%
     );
+
   animation: orbOne 13s ease-in-out infinite;
 }
 
 .orb-2 {
   width: 500px;
   height: 500px;
+
   right: -180px;
   top: 25%;
+
   background:
     radial-gradient(
       circle,
@@ -107,14 +136,17 @@ ANIMATED BACKGROUND
       rgba(85, 20, 190, 0.2) 48%,
       transparent 72%
     );
+
   animation: orbTwo 16s ease-in-out infinite;
 }
 
 .orb-3 {
   width: 380px;
   height: 380px;
+
   left: 25%;
   bottom: -220px;
+
   background:
     radial-gradient(
       circle,
@@ -122,11 +154,18 @@ ANIMATED BACKGROUND
       rgba(103, 31, 220, 0.16) 45%,
       transparent 72%
     );
+
   animation: orbThree 15s ease-in-out infinite;
 }
 
+
+/* =========================================================
+   BACKGROUND ANIMATIONS
+========================================================= */
+
 @keyframes orbOne {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
 
@@ -136,7 +175,8 @@ ANIMATED BACKGROUND
 }
 
 @keyframes orbTwo {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
 
@@ -146,7 +186,8 @@ ANIMATED BACKGROUND
 }
 
 @keyframes orbThree {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
 
@@ -155,20 +196,27 @@ ANIMATED BACKGROUND
   }
 }
 
-/* =========================
-PARTICLES
-========================= */
+
+/* =========================================================
+   PARTICLES
+========================================================= */
 
 .particle {
   position: absolute;
+
   width: 4px;
   height: 4px;
+
   border-radius: 50%;
+
   background: rgba(202, 126, 255, 0.8);
+
   box-shadow:
     0 0 8px rgba(175, 70, 255, 0.8),
     0 0 18px rgba(144, 44, 255, 0.35);
+
   animation: particleFloat 7s ease-in-out infinite;
+
   will-change: transform, opacity;
 }
 
@@ -208,7 +256,8 @@ PARTICLES
 }
 
 @keyframes particleFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
     opacity: 0.3;
   }
@@ -219,67 +268,88 @@ PARTICLES
   }
 }
 
-/* =========================
-PAGE
-========================= */
 
-.page {
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.download-page {
   position: relative;
   z-index: 2;
+
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   padding: 32px 18px 24px;
+
   overflow-x: hidden;
 }
 
-/* =========================
-CARD
-========================= */
+
+/* =========================================================
+   DOWNLOAD CARD
+========================================================= */
 
 .download-card {
   width: 100%;
   max-width: 460px;
   min-width: 0;
+
   padding: 32px 28px 28px;
+
   border: 1px solid rgba(174, 86, 255, 0.28);
   border-radius: 26px;
+
   background:
     linear-gradient(
       145deg,
       rgba(35, 14, 58, 0.92),
       rgba(12, 7, 21, 0.94)
     );
+
   box-shadow:
     0 0 0 1px rgba(122, 45, 210, 0.08),
     0 25px 80px rgba(0, 0, 0, 0.55),
     0 0 55px rgba(132, 42, 255, 0.2);
+
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+
   overflow: hidden;
 }
 
-/* =========================
-LOGO
-========================= */
+
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+
   text-align: center;
+
   font-size: clamp(32px, 9vw, 52px);
   line-height: 1;
+
   font-weight: 900;
   letter-spacing: 5px;
+
   color: #ffffff;
+
   text-shadow:
     0 0 8px rgba(194, 94, 255, 0.95),
     0 0 24px rgba(151, 48, 255, 0.75),
     0 0 50px rgba(116, 34, 220, 0.5);
+
   overflow: hidden;
 }
 
@@ -287,24 +357,30 @@ LOGO
   width: 90px;
   max-width: 100%;
   height: 3px;
+
   margin: 17px auto 28px;
+
   border-radius: 50%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #a94cff,
-    #df9aff,
-    #a94cff,
-    transparent
-  );
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #a94cff,
+      #df9aff,
+      #a94cff,
+      transparent
+    );
+
   box-shadow:
     0 0 10px rgba(174, 72, 255, 0.8),
     0 0 25px rgba(128, 35, 220, 0.45);
 }
 
-/* =========================
-BUTTONS
-========================= */
+
+/* =========================================================
+   DOWNLOAD AREA
+========================================================= */
 
 #downloadArea {
   width: 100%;
@@ -312,25 +388,41 @@ BUTTONS
   min-width: 0;
 }
 
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
 .download-button {
   position: relative;
+
   width: 100%;
   max-width: 100%;
   min-width: 0;
+
   min-height: 64px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 12px;
+
   padding: 16px 22px;
+
   border: 1px solid rgba(226, 190, 255, 0.35);
   border-radius: 17px;
+
   cursor: pointer;
+
   overflow: hidden;
+
   color: #ffffff;
+
   font-size: 17px;
   font-weight: 800;
   letter-spacing: 0.2px;
+
   background:
     linear-gradient(
       135deg,
@@ -338,30 +430,40 @@ BUTTONS
       #9b3cff 45%,
       #7020d4 100%
     );
+
   box-shadow:
     0 8px 28px rgba(122, 30, 226, 0.38),
     0 0 20px rgba(159, 56, 255, 0.28);
+
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
     filter 0.2s ease;
+
   animation: buttonPulse 2.4s ease-in-out infinite;
 }
 
 .download-button::before {
   content: "";
+
   position: absolute;
+
   top: 0;
   left: -120%;
+
   width: 80%;
   height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent,
-    rgba(255, 255, 255, 0.24),
-    transparent
-  );
+
+  background:
+    linear-gradient(
+      105deg,
+      transparent,
+      rgba(255, 255, 255, 0.24),
+      transparent
+    );
+
   transform: skewX(-20deg);
+
   animation: buttonShine 3.5s ease-in-out infinite;
 }
 
@@ -381,17 +483,25 @@ BUTTONS
 .download-icon {
   position: relative;
   z-index: 1;
+
   flex-shrink: 0;
+
   font-size: 25px;
   line-height: 1;
   font-weight: 900;
 }
 
-.download-button > span:last-child {
+.button-text {
   position: relative;
   z-index: 1;
+
   min-width: 0;
   max-width: 100%;
+
+  text-align: center;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .continue-button {
@@ -404,8 +514,14 @@ BUTTONS
     );
 }
 
+
+/* =========================================================
+   BUTTON ANIMATIONS
+========================================================= */
+
 @keyframes buttonPulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow:
       0 8px 28px rgba(122, 30, 226, 0.38),
       0 0 20px rgba(159, 56, 255, 0.28);
@@ -419,65 +535,91 @@ BUTTONS
 }
 
 @keyframes buttonShine {
-  0%, 45% {
+  0%,
+  45% {
     left: -120%;
   }
 
-  70%, 100% {
+  70%,
+  100% {
     left: 150%;
   }
 }
 
-/* =========================
-COUNTDOWN
-========================= */
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
 
 .countdown {
-  min-height: 220px;
   width: 100%;
   max-width: 100%;
   min-width: 0;
+
+  min-height: 220px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   text-align: center;
+
   border: 1px solid rgba(172, 76, 255, 0.2);
   border-radius: 18px;
+
   background: rgba(87, 29, 139, 0.08);
+
   overflow: hidden;
 }
 
 .countdown-label {
+  width: 100%;
   max-width: 100%;
+
   margin-bottom: 10px;
+
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 2.5px;
+
   color: rgba(221, 183, 255, 0.75);
+
+  overflow-wrap: anywhere;
 }
 
 .countdown-number {
   max-width: 100%;
+
   font-size: 82px;
   line-height: 1;
+
   font-weight: 900;
+
   color: #ffffff;
+
   text-shadow:
     0 0 12px rgba(210, 127, 255, 0.95),
     0 0 35px rgba(153, 48, 255, 0.7);
+
   animation: countdownGlow 1s ease-in-out infinite;
 }
 
 .countdown-small {
   max-width: 100%;
+
   margin-top: 12px;
+
   font-size: 13px;
+
   color: rgba(255, 255, 255, 0.55);
+
+  overflow-wrap: anywhere;
 }
 
 @keyframes countdownGlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.9;
   }
@@ -488,67 +630,101 @@ COUNTDOWN
   }
 }
 
-/* =========================
-MESSAGE
-========================= */
+
+/* =========================================================
+   MESSAGE
+========================================================= */
 
 .message {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+
   min-height: 20px;
+
   margin-top: 12px;
+
   padding: 0;
+
   text-align: center;
+
   font-size: 13px;
+  line-height: 1.5;
+
   color: rgba(255, 255, 255, 0.65);
+
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .message.error {
   color: #ff8bca;
 }
 
-/* =========================
-DESCRIPTION
-========================= */
+
+/* =========================================================
+   SINHALA DESCRIPTION
+========================================================= */
 
 .sinhala-description {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+
   margin-top: 22px;
+
   padding: 16px 17px;
+
   border: 1px solid rgba(178, 82, 255, 0.17);
   border-radius: 15px;
+
   background: rgba(116, 36, 184, 0.09);
+
   color: rgba(246, 231, 255, 0.76);
+
   font-size: 14px;
   line-height: 1.8;
+
   text-align: center;
+
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-/* =========================
-FOOTER
-========================= */
 
-footer {
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.download-footer {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+
   margin-top: 20px;
+
+  padding: 0 5px;
+
   text-align: center;
+
   font-size: 13px;
+  line-height: 1.5;
+
   color: rgba(255, 255, 255, 0.45);
+
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-footer strong {
+.download-footer strong {
   color: rgba(216, 169, 255, 0.85);
   font-weight: 700;
 }
 
-/* =========================
-MOBILE
-========================= */
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -556,14 +732,20 @@ MOBILE
   body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    min-width: 0;
+
+    overflow-x: hidden !important;
   }
 
-  .page {
+  .download-page {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+
     min-height: 100vh;
-    padding: 16px 10px 16px;
+
+    padding: 16px 10px;
+
     overflow-x: hidden;
   }
 
@@ -571,15 +753,21 @@ MOBILE
     width: 100%;
     max-width: 460px;
     min-width: 0;
+
     padding: 24px 14px 19px;
+
     border-radius: 21px;
   }
 
   .logo {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+
     font-size: clamp(27px, 9vw, 38px);
+
     letter-spacing: clamp(1px, 0.9vw, 3px);
+
     white-space: nowrap;
     overflow: hidden;
   }
@@ -587,49 +775,73 @@ MOBILE
   .logo-line {
     width: 70px;
     height: 3px;
+
     margin: 13px auto 21px;
   }
 
   #downloadArea {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
   }
 
   .download-button {
     width: 100%;
     max-width: 100%;
     min-width: 0;
+
     min-height: 58px;
+
     padding: 13px 12px;
+
     gap: 9px;
+
     border-radius: 15px;
+
     font-size: clamp(14px, 4vw, 16px);
   }
 
   .download-icon {
+    flex: 0 0 auto;
     font-size: 22px;
   }
 
-  .download-button > span:last-child {
+  .button-text {
+    flex: 1 1 auto;
+
     min-width: 0;
-    max-width: calc(100% - 30px);
+    max-width: 100%;
+
     text-align: center;
+
     line-height: 1.25;
+
     overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .countdown {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+
     min-height: 190px;
+
     padding: 18px 8px;
+
     border-radius: 17px;
   }
 
   .countdown-label {
+    width: 100%;
+    max-width: 100%;
+
     margin-bottom: 8px;
+
     font-size: 10px;
     letter-spacing: 1.8px;
+
+    overflow-wrap: anywhere;
   }
 
   .countdown-number {
@@ -638,13 +850,16 @@ MOBILE
 
   .countdown-small {
     margin-top: 10px;
+
     font-size: 11px;
     line-height: 1.45;
   }
 
   .message {
     margin-top: 9px;
+
     padding: 0 3px;
+
     font-size: 12px;
     line-height: 1.5;
   }
@@ -652,35 +867,52 @@ MOBILE
   .sinhala-description {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+
     margin-top: 16px;
+
     padding: 12px 10px;
+
     border-radius: 14px;
+
     font-size: clamp(11.5px, 3.5vw, 13px);
     line-height: 1.8;
+
     overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
-  footer {
+  .download-footer {
+    width: 100%;
+    max-width: 100%;
+
     margin-top: 14px;
+
     padding: 0 3px;
+
     font-size: 11px;
     line-height: 1.5;
   }
 }
 
-/* =========================
-SMALL PHONES
-========================= */
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media (max-width: 380px) {
 
-  .page {
+  .download-page {
     padding-left: 7px;
     padding-right: 7px;
   }
 
   .download-card {
+    width: 100%;
+    max-width: 100%;
+
     padding: 21px 11px 17px;
+
     border-radius: 19px;
   }
 
@@ -691,14 +923,18 @@ SMALL PHONES
 
   .logo-line {
     width: 62px;
+
     margin-top: 11px;
     margin-bottom: 18px;
   }
 
   .download-button {
     min-height: 55px;
+
     padding: 12px 9px;
+
     gap: 7px;
+
     font-size: 14px;
   }
 
@@ -706,12 +942,9 @@ SMALL PHONES
     font-size: 20px;
   }
 
-  .download-button > span:last-child {
-    max-width: calc(100% - 27px);
-  }
-
   .countdown {
     min-height: 175px;
+
     padding: 15px 6px;
   }
 
@@ -730,24 +963,27 @@ SMALL PHONES
 
   .sinhala-description {
     margin-top: 14px;
+
     padding: 11px 8px;
+
     font-size: 11.5px;
     line-height: 1.75;
   }
 
-  footer {
+  .download-footer {
     margin-top: 12px;
     font-size: 10.5px;
   }
 }
 
-/* =========================
-VERY SMALL PHONES
-========================= */
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
 
 @media (max-width: 340px) {
 
-  .page {
+  .download-page {
     padding-left: 5px;
     padding-right: 5px;
   }
@@ -764,8 +1000,11 @@ VERY SMALL PHONES
 
   .download-button {
     min-height: 53px;
+
     padding: 11px 7px;
+
     font-size: 13.5px;
+
     gap: 6px;
   }
 
@@ -786,21 +1025,25 @@ VERY SMALL PHONES
   }
 }
 
-/* =========================
-LANDSCAPE PHONES
-========================= */
+
+/* =========================================================
+   LANDSCAPE PHONES
+========================================================= */
 
 @media (max-height: 520px) and (max-width: 900px) {
 
-  .page {
+  .download-page {
     min-height: 100vh;
+
     padding-top: 12px;
     padding-bottom: 12px;
+
     justify-content: flex-start;
   }
 
   .download-card {
     margin-top: 4px;
+
     padding-top: 18px;
     padding-bottom: 16px;
   }
@@ -827,14 +1070,15 @@ LANDSCAPE PHONES
     padding: 9px;
   }
 
-  footer {
+  .download-footer {
     margin-top: 9px;
   }
 }
 
-/* =========================
-REDUCE MOTION
-========================= */
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -846,4 +1090,3 @@ REDUCE MOTION
     scroll-behavior: auto !important;
   }
 }
-```
