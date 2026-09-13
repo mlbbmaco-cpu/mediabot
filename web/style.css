@@ -1,64 +1,66 @@
 /* =========================================================
-WALAWWA DOWNLOAD PAGE
-FULL RESPONSIVE STYLES
-FIXED MOBILE POSITION — NO LOAD JUMP
-========================================================= */
+   WALAWWA DOWNLOAD PAGE
+   FULL RESPONSIVE STYLES
+   PC ANIMATION + MOBILE POSITION FIX
+   ========================================================= */
+
 
 /* =========================================================
-RESET
-========================================================= */
+   RESET
+   ========================================================= */
 
 html,
 body {
-width: 100%;
-max-width: 100%;
-min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
-margin: 0;
-padding: 0;
-overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
 
+    overflow-x: hidden !important;
 }
 
 html {
-scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-min-height: 100vh;
+    min-height: 100vh;
 
-font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-color: #ffffff;
-background: #08050f;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
+    color: #ffffff;
+
+    background: #08050f;
 }
 
 *,
 *::before,
 *::after {
-box-sizing: border-box;
-max-width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 button,
 input,
 select {
-font: inherit;
+    font: inherit;
 }
 
 button,
 a {
--webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button {
-cursor: pointer;
+    cursor: pointer;
 }
 
 img,
@@ -66,1353 +68,1647 @@ video,
 iframe,
 canvas,
 svg {
-max-width: 100%;
+    max-width: 100%;
 }
 
+
 /* =========================================================
-ANIMATED BACKGROUND
-========================================================= */
+   ANIMATED BACKGROUND
+   ========================================================= */
 
 .animated-background {
-position: fixed;
+    position: fixed;
 
-inset: 0;
-width: 100%;
-max-width: 100%;
-height: 100%;
-overflow: hidden !important;
-pointer-events: none;
-z-index: 0;
-background:
-    radial-gradient(
-        circle at 50% 20%,
-        rgba(126, 45, 255, 0.18),
-        transparent 35%
-    ),
-    radial-gradient(
-        circle at 10% 90%,
-        rgba(101, 24, 220, 0.14),
-        transparent 35%
-    ),
-    linear-gradient(
-        135deg,
-        #07040d 0%,
-        #10051c 50%,
-        #07040d 100%
-    );
+    inset: 0;
 
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+
+    overflow: hidden !important;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(126, 45, 255, 0.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(101, 24, 220, 0.14),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #07040d 0%,
+            #10051c 50%,
+            #07040d 100%
+        );
 }
 
+
 /* =========================================================
-PURPLE ORBS
-========================================================= */
+   PURPLE ORBS
+   ========================================================= */
 
 .gradient-orb {
-position: absolute;
+    position: absolute;
 
-border-radius: 50%;
-filter: blur(2px);
-opacity: 0.55;
-mix-blend-mode: screen;
-pointer-events: none;
-will-change: transform;
+    border-radius: 50%;
 
+    filter: blur(2px);
+
+    opacity: 0.55;
+
+    mix-blend-mode: screen;
+
+    pointer-events: none;
+
+    will-change: transform;
+
+    transform: translate3d(0, 0, 0);
 }
 
 .orb-1 {
-width: 420px;
-height: 420px;
+    width: 420px;
+    height: 420px;
 
-top: -180px;
-left: -120px;
-background:
-    radial-gradient(
-        circle,
-        rgba(170, 70, 255, 0.55) 0%,
-        rgba(105, 30, 220, 0.22) 45%,
-        transparent 72%
-    );
-animation:
-    orbOne 13s ease-in-out infinite;
+    top: -180px;
+    left: -120px;
 
+    background:
+        radial-gradient(
+            circle,
+            rgba(170, 70, 255, 0.55) 0%,
+            rgba(105, 30, 220, 0.22) 45%,
+            transparent 72%
+        );
+
+    animation:
+        orbOne 13s ease-in-out infinite;
 }
 
 .orb-2 {
-width: 500px;
-height: 500px;
+    width: 500px;
+    height: 500px;
 
-top: 25%;
-right: -180px;
-background:
-    radial-gradient(
-        circle,
-        rgba(132, 43, 255, 0.48) 0%,
-        rgba(85, 20, 190, 0.20) 48%,
-        transparent 72%
-    );
-animation:
-    orbTwo 16s ease-in-out infinite;
+    top: 25%;
+    right: -180px;
 
+    background:
+        radial-gradient(
+            circle,
+            rgba(132, 43, 255, 0.48) 0%,
+            rgba(85, 20, 190, 0.20) 48%,
+            transparent 72%
+        );
+
+    animation:
+        orbTwo 16s ease-in-out infinite;
 }
 
 .orb-3 {
-width: 380px;
-height: 380px;
+    width: 380px;
+    height: 380px;
 
-left: 25%;
-bottom: -220px;
-background:
-    radial-gradient(
-        circle,
-        rgba(195, 74, 255, 0.40) 0%,
-        rgba(103, 31, 220, 0.16) 45%,
-        transparent 72%
-    );
-animation:
-    orbThree 15s ease-in-out infinite;
+    left: 25%;
+    bottom: -220px;
 
+    background:
+        radial-gradient(
+            circle,
+            rgba(195, 74, 255, 0.40) 0%,
+            rgba(103, 31, 220, 0.16) 45%,
+            transparent 72%
+        );
+
+    animation:
+        orbThree 15s ease-in-out infinite;
 }
 
+
 /* =========================================================
-ORB ANIMATIONS
-========================================================= */
+   ORB ANIMATIONS
+   ========================================================= */
 
 @keyframes orbOne {
 
-0%,
-100% {
-    transform:
-        translate3d(0, 0, 0)
-        scale(1);
-}
-50% {
-    transform:
-        translate3d(90px, 70px, 0)
-        scale(1.12);
-}
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
 
+    50% {
+        transform:
+            translate3d(90px, 70px, 0)
+            scale(1.12);
+    }
 }
 
 @keyframes orbTwo {
 
-0%,
-100% {
-    transform:
-        translate3d(0, 0, 0)
-        scale(1);
-}
-50% {
-    transform:
-        translate3d(-100px, -65px, 0)
-        scale(1.08);
-}
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
 
+    50% {
+        transform:
+            translate3d(-100px, -65px, 0)
+            scale(1.08);
+    }
 }
 
 @keyframes orbThree {
 
-0%,
-100% {
-    transform:
-        translate3d(0, 0, 0)
-        scale(1);
-}
-50% {
-    transform:
-        translate3d(80px, -80px, 0)
-        scale(1.12);
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate3d(80px, -80px, 0)
+            scale(1.12);
+    }
 }
 
-}
 
 /* =========================================================
-PARTICLES
-========================================================= */
+   PARTICLES
+   ========================================================= */
 
 .particle {
-position: absolute;
+    position: absolute;
 
-width: 4px;
-height: 4px;
-border-radius: 50%;
-background:
-    rgba(202, 126, 255, 0.8);
-box-shadow:
-    0 0 8px rgba(175, 70, 255, 0.8),
-    0 0 18px rgba(144, 44, 255, 0.35);
-animation:
-    particleFloat 7s ease-in-out infinite;
-will-change:
-    transform,
-    opacity;
+    width: 4px;
+    height: 4px;
 
+    border-radius: 50%;
+
+    background:
+        rgba(202, 126, 255, 0.8);
+
+    box-shadow:
+        0 0 8px rgba(175, 70, 255, 0.8),
+        0 0 18px rgba(144, 44, 255, 0.35);
+
+    animation:
+        particleFloat 7s ease-in-out infinite;
+
+    will-change:
+        transform,
+        opacity;
 }
 
 .particle-1 {
-left: 12%;
-top: 20%;
+    left: 12%;
+    top: 20%;
 }
 
 .particle-2 {
-left: 82%;
-top: 18%;
-animation-delay: 1.2s;
+    left: 82%;
+    top: 18%;
+
+    animation-delay:
+        1.2s;
 }
 
 .particle-3 {
-left: 24%;
-top: 72%;
-animation-delay: 2.4s;
+    left: 24%;
+    top: 72%;
+
+    animation-delay:
+        2.4s;
 }
 
 .particle-4 {
-left: 72%;
-top: 65%;
-animation-delay: 3.1s;
+    left: 72%;
+    top: 65%;
+
+    animation-delay:
+        3.1s;
 }
 
 .particle-5 {
-left: 52%;
-top: 35%;
-animation-delay: 4s;
+    left: 52%;
+    top: 35%;
+
+    animation-delay:
+        4s;
 }
 
 .particle-6 {
-left: 90%;
-top: 82%;
-animation-delay: 5s;
+    left: 90%;
+    top: 82%;
+
+    animation-delay:
+        5s;
 }
 
 @keyframes particleFloat {
 
-0%,
-100% {
-    transform:
-        translate3d(0, 0, 0);
-    opacity:
-        0.3;
-}
-50% {
-    transform:
-        translate3d(18px, -35px, 0);
-    opacity:
-        1;
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+
+        opacity:
+            0.3;
+    }
+
+    50% {
+        transform:
+            translate3d(18px, -35px, 0);
+
+        opacity:
+            1;
+    }
 }
 
-}
 
 /* =========================================================
-MAIN DOWNLOAD PAGE
-========================================================= */
+   MAIN DOWNLOAD PAGE
+   ========================================================= */
 
 .download-page {
-position: relative;
+    position: relative;
 
-z-index: 2;
-width: 100%;
-max-width: 100%;
-min-width: 0;
-min-height: 100vh;
-min-height: 100svh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding:
-    24px 18px;
-overflow-x: hidden;
+    z-index: 2;
 
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        24px 18px;
+
+    overflow-x: hidden;
 }
 
+
 /* =========================================================
-DOWNLOAD CARD
-========================================================= */
+   DOWNLOAD CARD
+   ========================================================= */
 
 .download-card {
-width: 100%;
+    width: 100%;
 
-max-width: 460px;
-min-width: 0;
-padding:
-    32px 28px 28px;
-border:
-    1px solid
-    rgba(174, 86, 255, 0.28);
-border-radius:
-    26px;
-background:
-    linear-gradient(
-        145deg,
-        rgba(35, 14, 58, 0.92),
-        rgba(12, 7, 21, 0.94)
-    );
-box-shadow:
-    0 0 0 1px
-    rgba(122, 45, 210, 0.08),
-    0 25px 80px
-    rgba(0, 0, 0, 0.55),
-    0 0 55px
-    rgba(132, 42, 255, 0.20);
-backdrop-filter:
-    blur(18px);
--webkit-backdrop-filter:
-    blur(18px);
-overflow: hidden;
+    max-width: 460px;
 
+    min-width: 0;
+
+    padding:
+        32px 28px 28px;
+
+    border:
+        1px solid
+        rgba(174, 86, 255, 0.28);
+
+    border-radius:
+        26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 14, 58, 0.92),
+            rgba(12, 7, 21, 0.94)
+        );
+
+    box-shadow:
+        0 0 0 1px
+        rgba(122, 45, 210, 0.08),
+
+        0 25px 80px
+        rgba(0, 0, 0, 0.55),
+
+        0 0 55px
+        rgba(132, 42, 255, 0.20);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    overflow: hidden;
 }
 
+
 /* =========================================================
-LOGO
-========================================================= */
+   LOGO
+   ========================================================= */
 
 .logo {
-width: 100%;
-max-width: 100%;
-min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
-text-align: center;
-font-size:
-    clamp(32px, 9vw, 52px);
-line-height:
-    1;
-font-weight:
-    900;
-letter-spacing:
-    5px;
-color:
-    #ffffff;
-text-shadow:
-    0 0 8px
-    rgba(194, 94, 255, 0.95),
-    0 0 24px
-    rgba(151, 48, 255, 0.75),
-    0 0 50px
-    rgba(116, 34, 220, 0.50);
-overflow-wrap:
-    anywhere;
+    text-align: center;
 
+    font-size:
+        clamp(32px, 9vw, 52px);
+
+    line-height:
+        1;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        5px;
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 8px
+        rgba(194, 94, 255, 0.95),
+
+        0 0 24px
+        rgba(151, 48, 255, 0.75),
+
+        0 0 50px
+        rgba(116, 34, 220, 0.50);
+
+    overflow-wrap:
+        anywhere;
 }
 
 .logo-line {
-width:
-90px;
+    width:
+        90px;
 
-max-width:
-    100%;
-height:
-    3px;
-margin:
-    17px auto 28px;
-border-radius:
-    50%;
-background:
-    linear-gradient(
-        90deg,
-        transparent,
-        #a94cff,
-        #df9aff,
-        #a94cff,
-        transparent
-    );
-box-shadow:
-    0 0 10px
-    rgba(174, 72, 255, 0.8),
-    0 0 25px
-    rgba(128, 35, 220, 0.45);
+    max-width:
+        100%;
 
+    height:
+        3px;
+
+    margin:
+        17px auto 28px;
+
+    border-radius:
+        50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #a94cff,
+            #df9aff,
+            #a94cff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(174, 72, 255, 0.8),
+
+        0 0 25px
+        rgba(128, 35, 220, 0.45);
 }
 
+
 /* =========================================================
-DOWNLOAD AREA
-========================================================= */
+   DOWNLOAD AREA
+   ========================================================= */
 
 #downloadArea {
-width: 100%;
+    width:
+        100%;
 
-max-width: 100%;
-min-width: 0;
+    max-width:
+        100%;
 
+    min-width:
+        0;
 }
 
+
 /* =========================================================
-DOWNLOAD BUTTON
-========================================================= */
+   DOWNLOAD BUTTON
+   ========================================================= */
 
 .download-button {
-position: relative;
+    position: relative;
 
-width: 100%;
-max-width: 100%;
-min-width: 0;
-min-height:
-    64px;
-display: flex;
-align-items: center;
-justify-content: center;
-gap:
-    12px;
-padding:
-    16px 22px;
-border:
-    1px solid
-    rgba(226, 190, 255, 0.35);
-border-radius:
-    17px;
-overflow:
-    hidden;
-cursor:
-    pointer;
-color:
-    #ffffff;
-font-size:
-    17px;
-font-weight:
-    800;
-letter-spacing:
-    0.2px;
-background:
-    linear-gradient(
-        135deg,
-        #7d25e8 0%,
-        #9b3cff 45%,
-        #7020d4 100%
-    );
-box-shadow:
-    0 8px 28px
-    rgba(122, 30, 226, 0.38),
-    0 0 20px
-    rgba(159, 56, 255, 0.28);
-transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
-animation:
-    buttonPulse 2.4s ease-in-out infinite;
+    width:
+        100%;
 
-}
+    max-width:
+        100%;
 
-.download-button::before {
-content: “”;
+    min-width:
+        0;
 
-position: absolute;
-top: 0;
-left: -120%;
-width: 80%;
-height: 100%;
-background:
-    linear-gradient(
-        105deg,
-        transparent,
-        rgba(255, 255, 255, 0.24),
-        transparent
-    );
-transform:
-    skewX(-20deg);
-animation:
-    buttonShine 3.5s ease-in-out infinite;
-pointer-events:
-    none;
+    min-height:
+        64px;
 
-}
+    display:
+        flex;
 
-.download-button:hover {
-transform:
-translateY(-2px);
+    align-items:
+        center;
 
-filter:
-    brightness(1.08);
+    justify-content:
+        center;
 
-}
+    gap:
+        12px;
 
-.download-button:active {
-transform:
-translateY(1px)
-scale(0.99);
-}
+    padding:
+        16px 22px;
 
-.download-icon {
-position: relative;
+    border:
+        1px solid
+        rgba(226, 190, 255, 0.35);
 
-z-index: 2;
-flex:
-    0 0 auto;
-font-size:
-    25px;
-line-height:
-    1;
+    border-radius:
+        17px;
 
-}
+    overflow:
+        hidden;
 
-.button-text {
-position: relative;
+    cursor:
+        pointer;
 
-z-index: 2;
-min-width:
-    0;
-max-width:
-    100%;
-text-align:
-    center;
-overflow-wrap:
-    anywhere;
-word-break:
-    break-word;
+    color:
+        #ffffff;
 
-}
+    font-size:
+        17px;
 
-.continue-button {
-background:
-linear-gradient(
-135deg,
-#8e2cf4,
-#b34dff,
-#7623db
-);
-}
+    font-weight:
+        800;
 
-/* =========================================================
-BUTTON ANIMATIONS
-========================================================= */
+    letter-spacing:
+        0.2px;
 
-@keyframes buttonPulse {
+    background:
+        linear-gradient(
+            135deg,
+            #7d25e8 0%,
+            #9b3cff 45%,
+            #7020d4 100%
+        );
 
-0%,
-100% {
     box-shadow:
         0 8px 28px
         rgba(122, 30, 226, 0.38),
+
         0 0 20px
         rgba(159, 56, 255, 0.28);
-}
-50% {
-    box-shadow:
-        0 10px 34px
-        rgba(137, 31, 245, 0.50),
-        0 0 30px
-        rgba(177, 63, 255, 0.42);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+
+    animation:
+        buttonPulse 2.4s ease-in-out infinite;
 }
 
+
+/* IMPORTANT:
+   Fixed broken curly quotation marks from your CSS.
+*/
+
+.download-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent,
+            rgba(255, 255, 255, 0.24),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    animation:
+        buttonShine 3.5s ease-in-out infinite;
+
+    pointer-events:
+        none;
+}
+
+.download-button:hover {
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+}
+
+.download-button:active {
+    transform:
+        translateY(1px)
+        scale(0.99);
+}
+
+.download-icon {
+    position: relative;
+
+    z-index: 2;
+
+    flex:
+        0 0 auto;
+
+    font-size:
+        25px;
+
+    line-height:
+        1;
+}
+
+.button-text {
+    position: relative;
+
+    z-index: 2;
+
+    min-width:
+        0;
+
+    max-width:
+        100%;
+
+    text-align:
+        center;
+
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
+}
+
+.continue-button {
+    background:
+        linear-gradient(
+            135deg,
+            #8e2cf4,
+            #b34dff,
+            #7623db
+        );
+}
+
+
+/* =========================================================
+   BUTTON ANIMATIONS
+   ========================================================= */
+
+@keyframes buttonPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 28px
+            rgba(122, 30, 226, 0.38),
+
+            0 0 20px
+            rgba(159, 56, 255, 0.28);
+    }
+
+    50% {
+        box-shadow:
+            0 10px 34px
+            rgba(137, 31, 245, 0.50),
+
+            0 0 30px
+            rgba(177, 63, 255, 0.42);
+    }
 }
 
 @keyframes buttonShine {
 
-0%,
-45% {
-    left:
-        -120%;
-}
-70%,
-100% {
-    left:
-        150%;
+    0%,
+    45% {
+        left:
+            -120%;
+    }
+
+    70%,
+    100% {
+        left:
+            150%;
+    }
 }
 
-}
 
 /* =========================================================
-COUNTDOWN
-========================================================= */
+   COUNTDOWN
+   ========================================================= */
 
 .countdown {
-width:
-100%;
+    width:
+        100%;
 
-max-width:
-    100%;
-min-width:
-    0;
-min-height:
-    220px;
-display:
-    flex;
-flex-direction:
-    column;
-align-items:
-    center;
-justify-content:
-    center;
-text-align:
-    center;
-border:
-    1px solid
-    rgba(172, 76, 255, 0.20);
-border-radius:
-    18px;
-background:
-    rgba(87, 29, 139, 0.08);
-overflow:
-    hidden;
+    max-width:
+        100%;
 
+    min-width:
+        0;
+
+    min-height:
+        220px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    border:
+        1px solid
+        rgba(172, 76, 255, 0.20);
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(87, 29, 139, 0.08);
+
+    overflow:
+        hidden;
 }
 
 .countdown-label {
-width:
-100%;
+    width:
+        100%;
 
-max-width:
-    100%;
-margin-bottom:
-    10px;
-font-size:
-    12px;
-font-weight:
-    800;
-letter-spacing:
-    2.5px;
-color:
-    rgba(221, 183, 255, 0.75);
-overflow-wrap:
-    anywhere;
+    max-width:
+        100%;
 
+    margin-bottom:
+        10px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2.5px;
+
+    color:
+        rgba(221, 183, 255, 0.75);
+
+    overflow-wrap:
+        anywhere;
 }
 
 .countdown-number {
-max-width:
-100%;
+    max-width:
+        100%;
 
-font-size:
-    82px;
-line-height:
-    1;
-font-weight:
-    900;
-color:
-    #ffffff;
-text-shadow:
-    0 0 12px
-    rgba(210, 127, 255, 0.95),
-    0 0 35px
-    rgba(153, 48, 255, 0.70);
-animation:
-    countdownGlow 1s ease-in-out infinite;
+    font-size:
+        82px;
 
+    line-height:
+        1;
+
+    font-weight:
+        900;
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(210, 127, 255, 0.95),
+
+        0 0 35px
+        rgba(153, 48, 255, 0.70);
+
+    animation:
+        countdownGlow 1s ease-in-out infinite;
 }
 
 .countdown-small {
-max-width:
-100%;
+    max-width:
+        100%;
 
-margin-top:
-    12px;
-font-size:
-    13px;
-color:
-    rgba(255, 255, 255, 0.55);
+    margin-top:
+        12px;
 
+    font-size:
+        13px;
+
+    color:
+        rgba(255, 255, 255, 0.55);
 }
 
 @keyframes countdownGlow {
 
-0%,
-100% {
-    transform:
-        scale(1);
-    opacity:
-        0.9;
-}
-50% {
-    transform:
-        scale(1.08);
-    opacity:
-        1;
+    0%,
+    100% {
+        transform:
+            scale(1);
+
+        opacity:
+            0.9;
+    }
+
+    50% {
+        transform:
+            scale(1.08);
+
+        opacity:
+            1;
+    }
 }
 
-}
 
 /* =========================================================
-MESSAGE
-========================================================= */
+   MESSAGE
+   ========================================================= */
 
 .message {
-width:
-100%;
+    width:
+        100%;
 
-max-width:
-    100%;
-min-width:
-    0;
-min-height:
-    20px;
-margin-top:
-    12px;
-text-align:
-    center;
-font-size:
-    13px;
-line-height:
-    1.5;
-color:
-    rgba(255, 255, 255, 0.65);
-overflow-wrap:
-    anywhere;
-word-break:
-    break-word;
+    max-width:
+        100%;
 
+    min-width:
+        0;
+
+    min-height:
+        20px;
+
+    margin-top:
+        12px;
+
+    text-align:
+        center;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+
+    color:
+        rgba(255, 255, 255, 0.65);
+
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
 }
 
 .message.error {
-color:
-#ff8bca;
+    color:
+        #ff8bca;
 }
 
+
 /* =========================================================
-SINHALA DESCRIPTION
-========================================================= */
+   SINHALA DESCRIPTION
+   ========================================================= */
 
 .sinhala-description {
-width:
-100%;
+    width:
+        100%;
 
-max-width:
-    100%;
-min-width:
-    0;
-margin-top:
-    22px;
-padding:
-    16px 17px;
-border:
-    1px solid
-    rgba(178, 82, 255, 0.17);
-border-radius:
-    15px;
-background:
-    rgba(116, 36, 184, 0.09);
-color:
-    rgba(246, 231, 255, 0.76);
-font-size:
-    14px;
-line-height:
-    1.8;
-text-align:
-    center;
-overflow-wrap:
-    anywhere;
-word-break:
-    break-word;
+    max-width:
+        100%;
 
+    min-width:
+        0;
+
+    margin-top:
+        22px;
+
+    padding:
+        16px 17px;
+
+    border:
+        1px solid
+        rgba(178, 82, 255, 0.17);
+
+    border-radius:
+        15px;
+
+    background:
+        rgba(116, 36, 184, 0.09);
+
+    color:
+        rgba(246, 231, 255, 0.76);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+    text-align:
+        center;
+
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
 }
 
+
 /* =========================================================
-FOOTER
-========================================================= */
+   FOOTER
+   ========================================================= */
 
 .download-footer {
-width:
-100%;
+    width:
+        100%;
 
-max-width:
-    100%;
-min-width:
-    0;
-margin-top:
-    20px;
-padding:
-    0 5px;
-text-align:
-    center;
-font-size:
-    13px;
-line-height:
-    1.5;
-color:
-    rgba(255, 255, 255, 0.45);
-overflow-wrap:
-    anywhere;
-word-break:
-    break-word;
+    max-width:
+        100%;
 
+    min-width:
+        0;
+
+    margin-top:
+        20px;
+
+    padding:
+        0 5px;
+
+    text-align:
+        center;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+
+    color:
+        rgba(255, 255, 255, 0.45);
+
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
 }
 
 .download-footer strong {
-color:
-rgba(216, 169, 255, 0.85);
+    color:
+        rgba(216, 169, 255, 0.85);
 
-font-weight:
-    700;
-
+    font-weight:
+        700;
 }
 
+
 /* =========================================================
-HIDDEN
-========================================================= */
+   HIDDEN
+   ========================================================= */
 
 [hidden] {
-display:
-none !important;
+    display:
+        none !important;
 }
 
+
 /* =========================================================
-TABLET
-========================================================= */
+   TABLET
+   ========================================================= */
 
 @media (max-width: 800px) and (min-width: 601px) {
 
-.download-page {
-    padding:
-        60px 16px 20px;
-    justify-content:
-        center;
-}
-.download-card {
-    max-width:
-        400px;
-    padding:
-        24px 20px 20px;
-    border-radius:
-        21px;
-}
-.logo {
-    font-size:
-        36px;
-    letter-spacing:
-        3px;
-}
-.logo-line {
-    width:
-        70px;
-    margin:
-        12px auto 20px;
-}
-.download-button {
-    min-height:
-        56px;
-    padding:
-        13px 16px;
-    border-radius:
-        15px;
-    font-size:
-        15px;
-}
-.download-icon {
-    font-size:
-        22px;
-}
-.countdown {
-    min-height:
-        180px;
-    border-radius:
-        16px;
-}
-.countdown-number {
-    font-size:
-        68px;
-}
-.sinhala-description {
-    margin-top:
-        16px;
-    padding:
-        12px 13px;
-    font-size:
-        12px;
-    line-height:
-        1.7;
-}
-.download-footer {
-    margin-top:
-        12px;
-    font-size:
-        11px;
+    .download-page {
+        padding:
+            30px 16px 20px;
+    }
+
+    .download-card {
+        max-width:
+            400px;
+
+        padding:
+            24px 20px 20px;
+
+        border-radius:
+            21px;
+    }
+
+    .logo {
+        font-size:
+            36px;
+
+        letter-spacing:
+            3px;
+    }
+
+    .logo-line {
+        width:
+            70px;
+
+        margin:
+            12px auto 20px;
+    }
+
+    .download-button {
+        min-height:
+            56px;
+
+        padding:
+            13px 16px;
+
+        border-radius:
+            15px;
+
+        font-size:
+            15px;
+    }
+
+    .download-icon {
+        font-size:
+            22px;
+    }
+
+    .countdown {
+        min-height:
+            180px;
+
+        border-radius:
+            16px;
+    }
+
+    .countdown-number {
+        font-size:
+            68px;
+    }
+
+    .sinhala-description {
+        margin-top:
+            16px;
+
+        padding:
+            12px 13px;
+
+        font-size:
+            12px;
+
+        line-height:
+            1.7;
+    }
+
+    .download-footer {
+        margin-top:
+            12px;
+
+        font-size:
+            11px;
+    }
 }
 
-}
 
 /* =========================================================
-MOBILE
-FIXED TOP POSITION
-NO FLEX CENTERING
-========================================================= */
+   MOBILE
+   CARD MOVED WAY DOWN
+   ========================================================= */
 
 @media (max-width: 600px) {
 
-.download-page {
-    width:
-        100%;
-    max-width:
-        100%;
-    min-width:
-        0;
-    min-height:
-        100svh;
-    display:
-        flex;
-    flex-direction:
-        column;
-    align-items:
-        center;
-    /*
-     * IMPORTANT:
-     * Do NOT use justify-content:center here.
-     *
-     * The old centered layout could move when the
-     * mobile browser changed its viewport after loading.
-     *
-     * flex-start + top padding keeps the card fixed.
-     */
-    justify-content:
-        flex-start;
-    padding:
-        150px 14px 10px;
-}
-.download-card {
-    width:
-        100%;
-    max-width:
-        340px;
-    min-width:
-        0;
-    flex:
-        0 0 auto;
-    padding:
-        17px 11px 13px;
-    border-radius:
-        17px;
-}
-/* =====================================================
-   MOBILE LOGO
-   ===================================================== */
-.logo {
-    width:
-        100%;
-    max-width:
-        100%;
-    font-size:
-        27px;
-    letter-spacing:
-        1.5px;
-    line-height:
-        1;
-}
-.logo-line {
-    width:
-        55px;
-    height:
-        2px;
-    margin:
-        9px auto 13px;
-}
-/* =====================================================
-   MOBILE BUTTON
-   ===================================================== */
-.download-button {
-    width:
-        100%;
-    max-width:
-        100%;
-    min-width:
-        0;
-    min-height:
-        46px;
-    padding:
-        9px 8px;
-    gap:
-        7px;
-    border-radius:
-        12px;
-    font-size:
-        13px;
-}
-.download-icon {
-    font-size:
-        18px;
-}
-.button-text {
-    font-size:
-        13px;
-    line-height:
-        1.2;
-}
-/* =====================================================
-   MOBILE COUNTDOWN
-   ===================================================== */
-.countdown {
-    width:
-        100%;
-    max-width:
-        100%;
-    min-width:
-        0;
-    min-height:
-        135px;
-    padding:
-        10px 5px;
-    border-radius:
-        13px;
-}
-.countdown-label {
-    margin-bottom:
-        4px;
-    font-size:
-        8px;
-    letter-spacing:
-        1.2px;
-    line-height:
-        1.3;
-}
-.countdown-number {
-    font-size:
-        50px;
-}
-.countdown-small {
-    margin-top:
-        5px;
-    font-size:
-        9px;
-}
-/* =====================================================
-   MOBILE MESSAGE
-   ===================================================== */
-.message {
-    margin-top:
-        6px;
-    font-size:
-        10px;
-    line-height:
-        1.35;
-}
-/* =====================================================
-   MOBILE SINHALA
-   ===================================================== */
-.sinhala-description {
-    width:
-        100%;
-    max-width:
-        100%;
-    min-width:
-        0;
-    margin-top:
-        10px;
-    padding:
-        8px 7px;
-    border-radius:
-        11px;
-    font-size:
-        10px;
-    line-height:
-        1.55;
-}
-/* =====================================================
-   MOBILE FOOTER
-   ===================================================== */
-.download-footer {
-    margin-top:
-        7px;
-    font-size:
-        9px;
+    .download-page {
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        min-width:
+            0;
+
+        min-height:
+            100svh;
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            center;
+
+        justify-content:
+            flex-start;
+
+        /*
+         * Normal layout starts near the top.
+         * The card itself is moved down separately.
+         */
+
+        padding:
+            20px 14px 10px;
+    }
+
+    .download-card {
+        width:
+            100%;
+
+        max-width:
+            340px;
+
+        min-width:
+            0;
+
+        flex:
+            0 0 auto;
+
+        /*
+         * MAIN POSITION CONTROL
+         *
+         * Increase this number to move the card
+         * farther down.
+         */
+
+        transform:
+            translateY(140px);
+
+        padding:
+            17px 11px 13px;
+
+        border-radius:
+            17px;
+    }
+
+
+    /* =====================================================
+       MOBILE LOGO
+       ===================================================== */
+
+    .logo {
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        font-size:
+            27px;
+
+        letter-spacing:
+            1.5px;
+
+        line-height:
+            1;
+    }
+
+    .logo-line {
+        width:
+            55px;
+
+        height:
+            2px;
+
+        margin:
+            9px auto 13px;
+    }
+
+
+    /* =====================================================
+       MOBILE BUTTON
+       ===================================================== */
+
+    .download-button {
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        min-width:
+            0;
+
+        min-height:
+            46px;
+
+        padding:
+            9px 8px;
+
+        gap:
+            7px;
+
+        border-radius:
+            12px;
+
+        font-size:
+            13px;
+    }
+
+    .download-icon {
+        font-size:
+            18px;
+    }
+
+    .button-text {
+        font-size:
+            13px;
+
+        line-height:
+            1.2;
+    }
+
+
+    /* =====================================================
+       MOBILE COUNTDOWN
+       ===================================================== */
+
+    .countdown {
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        min-width:
+            0;
+
+        min-height:
+            135px;
+
+        padding:
+            10px 5px;
+
+        border-radius:
+            13px;
+    }
+
+    .countdown-label {
+        margin-bottom:
+            4px;
+
+        font-size:
+            8px;
+
+        letter-spacing:
+            1.2px;
+
+        line-height:
+            1.3;
+    }
+
+    .countdown-number {
+        font-size:
+            50px;
+    }
+
+    .countdown-small {
+        margin-top:
+            5px;
+
+        font-size:
+            9px;
+    }
+
+
+    /* =====================================================
+       MOBILE MESSAGE
+       ===================================================== */
+
+    .message {
+        margin-top:
+            6px;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.35;
+    }
+
+
+    /* =====================================================
+       MOBILE SINHALA
+       ===================================================== */
+
+    .sinhala-description {
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        min-width:
+            0;
+
+        margin-top:
+            10px;
+
+        padding:
+            8px 7px;
+
+        border-radius:
+            11px;
+
+        font-size:
+            10px;
+
+        line-height:
+            1.55;
+    }
+
+
+    /* =====================================================
+       MOBILE FOOTER
+       ===================================================== */
+
+    .download-footer {
+        margin-top:
+            147px;
+
+        font-size:
+            9px;
+    }
 }
 
-}
 
 /* =========================================================
-SMALL PHONES
-FIXED TOP POSITION
-========================================================= */
+   SMALL PHONES
+   ========================================================= */
 
 @media (max-width: 380px) {
 
-.download-page {
-    min-height:
-        100svh;
-    display:
-        flex;
-    flex-direction:
-        column;
-    align-items:
-        center;
-    justify-content:
-        flex-start;
-    padding:
-        140px 12px 8px;
-}
-.download-card {
-    max-width:
-        315px;
-    flex:
-        0 0 auto;
-    padding:
-        15px 9px 11px;
-    border-radius:
-        16px;
-}
-.logo {
-    font-size:
-        24px;
-    letter-spacing:
-        1px;
-}
-.logo-line {
-    width:
-        50px;
-    margin-top:
-        8px;
-    margin-bottom:
-        10px;
-}
-.download-button {
-    min-height:
-        43px;
-    padding:
-        8px 7px;
-    gap:
-        6px;
-    border-radius:
-        11px;
-    font-size:
-        12px;
-}
-.download-icon {
-    font-size:
-        17px;
-}
-.button-text {
-    font-size:
-        12px;
-}
-.countdown {
-    min-height:
-        125px;
-    padding:
-        9px 5px;
-}
-.countdown-number {
-    font-size:
-        46px;
-}
-.countdown-label {
-    font-size:
-        7.5px;
-    letter-spacing:
-        1.3px;
-}
-.countdown-small {
-    font-size:
-        8.5px;
-}
-.sinhala-description {
-    margin-top:
-        9px;
-    padding:
-        7px 6px;
-    font-size:
-        9.5px;
-    line-height:
-        1.5;
-}
-.download-footer {
-    margin-top:
-        6px;
-    font-size:
-        8.5px;
+    .download-page {
+        padding:
+            20px 12px 8px;
+    }
+
+    .download-card {
+        max-width:
+            315px;
+
+        transform:
+            translateY(140px);
+
+        padding:
+            15px 9px 11px;
+
+        border-radius:
+            16px;
+    }
+
+    .logo {
+        font-size:
+            24px;
+
+        letter-spacing:
+            1px;
+    }
+
+    .logo-line {
+        width:
+            50px;
+
+        margin-top:
+            8px;
+
+        margin-bottom:
+            10px;
+    }
+
+    .download-button {
+        min-height:
+            43px;
+
+        padding:
+            8px 7px;
+
+        gap:
+            6px;
+
+        border-radius:
+            11px;
+
+        font-size:
+            12px;
+    }
+
+    .download-icon {
+        font-size:
+            17px;
+    }
+
+    .button-text {
+        font-size:
+            12px;
+    }
+
+    .countdown {
+        min-height:
+            125px;
+
+        padding:
+            9px 5px;
+    }
+
+    .countdown-number {
+        font-size:
+            46px;
+    }
+
+    .countdown-label {
+        font-size:
+            7.5px;
+
+        letter-spacing:
+            1.3px;
+    }
+
+    .countdown-small {
+        font-size:
+            8.5px;
+    }
+
+    .sinhala-description {
+        margin-top:
+            9px;
+
+        padding:
+            7px 6px;
+
+        font-size:
+            9.5px;
+
+        line-height:
+            1.5;
+    }
+
+    .download-footer {
+        margin-top:
+            147px;
+
+        font-size:
+            8.5px;
+    }
 }
 
-}
 
 /* =========================================================
-VERY SMALL PHONES
-FIXED TOP POSITION
-========================================================= */
+   VERY SMALL PHONES
+   ========================================================= */
 
 @media (max-width: 340px) {
 
-.download-page {
-    min-height:
-        100svh;
-    display:
-        flex;
-    flex-direction:
-        column;
-    align-items:
-        center;
-    justify-content:
-        flex-start;
-    padding:
-        130px 10px 6px;
-}
-.download-card {
-    max-width:
-        295px;
-    flex:
-        0 0 auto;
-    padding:
-        14px 8px 10px;
-    border-radius:
-        15px;
-}
-.logo {
-    font-size:
-        22px;
-    letter-spacing:
-        1px;
-}
-.logo-line {
-    width:
-        46px;
-    margin-top:
-        8px;
-    margin-bottom:
-        9px;
-}
-.download-button {
-    min-height:
-        41px;
-    padding:
-        7px 6px;
-    gap:
-        6px;
-    font-size:
-        11.5px;
-}
-.download-icon {
-    font-size:
-        16px;
-}
-.button-text {
-    font-size:
-        11.5px;
-}
-.countdown {
-    min-height:
-        115px;
-}
-.countdown-number {
-    font-size:
-        43px;
-}
-.countdown-label {
-    font-size:
-        7px;
-}
-.countdown-small {
-    font-size:
-        8px;
-}
-.sinhala-description {
-    font-size:
-        9px;
-    padding:
-        6px;
-    line-height:
-        1.5;
-}
-.download-footer {
-    margin-top:
-        5px;
-    font-size:
-        8px;
+    .download-page {
+        padding:
+            20px 10px 6px;
+    }
+
+    .download-card {
+        max-width:
+            295px;
+
+        transform:
+            translateY(125px);
+
+        padding:
+            14px 8px 10px;
+
+        border-radius:
+            15px;
+    }
+
+    .logo {
+        font-size:
+            22px;
+
+        letter-spacing:
+            1px;
+    }
+
+    .logo-line {
+        width:
+            46px;
+
+        margin-top:
+            8px;
+
+        margin-bottom:
+            9px;
+    }
+
+    .download-button {
+        min-height:
+            41px;
+
+        padding:
+            7px 6px;
+
+        gap:
+            6px;
+
+        font-size:
+            11.5px;
+    }
+
+    .download-icon {
+        font-size:
+            16px;
+    }
+
+    .button-text {
+        font-size:
+            11.5px;
+    }
+
+    .countdown {
+        min-height:
+            115px;
+    }
+
+    .countdown-number {
+        font-size:
+            43px;
+    }
+
+    .countdown-label {
+        font-size:
+            7px;
+    }
+
+    .countdown-small {
+        font-size:
+            8px;
+    }
+
+    .sinhala-description {
+        font-size:
+            9px;
+
+        padding:
+            6px;
+
+        line-height:
+            1.5;
+    }
+
+    .download-footer {
+        margin-top:
+            132px;
+
+        font-size:
+            8px;
+    }
 }
 
-}
 
 /* =========================================================
-LANDSCAPE MOBILE
-========================================================= */
+   LANDSCAPE MOBILE
+   ========================================================= */
 
 @media (max-height: 520px) and (max-width: 900px) {
 
-.download-page {
-    min-height:
-        100svh;
-    display:
-        flex;
-    flex-direction:
-        column;
-    align-items:
-        center;
-    justify-content:
-        flex-start;
-    padding:
-        15px 12px;
-}
-.download-card {
-    margin-top:
-        8px;
-    max-width:
-        340px;
-    flex:
-        0 0 auto;
-    padding:
-        13px 10px 10px;
-}
-.logo {
-    font-size:
-        23px;
-}
-.logo-line {
-    width:
-        45px;
-    margin-top:
-        6px;
-    margin-bottom:
-        8px;
-}
-.download-button {
-    min-height:
-        39px;
-    padding:
-        6px;
-    font-size:
-        11px;
-}
-.download-icon {
-    font-size:
-        15px;
-}
-.button-text {
-    font-size:
-        11px;
-}
-.countdown {
-    min-height:
-        95px;
-}
-.countdown-number {
-    font-size:
-        37px;
-}
-.countdown-label {
-    font-size:
-        7px;
-}
-.countdown-small {
-    margin-top:
-        3px;
-    font-size:
-        8px;
-}
-.sinhala-description {
-    margin-top:
-        6px;
-    padding:
-        5px;
-    font-size:
-        8.5px;
-}
-.download-footer {
-    margin-top:
-        4px;
-    font-size:
-        8px;
-}
+    .download-page {
+        min-height:
+            100svh;
 
-}
+        padding:
+            10px 12px;
 
-/* =========================================================
-REDUCED MOTION
-========================================================= */
+        justify-content:
+            flex-start;
+    }
 
-@media (prefers-reduced-motion: reduce) {
+    .download-card {
+        margin-top:
+            60px;
 
-html {
-    scroll-behavior:
-        auto;
-}
-.gradient-orb,
-.particle,
-.download-button,
-.download-button::before,
-.countdown-number {
-    animation-play-state:
-        paused;
-}
+        transform:
+            none;
 
+        max-width:
+            340px;
+
+        padding:
+            13px 10px 10px;
+    }
+
+    .logo {
+        font-size:
+            23px;
+    }
+
+    .logo-line {
+        width:
+            45px;
+
+        margin-top:
+            6px;
+
+        margin-bottom:
+            8px;
+    }
+
+    .download-button {
+        min-height:
+            39px;
+
+        padding:
+            6px;
+
+        font-size:
+            11px;
+    }
+
+    .download-icon {
+        font-size:
+            15px;
+    }
+
+    .button-text {
+        font-size:
+            11px;
+    }
+
+    .countdown {
+        min-height:
+            95px;
+    }
+
+    .countdown-number {
+        font-size:
+            37px;
+    }
+
+    .countdown-label {
+        font-size:
+            7px;
+    }
+
+    .countdown-small {
+        margin-top:
+            3px;
+
+        font-size:
+            8px;
+    }
+
+    .sinhala-description {
+        margin-top:
+            6px;
+
+        padding:
+            5px;
+
+        font-size:
+            8.5px;
+    }
+
+    .download-footer {
+        margin-top:
+            8px;
+
+        font-size:
+            8px;
+    }
 }
