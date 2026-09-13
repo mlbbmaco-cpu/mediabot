@@ -19,37 +19,39 @@
 
     <link
         rel="stylesheet"
-        href="style.css?v=45"
+        href="style.css?v=46"
     >
 
 
     <!-- =====================================================
-         EXACT MOBILE POSITION OVERRIDE
+         MOBILE POSITION OVERRIDE
          ===================================================== -->
 
     <style>
 
-        /* =================================================
+        /* =====================================================
            MOBILE
-           ================================================= */
+           ===================================================== */
 
         @media (max-width: 520px) {
 
             html,
             body {
                 width: 100% !important;
+
                 min-height: 100% !important;
 
                 margin: 0 !important;
+
                 padding: 0 !important;
 
                 overflow-x: hidden !important;
             }
 
 
-            /*
-             * MAIN POSITIONING AREA
-             */
+            /* =================================================
+               MAIN PAGE
+               ================================================= */
 
             .download-page {
                 position: relative !important;
@@ -70,21 +72,16 @@
             }
 
 
-            /*
-             * =================================================
-             * WALAWWA CARD
-             * =================================================
-             *
-             * EXACT TARGET POSITION
-             *
-             * The red box in your screenshot starts around
-             * this position.
-             */
+            /* =================================================
+               WALAWWA CARD
+               
+               ONLY THE CARD IS MOVED.
+               ================================================= */
 
             .download-card {
                 position: absolute !important;
 
-                top: 90px !important;
+                top: 400px !important;
 
                 left: 50% !important;
 
@@ -97,6 +94,8 @@
                 max-width: 360px !important;
 
                 margin: 0 !important;
+
+                padding: 17px 12px 14px !important;
 
                 transform: translateX(-50%) !important;
 
@@ -104,16 +103,17 @@
             }
 
 
-            /*
-             * =================================================
-             * FOOTER
-             * =================================================
-             */
+            /* =================================================
+               POWERED BY MACO
+               
+               INDEPENDENT POSITION.
+               DOES NOT MOVE WITH THE CARD.
+               ================================================= */
 
             .download-footer {
                 position: absolute !important;
 
-                top: 520px !important;
+                top: 900px !important;
 
                 left: 50% !important;
 
@@ -127,22 +127,24 @@
 
                 margin: 0 !important;
 
+                padding: 0 5px !important;
+
                 transform: translateX(-50%) !important;
 
-                z-index: 50 !important;
+                z-index: 20 !important;
             }
 
         }
 
 
-        /* =================================================
+        /* =====================================================
            SMALL PHONES
-           ================================================= */
+           ===================================================== */
 
         @media (max-width: 380px) {
 
             .download-card {
-                top: 90px !important;
+                top: 400px !important;
 
                 width: calc(100% - 20px) !important;
 
@@ -151,7 +153,7 @@
 
 
             .download-footer {
-                top: 505px !important;
+                top: 900px !important;
 
                 width: calc(100% - 20px) !important;
 
@@ -161,14 +163,14 @@
         }
 
 
-        /* =================================================
+        /* =====================================================
            VERY SMALL PHONES
-           ================================================= */
+           ===================================================== */
 
         @media (max-width: 340px) {
 
             .download-card {
-                top: 90px !important;
+                top: 400px !important;
 
                 width: calc(100% - 18px) !important;
 
@@ -177,7 +179,7 @@
 
 
             .download-footer {
-                top: 490px !important;
+                top: 900px !important;
 
                 width: calc(100% - 18px) !important;
 
@@ -187,9 +189,9 @@
         }
 
 
-        /* =================================================
-           LANDSCAPE
-           ================================================= */
+        /* =====================================================
+           LANDSCAPE PHONE
+           ===================================================== */
 
         @media (max-height: 520px) and (max-width: 900px) {
 
@@ -201,14 +203,14 @@
 
 
             .download-card {
-                top: 90px !important;
+                top: 400px !important;
 
                 max-width: 350px !important;
             }
 
 
             .download-footer {
-                top: 500px !important;
+                top: 900px !important;
 
                 max-width: 350px !important;
             }
@@ -244,12 +246,16 @@
         aria-hidden="true"
     >
 
+        <!-- PURPLE ORBS -->
+
         <div class="gradient-orb orb-1"></div>
 
         <div class="gradient-orb orb-2"></div>
 
         <div class="gradient-orb orb-3"></div>
 
+
+        <!-- PARTICLES -->
 
         <div class="particle particle-1"></div>
 
@@ -326,6 +332,7 @@
                         aria-hidden="true"
                     >↓</span>
 
+
                     <span class="button-text">
                         Continue Download
                     </span>
@@ -381,6 +388,7 @@
                         class="download-icon"
                         aria-hidden="true"
                     >↓</span>
+
 
                     <span class="button-text">
                         Download
@@ -449,7 +457,7 @@
          ===================================================== -->
 
     <script
-        src="script.js?v=45"
+        src="script.js?v=46"
     ></script>
 
 
