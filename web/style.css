@@ -1,5 +1,6 @@
 /* =========================================================
-   WALAWWA - COMPLETE STYLE.CSS
+   WALAWWA - FINAL STYLE.CSS
+   MOBILE POSITION FIX
    ========================================================= */
 
 :root {
@@ -34,14 +35,11 @@
     box-sizing: border-box;
 }
 
-
 html {
     width: 100%;
     min-height: 100%;
-
     scroll-behavior: smooth;
 }
-
 
 body {
     width: 100%;
@@ -88,26 +86,21 @@ body {
     overflow-x: hidden;
 }
 
-
 button,
 input,
 select {
     font: inherit;
 }
 
-
 button {
     cursor: pointer;
-
     -webkit-tap-highlight-color: transparent;
 }
-
 
 a {
     color: inherit;
     text-decoration: none;
 }
-
 
 img,
 video,
@@ -124,14 +117,12 @@ svg {
 
 .animated-background {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
     height: 100%;
 
     pointer-events: none;
-
     overflow: hidden;
 
     z-index: 0;
@@ -335,43 +326,33 @@ svg {
     top: 20%;
 }
 
-
 .particle-2 {
     left: 82%;
     top: 18%;
-
     animation-delay: -1.2s;
 }
-
 
 .particle-3 {
     left: 24%;
     top: 72%;
-
     animation-delay: -2.4s;
 }
-
 
 .particle-4 {
     left: 72%;
     top: 65%;
-
     animation-delay: -3.1s;
 }
-
 
 .particle-5 {
     left: 52%;
     top: 35%;
-
     animation-delay: -4s;
 }
-
 
 .particle-6 {
     left: 90%;
     top: 82%;
-
     animation-delay: -5s;
 }
 
@@ -421,7 +402,7 @@ svg {
 
 
 /* =========================================================
-   MAIN
+   MAIN PAGE
    ========================================================= */
 
 .download-page {
@@ -430,20 +411,14 @@ svg {
     z-index: 2;
 
     width: 100%;
-
     min-height: 100vh;
     min-height: 100svh;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
-    justify-content: center;
-
-    padding:
-        24px 18px;
+    padding: 24px 18px 35px;
 
     overflow-x: hidden;
 }
@@ -461,8 +436,7 @@ svg {
 
     margin: 0 auto;
 
-    padding:
-        32px 28px 28px;
+    padding: 32px 28px 28px;
 
     border:
         1px solid
@@ -552,8 +526,7 @@ svg {
 
     height: 3px;
 
-    margin:
-        17px auto 28px;
+    margin: 17px auto 28px;
 
     border-radius: 50%;
 
@@ -579,7 +552,6 @@ svg {
 
 #downloadArea {
     width: 100%;
-
     min-width: 0;
 }
 
@@ -592,13 +564,11 @@ svg {
     position: relative;
 
     width: 100%;
-
     min-height: 62px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 10px;
@@ -617,7 +587,6 @@ svg {
     color: #ffffff;
 
     font-size: 16px;
-
     font-weight: 800;
 
     background:
@@ -645,21 +614,15 @@ svg {
 }
 
 
-/* =========================================================
-   BUTTON SHINE
-   ========================================================= */
-
 .download-button::before {
     content: "";
 
     position: absolute;
 
     top: 0;
-
     left: -45%;
 
     width: 35%;
-
     height: 100%;
 
     background:
@@ -684,11 +647,9 @@ svg {
 
 
 .download-button:hover {
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
-    filter:
-        brightness(1.08);
+    filter: brightness(1.08);
 
     box-shadow:
         0 14px 35px
@@ -725,7 +686,6 @@ svg {
     flex: 0 0 auto;
 
     font-size: 24px;
-
     line-height: 1;
 }
 
@@ -736,19 +696,17 @@ svg {
     z-index: 2;
 
     min-width: 0;
-
     max-width: 100%;
 
     text-align: center;
 
     overflow-wrap: anywhere;
-
     word-break: break-word;
 }
 
 
 /* =========================================================
-   BUTTON ANIMATIONS
+   BUTTON ANIMATION
    ========================================================= */
 
 @keyframes buttonPulse {
@@ -808,11 +766,9 @@ svg {
     min-height: 220px;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -834,7 +790,6 @@ svg {
     margin-bottom: 10px;
 
     font-size: 12px;
-
     font-weight: 800;
 
     letter-spacing: 2.5px;
@@ -901,14 +856,12 @@ svg {
     text-align: center;
 
     font-size: 13px;
-
     line-height: 1.5;
 
     color:
         rgba(255, 255, 255, 0.65);
 
     overflow-wrap: anywhere;
-
     word-break: break-word;
 }
 
@@ -942,13 +895,11 @@ svg {
         rgba(246, 231, 255, 0.76);
 
     font-size: 14px;
-
     line-height: 1.8;
 
     text-align: center;
 
     overflow-wrap: anywhere;
-
     word-break: break-word;
 }
 
@@ -969,7 +920,6 @@ svg {
     text-align: center;
 
     font-size: 13px;
-
     line-height: 1.5;
 
     color:
@@ -1004,69 +954,51 @@ svg {
         padding: 30px 16px;
     }
 
-
     .download-card {
         max-width: 400px;
 
-        padding:
-            24px 20px 20px;
+        padding: 24px 20px 20px;
 
         border-radius: 20px;
     }
 
-
     .logo {
         font-size: 38px;
-
         letter-spacing: 3px;
     }
 
-
     .logo-line {
         width: 70px;
-
-        margin:
-            13px auto 21px;
+        margin: 13px auto 21px;
     }
-
 
     .download-button {
         min-height: 56px;
-
         font-size: 15px;
     }
-
 
     .download-icon {
         font-size: 22px;
     }
 
-
     .countdown {
         min-height: 180px;
     }
-
 
     .countdown-number {
         font-size: 68px;
     }
 
-
     .sinhala-description {
         margin-top: 16px;
-
-        padding:
-            12px 13px;
+        padding: 12px 13px;
 
         font-size: 12px;
-
         line-height: 1.7;
     }
 
-
     .download-footer {
         margin-top: 12px;
-
         font-size: 11px;
     }
 }
@@ -1078,26 +1010,29 @@ svg {
 
 @media (max-width: 520px) {
 
-    /*
-     * =====================================================
-     * IMPORTANT
-     * =====================================================
-     *
-     * The card is intentionally placed lower using
-     * padding-top on the PAGE.
-     *
-     * This avoids absolute positioning problems.
-     */
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+
+    body {
+        overflow-x: hidden;
+    }
+
+
+    /* -----------------------------------------
+       PAGE
+       ----------------------------------------- */
 
     .download-page {
         position: relative;
 
         width: 100%;
-
         min-height: 100svh;
 
         display: flex;
-
         flex-direction: column;
 
         align-items: center;
@@ -1105,48 +1040,48 @@ svg {
         justify-content: flex-start;
 
         /*
-         * THIS CONTROLS THE CARD POSITION.
+         * THIS controls the position of the
+         * COMPLETE WALAWWA BOX.
          *
-         * The target in your red box is around here.
+         * 220px = approximately the red-box
+         * starting area on the iPhone screenshot.
          */
-
         padding:
-            450px 12px 35px;
+            220px 12px 35px;
+
+        margin: 0;
 
         overflow-x: hidden;
     }
 
 
-    /* =====================================================
-       WALAWWA CARD
-       ===================================================== */
+    /* -----------------------------------------
+       COMPLETE WALAWWA BOX
+       ----------------------------------------- */
 
     .download-card {
         position: relative;
-
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
 
         width: 100%;
 
         max-width: 360px;
 
-        margin: 0 auto;
+        margin: 0 !important;
 
         padding:
             17px 12px 14px;
 
-        transform: none;
+        border-radius: 17px;
 
-        z-index: 5;
+        transform: none !important;
+
+        flex: 0 0 auto;
     }
 
 
-    /* =====================================================
+    /* -----------------------------------------
        LOGO
-       ===================================================== */
+       ----------------------------------------- */
 
     .logo {
         font-size: 28px;
@@ -1165,9 +1100,9 @@ svg {
     }
 
 
-    /* =====================================================
-       BUTTON
-       ===================================================== */
+    /* -----------------------------------------
+       DOWNLOAD BUTTON
+       ----------------------------------------- */
 
     .download-button {
         min-height: 48px;
@@ -1194,15 +1129,14 @@ svg {
     }
 
 
-    /* =====================================================
+    /* -----------------------------------------
        COUNTDOWN
-       ===================================================== */
+       ----------------------------------------- */
 
     .countdown {
         min-height: 140px;
 
-        padding:
-            10px 6px;
+        padding: 10px 6px;
 
         border-radius: 13px;
     }
@@ -1231,9 +1165,9 @@ svg {
     }
 
 
-    /* =====================================================
+    /* -----------------------------------------
        MESSAGE
-       ===================================================== */
+       ----------------------------------------- */
 
     .message {
         margin-top: 7px;
@@ -1244,15 +1178,14 @@ svg {
     }
 
 
-    /* =====================================================
+    /* -----------------------------------------
        SINHALA
-       ===================================================== */
+       ----------------------------------------- */
 
     .sinhala-description {
         margin-top: 10px;
 
-        padding:
-            9px 8px;
+        padding: 9px 8px;
 
         border-radius: 11px;
 
@@ -1262,41 +1195,39 @@ svg {
     }
 
 
-    /* =====================================================
-       FOOTER
-       
+    /* -----------------------------------------
+       POWERED BY MACO
        IMPORTANT:
-       It is now naturally AFTER the card.
-       ===================================================== */
+       stays OUTSIDE the card
+       ----------------------------------------- */
 
     .download-footer {
         position: relative;
-
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
 
         width: 100%;
 
         max-width: 360px;
 
         margin:
-            20px auto 0;
+            14px auto 0 !important;
 
         padding: 0 5px;
 
-        transform: none;
-
-        z-index: 5;
+        text-align: center;
 
         font-size: 9px;
+
+        line-height: 1.5;
+
+        flex: 0 0 auto;
+
+        transform: none !important;
     }
 
 
-    /* =====================================================
+    /* -----------------------------------------
        BACKGROUND
-       ===================================================== */
+       ----------------------------------------- */
 
     .gradient-orb {
         filter: blur(1px);
@@ -1335,13 +1266,18 @@ svg {
 @media (max-width: 380px) {
 
     .download-page {
+        /*
+         * Slightly higher on very small screens.
+         */
         padding:
-            450px 10px 25px;
+            210px 10px 25px;
     }
 
 
     .download-card {
         max-width: 330px;
+
+        margin: 0 !important;
 
         padding:
             15px 10px 12px;
@@ -1366,8 +1302,7 @@ svg {
     .download-button {
         min-height: 45px;
 
-        padding:
-            8px 7px;
+        padding: 8px 7px;
 
         gap: 6px;
 
@@ -1412,8 +1347,7 @@ svg {
     .sinhala-description {
         margin-top: 9px;
 
-        padding:
-            7px 6px;
+        padding: 7px 6px;
 
         font-size: 9.5px;
 
@@ -1422,7 +1356,8 @@ svg {
 
 
     .download-footer {
-        margin-top: 18px;
+        margin:
+            12px auto 0 !important;
 
         font-size: 8.5px;
     }
@@ -1437,12 +1372,14 @@ svg {
 
     .download-page {
         padding:
-            450px 9px 20px;
+            200px 9px 20px;
     }
 
 
     .download-card {
         max-width: 305px;
+
+        margin: 0 !important;
 
         padding:
             14px 8px 10px;
@@ -1467,8 +1404,7 @@ svg {
     .download-button {
         min-height: 42px;
 
-        padding:
-            7px 6px;
+        padding: 7px 6px;
 
         gap: 5px;
 
@@ -1520,7 +1456,8 @@ svg {
 
 
     .download-footer {
-        margin-top: 18px;
+        margin:
+            10px auto 0 !important;
 
         font-size: 8px;
     }
@@ -1528,18 +1465,14 @@ svg {
 
 
 /* =========================================================
-   LANDSCAPE PHONE
+   LANDSCAPE
    ========================================================= */
 
 @media (max-height: 520px) and (max-width: 900px) {
 
     .download-page {
-        min-height: 100svh;
-
         padding:
-            300px 12px 20px;
-
-        justify-content: flex-start;
+            35px 12px 20px;
     }
 
 
@@ -1548,12 +1481,15 @@ svg {
 
         padding:
             13px 10px 10px;
+
+        margin: 0 !important;
+
+        transform: none !important;
     }
 
 
     .logo {
         font-size: 23px;
-
         letter-spacing: 1px;
     }
 
@@ -1621,7 +1557,8 @@ svg {
 
 
     .download-footer {
-        margin-top: 15px;
+        margin:
+            8px auto 0 !important;
 
         font-size: 8px;
     }
@@ -1629,7 +1566,7 @@ svg {
 
 
 /* =========================================================
-   FORCE ANIMATIONS
+   ANIMATIONS ALWAYS RUN
    ========================================================= */
 
 .animated-background .gradient-orb,
