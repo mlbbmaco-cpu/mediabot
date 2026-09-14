@@ -28,7 +28,12 @@ body {
     pointer-events: none;
     z-index: 0;
     background:
-        radial-gradient(circle at 50% 30%, #241044 0%, #10081d 45%, #08050f 100%);
+        radial-gradient(
+            circle at 50% 30%,
+            #241044 0%,
+            #10081d 45%,
+            #08050f 100%
+        );
 }
 
 .gradient-orb {
@@ -107,6 +112,7 @@ body {
 }
 
 @keyframes floatParticle {
+
     0%,
     100% {
         transform: translateY(0);
@@ -184,6 +190,7 @@ body {
 
     -webkit-background-clip: text;
     background-clip: text;
+
     color: transparent;
 }
 
@@ -227,6 +234,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
 
     color: #ffffff;
@@ -281,9 +289,9 @@ body {
 .countdown {
     width: 100%;
 
-    padding: 15px 10px 20px;
+    padding: 18px 10px;
 
-    text-align: center;
+    text-align: center !important;
 
     display: flex;
     flex-direction: column;
@@ -291,39 +299,28 @@ body {
     justify-content: center;
 }
 
-/* Hide PREPARING DOWNLOAD */
-.countdown-label {
-    display: none !important;
-}
+/*
+   Countdown number only.
+   No label and no "Please wait..."
+*/
 
-/* BIG CENTER NUMBER */
 .countdown-number {
     width: 100%;
 
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0 auto;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 64px;
 
-    text-align: center;
-
-    font-size: 78px;
     font-weight: 900;
 
     line-height: 1;
 
+    text-align: center !important;
+
     color: #ffffff;
 
     text-shadow:
-        0 0 25px rgba(168, 85, 247, 0.65),
-        0 0 45px rgba(168, 85, 247, 0.25);
-}
-
-/* Hide PLEASE WAIT */
-.countdown-small {
-    display: none !important;
+        0 0 25px rgba(168, 85, 247, 0.65);
 }
 
 /* =========================
@@ -339,6 +336,8 @@ body {
     line-height: 1.5;
 
     color: #d6c7e4;
+
+    text-align: center;
 }
 
 /* =========================
@@ -359,6 +358,7 @@ body {
     color: #bdb0ca;
 
     font-size: 13px;
+
     line-height: 1.8;
 
     text-align: center;
@@ -438,13 +438,19 @@ body {
 
     .logo {
         font-size: 28px !important;
+
         letter-spacing: 3px !important;
     }
 
     .logo-line {
         margin-top: 8px !important;
+
         margin-bottom: 18px !important;
     }
+
+    /* =========================
+       BUTTON
+    ========================= */
 
     .download-button {
         min-height: 52px !important;
@@ -465,7 +471,7 @@ body {
     .countdown {
         width: 100% !important;
 
-        padding: 12px 0 18px !important;
+        padding: 15px 8px !important;
 
         display: flex !important;
 
@@ -478,35 +484,18 @@ body {
         text-align: center !important;
     }
 
-    .countdown-label,
-    .countdown-small {
-        display: none !important;
-    }
-
     .countdown-number {
         width: 100% !important;
 
-        margin: 0 !important;
-        padding: 0 !important;
+        margin: 0 auto !important;
 
-        display: flex !important;
+        font-size: 56px !important;
 
-        align-items: center !important;
-        justify-content: center !important;
+        line-height: 1 !important;
 
         text-align: center !important;
 
-        font-size: 82px !important;
-
-        line-height: 0.95 !important;
-    }
-
-    /* =========================
-       MESSAGE
-    ========================= */
-
-    .message {
-        margin-top: 10px !important;
+        display: block !important;
     }
 
     /* =========================
@@ -568,19 +557,6 @@ body {
         padding: 18px 12px 16px !important;
     }
 
-    .countdown-number {
-        width: 100% !important;
-
-        font-size: 76px !important;
-
-        display: flex !important;
-
-        align-items: center !important;
-        justify-content: center !important;
-
-        text-align: center !important;
-    }
-
     .download-footer {
         width: calc(100% - 40px) !important;
 
@@ -591,6 +567,16 @@ body {
 
     .logo {
         font-size: 26px !important;
+    }
+
+    .countdown {
+        padding: 15px 5px !important;
+    }
+
+    .countdown-number {
+        font-size: 54px !important;
+
+        text-align: center !important;
     }
 
     .sinhala-description {
@@ -610,19 +596,6 @@ body {
         width: calc(100% - 32px) !important;
     }
 
-    .countdown-number {
-        width: 100% !important;
-
-        font-size: 70px !important;
-
-        display: flex !important;
-
-        align-items: center !important;
-        justify-content: center !important;
-
-        text-align: center !important;
-    }
-
     .download-footer {
         width: calc(100% - 32px) !important;
 
@@ -633,6 +606,16 @@ body {
 
     .logo {
         font-size: 24px !important;
+    }
+
+    .countdown {
+        padding: 14px 4px !important;
+    }
+
+    .countdown-number {
+        font-size: 52px !important;
+
+        text-align: center !important;
     }
 
     .sinhala-description {
@@ -654,12 +637,12 @@ body {
         top: 90px !important;
     }
 
-    .countdown-number {
-        font-size: 70px !important;
-    }
-
     .download-footer {
         top: 520px !important;
+    }
+
+    .countdown-number {
+        text-align: center !important;
     }
 }
 
@@ -675,6 +658,19 @@ body {
 
     .download-card {
         margin: 0 auto;
+    }
+
+    .countdown {
+        text-align: center !important;
+    }
+
+    .countdown-number {
+        width: 100% !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        text-align: center !important;
     }
 
     .download-footer {
