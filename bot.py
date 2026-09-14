@@ -47,8 +47,9 @@ from firebase import (
 
 
 print(
-    "BOT VERSION 14 - ADMIN/PUBLIC SEPARATED "
-    "+ VIP + SUB2UNLOCK + PERSISTENT SCHEDULER"
+    "BOT VERSION 15 - VIP DISABLED "
+    "+ UNIVERSAL PUBLIC SEND "
+    "+ SUB2UNLOCK + PERSISTENT SCHEDULER"
 )
 
 
@@ -66,6 +67,20 @@ VIP_BUTTON_TEXT = "👑 VIP Access"
 STOP_UPLOAD_BUTTON_TEXT = "🛑 Stop Uploading"
 
 SCHEDULE_TIMEZONE = ZoneInfo("Asia/Colombo")
+
+
+# ======================================
+# FEATURE SWITCHES
+# ======================================
+
+# VIP is temporarily disabled/hidden.
+#
+# IMPORTANT:
+# All VIP functions/code remain in this file.
+#
+# Change to True later when you want VIP
+# functionality back.
+VIP_ENABLED = False
 
 
 # ======================================
@@ -185,31 +200,57 @@ async def copy_message_with_retry(
 
 # ======================================
 # ADMIN MENU
+#
+# VIP BUTTON IS HIDDEN WHEN DISABLED.
 # ======================================
 
 def get_admin_menu():
 
-    return InlineKeyboardMarkup(
-        [
+    buttons = []
+
+    # ==================================
+    # VIP
+    # ==================================
+
+    if VIP_ENABLED:
+
+        buttons.append(
             [
                 InlineKeyboardButton(
                     "🟣 VIP Post",
                     callback_data="mode:vip",
                 )
-            ],
-            [
-                InlineKeyboardButton(
-                    "🔵 Normal Post",
-                    callback_data="mode:normal",
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    "🟢 Sub2Unlock",
-                    callback_data="mode:sub2unlock",
-                )
-            ],
+            ]
+        )
+
+    # ==================================
+    # NORMAL
+    # ==================================
+
+    buttons.append(
+        [
+            InlineKeyboardButton(
+                "🔵 Normal Post",
+                callback_data="mode:normal",
+            )
         ]
+    )
+
+    # ==================================
+    # SUB2UNLOCK
+    # ==================================
+
+    buttons.append(
+        [
+            InlineKeyboardButton(
+                "🟢 Sub2Unlock",
+                callback_data="mode:sub2unlock",
+            )
+        ]
+    )
+
+    return InlineKeyboardMarkup(
+        buttons
     )
 
 
@@ -232,7 +273,7 @@ def get_upload_stop_keyboard():
 
 
 # ======================================
-# ADMIN MENU
+# SHOW ADMIN MENU
 # ======================================
 
 async def show_admin_menu(
@@ -292,12 +333,20 @@ def make_web_link(code):
 
 # ======================================
 # VIP
+#
+# TEMPORARILY DISABLED
+#
+# FUNCTIONS ARE KEPT.
 # ======================================
 
 async def vip_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE,
 ):
+
+    # VIP disabled.
+    if not VIP_ENABLED:
+        return
 
     if update.effective_user.id != OWNER_ID:
         return
@@ -333,12 +382,19 @@ async def vip_command(
 
 # ======================================
 # REMOVE VIP
+#
+# TEMPORARILY DISABLED
+#
+# FUNCTION IS KEPT.
 # ======================================
 
 async def removevip_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE,
 ):
+
+    if not VIP_ENABLED:
+        return
 
     if update.effective_user.id != OWNER_ID:
         return
@@ -374,12 +430,19 @@ async def removevip_command(
 
 # ======================================
 # VIP LIST
+#
+# TEMPORARILY DISABLED
+#
+# FUNCTION IS KEPT.
 # ======================================
 
 async def viplist_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE,
 ):
+
+    if not VIP_ENABLED:
+        return
 
     if update.effective_user.id != OWNER_ID:
         return
@@ -485,20 +548,30 @@ async def send_download_files(
 
 
 # ======================================
-# PUBLIC FILE CHECK
+# PUBLIC SEND CHECK
+#
+# NOW ACCEPTS EVERYTHING.
+#
+# Text
+# Links
+# TXT
+# PDF
+# Video
+# Image
+# Audio
+# Voice
+# GIF
+# Sticker
+# Contact
+# Location
+# Poll
+# Dice
+# Etc.
 # ======================================
 
 def is_public_send_file(message):
 
-    return bool(
-        message.document
-        or message.photo
-        or message.video
-        or message.audio
-        or message.voice
-        or message.animation
-        or message.sticker
-    )
+    return message is not None
 
 
 # ======================================
@@ -526,10 +599,56 @@ def get_public_send_user_details(user):
 
 
 # ======================================
-# PUBLIC COPY
+# PUBLIC MESSAGE TYPE
+# ======================================
+
+def is_text_only_message(message):
+
+    return bool(
+        message.text
+        and not (
+            message.document
+            or message.photo
+            or message.video
+            or message.audio
+            or message.voice
+            or message.animation
+            or message.sticker
+            or message.contact
+            or message.location
+            or message.venue
+            or message.poll
+            or message.dice
+            or message.video_note
+            or message.game
+        )
+    )
+
+
+# ======================================
+# PUBLIC MESSAGE WITH CAPTION
 #
-# EVERY FILE GETS USER DETAILS.
-# NO SEPARATE USER DETAIL MESSAGE.
+# Telegram allows captions for media,
+# but NOT normal text messages.
+# ======================================
+
+def can_have_caption(message):
+
+    return bool(
+        message.photo
+        or message.video
+        or message.document
+        or message.audio
+        or message.voice
+        or message.animation
+        or message.video_note
+    )
+
+
+# ======================================
+# PUBLIC COPY WITH RETRY
+#
+# UNIVERSAL MESSAGE SUPPORT.
 # ======================================
 
 async def copy_public_send_file_with_retry(
@@ -537,6 +656,85 @@ async def copy_public_send_file_with_retry(
     message,
     user_details,
 ):
+
+    # ==================================
+    # TEXT MESSAGE
+    #
+    # We cannot use copy_message with
+    # caption for text.
+    #
+    # Therefore create a new text message
+    # containing user details + original text.
+    # ==================================
+
+    if is_text_only_message(message):
+
+        final_text = (
+            f"{user_details}\n\n"
+            f"📝 {message.text}"
+        )
+
+        while True:
+
+            try:
+
+                print(
+                    f"📤 Public Text Send -> "
+                    f"{PUBLIC_SEND_STORAGE_CHANNEL_ID}"
+                )
+
+                result = await context.bot.send_message(
+                    chat_id=PUBLIC_SEND_STORAGE_CHANNEL_ID,
+                    text=final_text,
+                    disable_web_page_preview=False,
+                )
+
+                print(
+                    f"✅ Public text stored: "
+                    f"{result.message_id}"
+                )
+
+                return result
+
+            except telegram.error.RetryAfter as e:
+
+                wait = int(
+                    getattr(
+                        e,
+                        "retry_after",
+                        1,
+                    )
+                ) + 1
+
+                print(
+                    f"⚠️ Public text flood wait: "
+                    f"{wait}s"
+                )
+
+                await asyncio.sleep(
+                    wait
+                )
+
+            except telegram.error.TimedOut:
+
+                print(
+                    "⚠️ Public text timeout. "
+                    "Retrying in 5 seconds..."
+                )
+
+                await asyncio.sleep(5)
+
+            except Exception as e:
+
+                print(
+                    f"❌ Public text send error: {e}"
+                )
+
+                raise
+
+    # ==================================
+    # MEDIA WITH CAPTION
+    # ==================================
 
     original_caption = (
         message.caption
@@ -554,6 +752,10 @@ async def copy_public_send_file_with_retry(
 
         final_caption = user_details
 
+    # ==================================
+    # COPY MEDIA / OTHER TELEGRAM TYPES
+    # ==================================
+
     while True:
 
         try:
@@ -563,17 +765,59 @@ async def copy_public_send_file_with_retry(
                 f"{PUBLIC_SEND_STORAGE_CHANNEL_ID}"
             )
 
+            kwargs = {
+                "chat_id": (
+                    PUBLIC_SEND_STORAGE_CHANNEL_ID
+                ),
+                "from_chat_id": message.chat.id,
+                "message_id": message.message_id,
+            }
+
+            # Only caption-capable messages get
+            # the user information as caption.
+            #
+            # For stickers, contacts, locations,
+            # polls, dice, etc. Telegram may reject
+            # a caption argument.
+            if can_have_caption(message):
+
+                kwargs["caption"] = final_caption
+
             result = await context.bot.copy_message(
-                chat_id=PUBLIC_SEND_STORAGE_CHANNEL_ID,
-                from_chat_id=message.chat.id,
-                message_id=message.message_id,
-                caption=final_caption,
+                **kwargs
             )
 
             print(
-                f"✅ Public file stored: "
+                f"✅ Public message stored: "
                 f"{result.message_id}"
             )
+
+            # ==================================
+            # NON-CAPTION MESSAGE TYPES
+            #
+            # Keep original message intact.
+            # User details are stored separately
+            # only when Telegram does not support
+            # attaching them to the message.
+            # ==================================
+
+            if not can_have_caption(message):
+
+                try:
+
+                    await context.bot.send_message(
+                        chat_id=(
+                            PUBLIC_SEND_STORAGE_CHANNEL_ID
+                        ),
+                        text=user_details,
+                    )
+
+                except Exception as e:
+
+                    print(
+                        f"⚠️ Could not store "
+                        f"user details: {e}"
+                    )
 
             return result
 
@@ -637,6 +881,7 @@ async def process_public_send_batch(
         return
 
     user = batch["user"]
+
     messages = batch["messages"]
 
     user_details = get_public_send_user_details(
@@ -660,7 +905,7 @@ async def process_public_send_batch(
     )
 
     print(
-        f"Files: {len(messages)}"
+        f"Messages: {len(messages)}"
     )
 
     print(
@@ -682,7 +927,7 @@ async def process_public_send_batch(
         try:
 
             print(
-                f"📦 Storing public file "
+                f"📦 Storing public message "
                 f"{index}/{len(messages)}"
             )
 
@@ -697,7 +942,7 @@ async def process_public_send_batch(
         except Exception as e:
 
             print(
-                f"❌ Failed public file "
+                f"❌ Failed public message "
                 f"{index}: {e}"
             )
 
@@ -712,7 +957,7 @@ async def process_public_send_batch(
             await context.bot.send_message(
                 chat_id=user.id,
                 text=(
-                    f"✅ {successful} file"
+                    f"✅ {successful} message"
                     f"{'s' if successful != 1 else ''} "
                     f"sent."
                 ),
@@ -723,7 +968,7 @@ async def process_public_send_batch(
             await context.bot.send_message(
                 chat_id=user.id,
                 text=(
-                    "❌ File send failed. "
+                    "❌ Message send failed. "
                     "Please try again."
                 ),
             )
@@ -738,6 +983,10 @@ async def process_public_send_batch(
 
 # ======================================
 # PUBLIC SILENT WAIT
+#
+# 20 SECOND TIMER.
+#
+# EVERY NEW MESSAGE RESETS TIMER.
 # ======================================
 
 async def public_send_wait_task(
@@ -773,9 +1022,11 @@ async def public_send_wait_task(
 
 
 # ======================================
-# PUBLIC SEND RECEIVE FILE
+# PUBLIC SEND RECEIVE MESSAGE
 #
 # OWNER IS NEVER HANDLED HERE.
+#
+# ANY MESSAGE IS ACCEPTED.
 # ======================================
 
 async def handle_public_send_file(
@@ -799,6 +1050,10 @@ async def handle_public_send_file(
         return
 
     message = update.message
+
+    # ==================================
+    # ACCEPT EVERYTHING
+    # ==================================
 
     if not is_public_send_file(message):
         return
@@ -825,7 +1080,7 @@ async def handle_public_send_file(
     )
 
     print(
-        f"📥 Public Send file received "
+        f"📥 Public Send message received "
         f"from {user.id}: {count}"
     )
 
@@ -851,7 +1106,7 @@ async def handle_public_send_file(
     public_send_tasks[user.id] = task
 
     # ==================================
-    # SIMPLE ACK ONLY
+    # SIMPLE ACK
     # ==================================
 
     try:
@@ -892,19 +1147,24 @@ async def start(
     ):
 
         await update.message.reply_text(
-            "📤 Send your files."
+            "📤 Send anything you want."
         )
 
         return
 
     # ==================================
     # VIP CONTACT
+    #
+    # DISABLED
     # ==================================
 
     if (
         context.args
         and context.args[0] == "contact"
     ):
+
+        if not VIP_ENABLED:
+            return
 
         await update.message.reply_text(
             "💎 VIP Membership\n\n"
@@ -941,9 +1201,19 @@ async def start(
 
     # ==================================
     # VIP DIRECT LINK
+    #
+    # VIP DISABLED.
     # ==================================
 
     if code.startswith("vip_"):
+
+        if not VIP_ENABLED:
+
+            await update.message.reply_text(
+                "❌ VIP is temporarily unavailable."
+            )
+
+            return
 
         real_code = code.replace(
             "vip_",
@@ -1026,9 +1296,11 @@ async def start(
 
     # ==================================
     # VIP USER
+    #
+    # ONLY ACTIVE IF VIP ENABLED.
     # ==================================
 
-    if is_vip(user_id):
+    if VIP_ENABLED and is_vip(user_id):
 
         await send_download_files(
             bot=context.bot,
@@ -1044,9 +1316,15 @@ async def start(
 
     # ==================================
     # VIP POST
+    #
+    # WHEN VIP IS DISABLED, OLD VIP POSTS
+    # ARE TREATED AS NORMAL POSTS.
     # ==================================
 
-    if post_type == "vip":
+    if (
+        post_type == "vip"
+        and VIP_ENABLED
+    ):
 
         await update.message.reply_text(
             "🔒 VIP Content\n\n"
@@ -1079,7 +1357,7 @@ async def start(
                         callback_data=(
                             f"unlock:{code}"
                         ),
-                    )
+                    ),
                 ],
             ]
         )
@@ -1140,7 +1418,13 @@ async def unlock_video(
 
         return
 
-    if is_vip(user_id):
+    # ==================================
+    # VIP BYPASS
+    #
+    # ONLY WHEN VIP ENABLED.
+    # ==================================
+
+    if VIP_ENABLED and is_vip(user_id):
 
         await send_download_files(
             bot=context.bot,
@@ -1233,9 +1517,11 @@ def build_post_caption(data):
         "",
     )
 
-    if data.get(
-        "post_type"
-    ) == "vip":
+    # VIP tag only when VIP is enabled.
+    if (
+        data.get("post_type") == "vip"
+        and VIP_ENABLED
+    ):
 
         return (
             f"{VIP_TAG}\n\n"
@@ -1247,6 +1533,8 @@ def build_post_caption(data):
 
 # ======================================
 # SEND POST TO CHANNEL
+#
+# VIP BUTTON HIDDEN WHEN DISABLED.
 # ======================================
 
 async def send_post_to_channel(
@@ -1268,7 +1556,14 @@ async def send_post_to_channel(
         f"?start=vip_{code}"
     )
 
-    if data["post_type"] == "vip":
+    # ==================================
+    # VIP POST
+    # ==================================
+
+    if (
+        data["post_type"] == "vip"
+        and VIP_ENABLED
+    ):
 
         keyboard = InlineKeyboardMarkup(
             [
@@ -1281,6 +1576,13 @@ async def send_post_to_channel(
             ]
         )
 
+    # ==================================
+    # NORMAL POST
+    #
+    # ONLY WATCH BUTTON.
+    # VIP BUTTON IS REMOVED.
+    # ==================================
+
     else:
 
         keyboard = InlineKeyboardMarkup(
@@ -1290,13 +1592,7 @@ async def send_post_to_channel(
                         WATCH_BUTTON_TEXT,
                         url=watch_link,
                     )
-                ],
-                [
-                    InlineKeyboardButton(
-                        VIP_BUTTON_TEXT,
-                        url=vip_link,
-                    )
-                ],
+                ]
             ]
         )
 
@@ -1321,6 +1617,7 @@ async def send_post_to_channel(
             )
 
         media_chat_id = media.chat.id
+
         media_message_id = media.message_id
 
     while True:
@@ -1720,10 +2017,6 @@ async def handle_schedule_time(
     if target <= now:
 
         target += timedelta(days=1)
-
-    delay = (
-        target - now
-    ).total_seconds()
 
     media = data.get(
         "media_message"
@@ -2269,11 +2562,24 @@ async def mode_buttons(
 
     # ==================================
     # VIP
+    #
+    # BLOCKED WHEN DISABLED.
     # ==================================
 
     if query.data == "mode:vip":
 
-        reset_admin_state(user_id)
+        if not VIP_ENABLED:
+
+            await query.answer(
+                "VIP is temporarily disabled.",
+                show_alert=True,
+            )
+
+            return
+
+        reset_admin_state(
+            user_id
+        )
 
         owner_mode = "vip"
 
@@ -2297,7 +2603,9 @@ async def mode_buttons(
 
     if query.data == "mode:normal":
 
-        reset_admin_state(user_id)
+        reset_admin_state(
+            user_id
+        )
 
         owner_mode = "normal"
 
@@ -2321,7 +2629,9 @@ async def mode_buttons(
 
     if query.data == "mode:sub2unlock":
 
-        reset_admin_state(user_id)
+        reset_admin_state(
+            user_id
+        )
 
         owner_mode = "sub2unlock"
 
@@ -2642,9 +2952,6 @@ async def process_uploaded_files(
 
 # ======================================
 # /STOP
-#
-# STOP = FINISHED UPLOADING
-# MOVE TO POST CREATION.
 # ======================================
 
 async def stop(
@@ -2720,8 +3027,6 @@ async def stop(
 
 # ======================================
 # /CANCEL
-#
-# CANCEL = DISCARD EVERYTHING.
 # ======================================
 
 async def cancel_command(
@@ -2989,6 +3294,7 @@ async def handle_sub2unlock_channel(
     # ==================================
 
     sub2unlock_channel = chat
+
     sub2unlock_channel_id = chat.id
 
     if chat.username:
@@ -3047,8 +3353,6 @@ async def handle_sub2unlock_channel(
 
 # ======================================
 # OWNER ROUTER
-#
-# THIS IS OWNER ONLY.
 # ======================================
 
 async def owner_router(
@@ -3063,10 +3367,6 @@ async def owner_router(
 
     if not user:
         return
-
-    # ==================================
-    # OWNER ONLY
-    # ==================================
 
     if user.id != OWNER_ID:
         return
@@ -3213,6 +3513,13 @@ app.add_handler(
     )
 )
 
+# ======================================
+# VIP COMMANDS
+#
+# KEPT REGISTERED.
+# DO NOTHING WHILE VIP_ENABLED=False.
+# ======================================
+
 app.add_handler(
     CommandHandler(
         "vip",
@@ -3278,10 +3585,7 @@ app.add_handler(
 # ======================================
 # ADMIN MESSAGE HANDLER
 #
-# CRITICAL:
-# ONLY OWNER REACHES owner_router.
-#
-# PUBLIC USERS DO NOT ENTER THIS HANDLER.
+# ONLY OWNER.
 # ======================================
 
 app.add_handler(
@@ -3293,25 +3597,34 @@ app.add_handler(
 
 
 # ======================================
-# PUBLIC FILE HANDLER
+# PUBLIC SEND HANDLER
 #
-# CRITICAL:
+# IMPORTANT:
+#
+# filters.ALL means:
+#
+# TEXT       ✅
+# LINKS      ✅
+# TXT        ✅
+# PDF        ✅
+# VIDEO      ✅
+# IMAGE      ✅
+# AUDIO      ✅
+# VOICE      ✅
+# GIF        ✅
+# STICKER    ✅
+# CONTACT    ✅
+# LOCATION   ✅
+# POLL       ✅
+# DICE       ✅
+# ETC.       ✅
+#
 # OWNER IS EXCLUDED.
-#
-# PUBLIC FILES GO TO UPLOAD_CHANNEL_ID.
 # ======================================
 
 app.add_handler(
     MessageHandler(
-        (
-            filters.Document.ALL
-            | filters.PHOTO
-            | filters.VIDEO
-            | filters.AUDIO
-            | filters.VOICE
-            | filters.ANIMATION
-            | filters.Sticker.ALL
-        )
+        filters.ALL
         & ~filters.User(OWNER_ID),
         handle_public_send_file,
     )
@@ -3342,11 +3655,15 @@ if __name__ == "__main__":
     )
 
     print(
-        " VIP + Sub2Unlock + Schedule "
+        " VIP DISABLED "
     )
 
     print(
-        " + SEPARATED Public Send "
+        " + Sub2Unlock + Schedule "
+    )
+
+    print(
+        " + UNIVERSAL Public Send "
     )
 
     print(
@@ -3371,6 +3688,10 @@ if __name__ == "__main__":
     )
 
     print(
+        f"VIP enabled: {VIP_ENABLED}"
+    )
+
+    print(
         f"Scheduler timezone: "
         f"{SCHEDULE_TIMEZONE.key}"
     )
@@ -3378,6 +3699,10 @@ if __name__ == "__main__":
     print(
         "Public Send batching: "
         f"{PUBLIC_SEND_WAIT_SECONDS}s silent"
+    )
+
+    print(
+        "Public Send accepts: ANY MESSAGE"
     )
 
     print(
