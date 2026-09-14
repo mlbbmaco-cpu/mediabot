@@ -9,6 +9,9 @@ let countdown = null;
 let countdownNumber = null;
 let message = null;
 
+let countdownTimer = null;
+
+
 function getDownloadCode() {
     const params = new URLSearchParams(window.location.search);
 
@@ -27,6 +30,7 @@ function getDownloadCode() {
     return code || null;
 }
 
+
 function makeTelegramLink(code) {
     return (
         "https://t.me/" +
@@ -35,6 +39,7 @@ function makeTelegramLink(code) {
         encodeURIComponent(code)
     );
 }
+
 
 function showMessage(text, type = "") {
     if (!message) {
@@ -49,14 +54,26 @@ function showMessage(text, type = "") {
     }
 }
 
+
 function initializeDownloadPage() {
+
     console.log("WALAWWA: JavaScript loaded");
 
-    firstDownload = document.getElementById("firstDownload");
-    secondDownload = document.getElementById("secondDownload");
-    countdown = document.getElementById("countdown");
-    countdownNumber = document.getElementById("countdownNumber");
-    message = document.getElementById("message");
+    firstDownload =
+        document.getElementById("firstDownload");
+
+    secondDownload =
+        document.getElementById("secondDownload");
+
+    countdown =
+        document.getElementById("countdown");
+
+    countdownNumber =
+        document.getElementById("countdownNumber");
+
+    message =
+        document.getElementById("message");
+
 
     if (
         !firstDownload ||
@@ -65,11 +82,38 @@ function initializeDownloadPage() {
         !countdownNumber ||
         !message
     ) {
+
         console.error(
             "WALAWWA: Required HTML elements are missing."
         );
+
         return;
     }
+
+
+    /* =========================
+       INITIAL PAGE STATE
+    ========================= */
+
+    // Countdown MUST be hidden when page opens.
+    countdown.style.display = "none";
+
+    // Download button MUST be hidden initially.
+    secondDownload.style.display = "none";
+
+    secondDownload.disabled = true;
+
+    // Continue button is visible.
+    firstDownload.style.display = "flex";
+
+    firstDownload.disabled = false;
+
+    showMessage("");
+
+
+    /* =========================
+       GET DOWNLOAD CODE
+    ========================= */
 
     const code = getDownloadCode();
 
@@ -78,12 +122,16 @@ function initializeDownloadPage() {
         code
     );
 
+
     if (!code) {
+
         firstDownload.disabled = true;
 
         firstDownload.innerHTML =
             '<span class="download-icon">!</span>' +
-            '<span>Invalid Download Link</span>';
+            '<span class="button-text">' +
+            'Invalid Download Link' +
+            '</span>';
 
         showMessage(
             "Please open a valid WALAWWA download link.",
@@ -93,88 +141,154 @@ function initializeDownloadPage() {
         return;
     }
 
-    firstDownload.style.display = "flex";
-    firstDownload.disabled = false;
 
-    secondDownload.style.display = "none";
-    secondDownload.disabled = true;
-
-    countdown.style.display = "none";
-
-    showMessage("");
+    /* =========================
+       CONTINUE DOWNLOAD
+    ========================= */
 
     firstDownload.addEventListener(
         "click",
         function () {
+
             console.log(
                 "WALAWWA: Continue Download clicked"
             );
 
+
+            /* Stop any old timer */
+            if (countdownTimer) {
+                clearInterval(countdownTimer);
+                countdownTimer = null;
+            }
+
+
+            /* Hide Continue button */
             firstDownload.style.display = "none";
+
             firstDownload.disabled = true;
 
+
+            /* Hide final Download button */
+            secondDownload.style.display = "none";
+
+            secondDownload.disabled = true;
+
+
+            /* Show countdown */
             countdown.style.display = "flex";
 
+
+            /* Start at 5 */
             let remaining = COUNTDOWN_SECONDS;
 
             countdownNumber.textContent = remaining;
 
             showMessage("");
 
-            const timer = setInterval(
+
+            /* =========================
+               COUNTDOWN
+            ========================= */
+
+            countdownTimer = setInterval(
                 function () {
+
                     remaining--;
 
-                    countdownNumber.textContent =
-                        remaining;
+                    /*
+                       Show:
+                       5
+                       4
+                       3
+                       2
+                       1
+                    */
 
-                    if (remaining <= 0) {
-                        clearInterval(timer);
+                    if (remaining > 0) {
 
-                        countdown.style.display = "none";
+                        countdownNumber.textContent =
+                            remaining;
 
-                        secondDownload.style.display =
-                            "flex";
-
-                        secondDownload.disabled = false;
-
-                        console.log(
-                            "WALAWWA: Download button ready"
-                        );
+                        return;
                     }
+
+
+                    /* =========================
+                       COUNTDOWN FINISHED
+                    ========================= */
+
+                    clearInterval(countdownTimer);
+
+                    countdownTimer = null;
+
+
+                    /* Hide countdown */
+                    countdown.style.display = "none";
+
+
+                    /* Show Download button */
+                    secondDownload.style.display = "flex";
+
+                    secondDownload.disabled = false;
+
+
+                    console.log(
+                        "WALAWWA: Download button ready"
+                    );
+
                 },
                 1000
             );
         }
     );
 
+
+    /* =========================
+       DOWNLOAD BUTTON
+    ========================= */
+
     secondDownload.addEventListener(
         "click",
         function () {
+
             console.log(
                 "WALAWWA: Download clicked"
             );
 
+
             secondDownload.disabled = true;
+
 
             const telegramLink =
                 makeTelegramLink(code);
+
 
             console.log(
                 "WALAWWA: Opening Telegram:",
                 telegramLink
             );
 
-            window.location.href = telegramLink;
+
+            window.location.href =
+                telegramLink;
         }
     );
 }
 
+
+/* =========================
+   START
+========================= */
+
 if (document.readyState === "loading") {
+
     document.addEventListener(
         "DOMContentLoaded",
         initializeDownloadPage
     );
+
 } else {
+
     initializeDownloadPage();
+
 }
