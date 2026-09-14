@@ -17,16 +17,21 @@ body {
     overflow-x: hidden;
 }
 
-/* =========================
+
+/* =========================================================
    ANIMATED BACKGROUND
-========================= */
+========================================================= */
 
 .animated-background {
     position: fixed;
     inset: 0;
+
     overflow: hidden;
+
     pointer-events: none;
+
     z-index: 0;
+
     background:
         radial-gradient(
             circle at 50% 30%,
@@ -36,80 +41,111 @@ body {
         );
 }
 
+
 .gradient-orb {
     position: absolute;
+
     border-radius: 50%;
+
     filter: blur(70px);
+
     opacity: 0.35;
 }
+
 
 .orb-1 {
     width: 300px;
     height: 300px;
+
     top: 5%;
     left: -100px;
+
     background: #7b2cff;
 }
+
 
 .orb-2 {
     width: 260px;
     height: 260px;
+
     top: 45%;
     right: -100px;
+
     background: #d400ff;
 }
+
 
 .orb-3 {
     width: 250px;
     height: 250px;
+
     bottom: -80px;
     left: 20%;
+
     background: #4c00ff;
 }
 
+
 .particle {
     position: absolute;
+
     width: 4px;
     height: 4px;
+
     border-radius: 50%;
+
     background: rgba(255, 255, 255, 0.5);
-    animation: floatParticle 8s infinite ease-in-out;
+
+    animation:
+        floatParticle 8s infinite ease-in-out;
 }
+
 
 .particle-1 {
     top: 15%;
     left: 15%;
 }
 
+
 .particle-2 {
     top: 25%;
     left: 80%;
+
     animation-delay: 1s;
 }
+
 
 .particle-3 {
     top: 55%;
     left: 10%;
+
     animation-delay: 2s;
 }
+
 
 .particle-4 {
     top: 70%;
     left: 85%;
+
     animation-delay: 3s;
 }
+
 
 .particle-5 {
     top: 82%;
     left: 30%;
+
     animation-delay: 4s;
 }
+
 
 .particle-6 {
     top: 40%;
     left: 60%;
+
     animation-delay: 5s;
 }
+
 
 @keyframes floatParticle {
 
@@ -125,33 +161,41 @@ body {
     }
 }
 
-/* =========================
+
+/* =========================================================
    MAIN PAGE
-========================= */
+========================================================= */
 
 .download-page {
     position: relative;
+
     z-index: 5;
 
     width: 100%;
+
     min-height: 100vh;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 30px 20px 40px;
 }
 
-/* =========================
+
+/* =========================================================
    DOWNLOAD CARD
-========================= */
+========================================================= */
 
 .download-card {
     position: relative;
 
     width: 100%;
+
     max-width: 430px;
 
     padding: 30px 25px 25px;
@@ -160,95 +204,115 @@ body {
 
     background: rgba(18, 10, 31, 0.94);
 
-    border: 1px solid rgba(184, 91, 255, 0.35);
+    border:
+        1px solid
+        rgba(184, 91, 255, 0.35);
 
     box-shadow:
         0 25px 70px rgba(0, 0, 0, 0.55),
         0 0 35px rgba(139, 47, 255, 0.15);
 
     backdrop-filter: blur(14px);
+
     -webkit-backdrop-filter: blur(14px);
 
     text-align: center;
 }
 
-/* =========================
+
+/* =========================================================
    LOGO
-========================= */
+========================================================= */
 
 .logo {
     font-size: 34px;
+
     font-weight: 900;
+
     letter-spacing: 4px;
 
-    background: linear-gradient(
-        90deg,
-        #ffffff,
-        #d8a5ff,
-        #ffffff
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #d8a5ff,
+            #ffffff
+        );
 
     -webkit-background-clip: text;
+
     background-clip: text;
 
     color: transparent;
 }
 
+
 .logo-line {
     width: 75px;
+
     height: 3px;
 
     margin: 10px auto 25px;
 
     border-radius: 10px;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        #a855f7,
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #a855f7,
+            transparent
+        );
 }
 
-/* =========================
+
+/* =========================================================
    DOWNLOAD AREA
-========================= */
+========================================================= */
 
 #downloadArea {
     width: 100%;
 }
 
-/* =========================
+
+/* =========================================================
    DOWNLOAD BUTTON
-========================= */
+========================================================= */
 
 .download-button {
     width: 100%;
+
     min-height: 58px;
 
     border: 0;
+
     border-radius: 14px;
 
     padding: 14px 18px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 10px;
 
     color: #ffffff;
 
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #a855f7
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a855f7
+        );
 
     box-shadow:
-        0 10px 30px rgba(124, 58, 237, 0.35);
+        0 10px 30px
+        rgba(124, 58, 237, 0.35);
 
     font-size: 16px;
+
     font-weight: 700;
 
     cursor: pointer;
@@ -259,55 +323,95 @@ body {
         filter 0.2s ease;
 }
 
+
 .download-button:hover {
     transform: translateY(-2px);
 
     box-shadow:
-        0 14px 35px rgba(124, 58, 237, 0.5);
+        0 14px 35px
+        rgba(124, 58, 237, 0.5);
 
     filter: brightness(1.08);
 }
+
 
 .download-button:active {
     transform: scale(0.98);
 }
 
+
+.download-button:disabled {
+    cursor: default;
+
+    opacity: 0.65;
+}
+
+
 .download-icon {
     font-size: 24px;
+
     line-height: 1;
+
     font-weight: 400;
 }
+
 
 .button-text {
     line-height: 1.2;
 }
 
-/* =========================
-   COUNTDOWN
-========================= */
 
-.countdown {
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+/*
+   IMPORTANT:
+
+   Countdown is HIDDEN by default.
+
+   JavaScript adds:
+   .countdown-active
+
+   only AFTER Continue Download is clicked.
+*/
+
+#countdown {
+    display: none !important;
+
     width: 100%;
 
     padding: 18px 10px;
 
-    text-align: center !important;
-
-    display: flex;
-    flex-direction: column;
     align-items: center;
+
     justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
 }
 
+
 /*
-   Countdown number only.
-   No label and no "Please wait..."
+   This is the ONLY way the countdown becomes visible.
 */
 
-.countdown-number {
+#countdown.countdown-active {
+    display: flex !important;
+}
+
+
+/*
+   Large countdown number
+*/
+
+#countdownNumber {
     width: 100%;
 
     margin: 0 auto;
+
+    padding: 0;
 
     font-size: 64px;
 
@@ -320,12 +424,14 @@ body {
     color: #ffffff;
 
     text-shadow:
-        0 0 25px rgba(168, 85, 247, 0.65);
+        0 0 25px
+        rgba(168, 85, 247, 0.65);
 }
 
-/* =========================
+
+/* =========================================================
    MESSAGE
-========================= */
+========================================================= */
 
 .message {
     min-height: 5px;
@@ -333,6 +439,7 @@ body {
     margin-top: 12px;
 
     font-size: 13px;
+
     line-height: 1.5;
 
     color: #d6c7e4;
@@ -340,9 +447,10 @@ body {
     text-align: center;
 }
 
-/* =========================
+
+/* =========================================================
    SINHALA DESCRIPTION
-========================= */
+========================================================= */
 
 .sinhala-description {
     margin-top: 22px;
@@ -351,9 +459,12 @@ body {
 
     border-radius: 12px;
 
-    background: rgba(255, 255, 255, 0.035);
+    background:
+        rgba(255, 255, 255, 0.035);
 
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
 
     color: #bdb0ca;
 
@@ -364,13 +475,15 @@ body {
     text-align: center;
 }
 
+
 .sinhala-description strong {
     color: #d9a7ff;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 .download-footer {
     margin-top: 16px;
@@ -379,16 +492,20 @@ body {
 
     text-align: center;
 
-    color: rgba(255, 255, 255, 0.45);
+    color:
+        rgba(255, 255, 255, 0.45);
 
     font-size: 12px;
 
     line-height: 1.4;
 }
 
+
 .download-footer strong {
-    color: rgba(255, 255, 255, 0.7);
+    color:
+        rgba(255, 255, 255, 0.7);
 }
+
 
 /* =========================================================
    MOBILE
@@ -410,9 +527,10 @@ body {
         overflow-x: hidden !important;
     }
 
-    /* =========================
+
+    /* =====================================================
        WALAWWA BOX
-    ========================= */
+    ===================================================== */
 
     .download-card {
         position: absolute !important;
@@ -421,20 +539,24 @@ body {
 
         left: 50% !important;
 
-        width: calc(100% - 56px) !important;
+        width:
+            calc(100% - 56px) !important;
 
         max-width: 360px !important;
 
         margin: 0 !important;
 
-        padding: 20px 14px 18px !important;
+        padding:
+            20px 14px 18px !important;
 
         border-radius: 18px !important;
 
-        transform: translateX(-50%) !important;
+        transform:
+            translateX(-50%) !important;
 
         z-index: 20 !important;
     }
+
 
     .logo {
         font-size: 28px !important;
@@ -442,79 +564,95 @@ body {
         letter-spacing: 3px !important;
     }
 
+
     .logo-line {
         margin-top: 8px !important;
 
         margin-bottom: 18px !important;
     }
 
-    /* =========================
+
+    /* =====================================================
        BUTTON
-    ========================= */
+    ===================================================== */
 
     .download-button {
         min-height: 52px !important;
 
-        padding: 12px 14px !important;
+        padding:
+            12px 14px !important;
 
         font-size: 14px !important;
     }
+
 
     .download-icon {
         font-size: 21px !important;
     }
 
-    /* =========================
-       MOBILE COUNTDOWN
-    ========================= */
 
-    .countdown {
+    /* =====================================================
+       MOBILE COUNTDOWN
+    ===================================================== */
+
+    #countdown {
         width: 100% !important;
 
-        padding: 15px 8px !important;
+        padding:
+            15px 8px !important;
 
-        display: flex !important;
+        align-items:
+            center !important;
 
-        flex-direction: column !important;
+        justify-content:
+            center !important;
 
-        align-items: center !important;
-
-        justify-content: center !important;
-
-        text-align: center !important;
+        text-align:
+            center !important;
     }
 
-    .countdown-number {
+
+    #countdown.countdown-active {
+        display: flex !important;
+    }
+
+
+    #countdownNumber {
         width: 100% !important;
 
-        margin: 0 auto !important;
+        margin:
+            0 auto !important;
 
         font-size: 56px !important;
 
         line-height: 1 !important;
 
-        text-align: center !important;
+        text-align:
+            center !important;
 
         display: block !important;
     }
 
-    /* =========================
+
+    /* =====================================================
        SINHALA DESCRIPTION
-    ========================= */
+    ===================================================== */
 
     .sinhala-description {
         margin-top: 17px !important;
 
-        padding: 11px 9px !important;
+        padding:
+            11px 9px !important;
 
         font-size: 12px !important;
 
         line-height: 1.7 !important;
     }
 
-    /* =========================
+
+    /* =====================================================
        POWERED BY MACO
-    ========================= */
+    ===================================================== */
 
     .download-footer {
         position: absolute !important;
@@ -523,7 +661,8 @@ body {
 
         left: 50% !important;
 
-        width: calc(100% - 56px) !important;
+        width:
+            calc(100% - 56px) !important;
 
         max-width: 360px !important;
 
@@ -531,15 +670,18 @@ body {
 
         padding: 0 !important;
 
-        transform: translateX(-50%) !important;
+        transform:
+            translateX(-50%) !important;
 
-        text-align: center !important;
+        text-align:
+            center !important;
 
         font-size: 12px !important;
 
         z-index: 21 !important;
     }
 }
+
 
 /* =========================================================
    SMALL PHONES
@@ -550,39 +692,50 @@ body {
     .download-card {
         top: 220px !important;
 
-        width: calc(100% - 40px) !important;
+        width:
+            calc(100% - 40px) !important;
 
         max-width: 350px !important;
 
-        padding: 18px 12px 16px !important;
+        padding:
+            18px 12px 16px !important;
     }
 
+
     .download-footer {
-        width: calc(100% - 40px) !important;
+        width:
+            calc(100% - 40px) !important;
 
         top: 630px !important;
 
         font-size: 11px !important;
     }
 
+
     .logo {
         font-size: 26px !important;
     }
 
-    .countdown {
-        padding: 15px 5px !important;
+
+    #countdown {
+        padding:
+            15px 5px !important;
     }
 
-    .countdown-number {
+
+    #countdownNumber {
         font-size: 54px !important;
 
-        text-align: center !important;
+        text-align:
+            center !important;
     }
+
 
     .sinhala-description {
         font-size: 11px !important;
     }
 }
+
 
 /* =========================================================
    VERY SMALL PHONES
@@ -593,35 +746,45 @@ body {
     .download-card {
         top: 215px !important;
 
-        width: calc(100% - 32px) !important;
+        width:
+            calc(100% - 32px) !important;
     }
 
+
     .download-footer {
-        width: calc(100% - 32px) !important;
+        width:
+            calc(100% - 32px) !important;
 
         top: 610px !important;
 
         font-size: 10px !important;
     }
 
+
     .logo {
         font-size: 24px !important;
     }
 
-    .countdown {
-        padding: 14px 4px !important;
+
+    #countdown {
+        padding:
+            14px 4px !important;
     }
 
-    .countdown-number {
+
+    #countdownNumber {
         font-size: 52px !important;
 
-        text-align: center !important;
+        text-align:
+            center !important;
     }
+
 
     .sinhala-description {
         font-size: 11px !important;
     }
 }
+
 
 /* =========================================================
    LANDSCAPE MOBILE
@@ -633,18 +796,23 @@ body {
         min-height: 900px !important;
     }
 
+
     .download-card {
         top: 90px !important;
     }
+
 
     .download-footer {
         top: 520px !important;
     }
 
-    .countdown-number {
-        text-align: center !important;
+
+    #countdownNumber {
+        text-align:
+            center !important;
     }
 }
+
 
 /* =========================================================
    DESKTOP
@@ -656,22 +824,25 @@ body {
         min-height: 100vh;
     }
 
+
     .download-card {
         margin: 0 auto;
     }
 
-    .countdown {
-        text-align: center !important;
-    }
 
-    .countdown-number {
+    #countdownNumber {
         width: 100% !important;
 
-        margin-left: auto !important;
-        margin-right: auto !important;
+        margin-left:
+            auto !important;
 
-        text-align: center !important;
+        margin-right:
+            auto !important;
+
+        text-align:
+            center !important;
     }
+
 
     .download-footer {
         margin-top: 16px;
