@@ -279,25 +279,35 @@ body {
 ========================= */
 
 .countdown {
-    padding: 12px 10px 18px;
+    width: 100%;
+
+    padding: 15px 10px 20px;
+
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/*
-   PREPARING DOWNLOAD REMOVED
-   PLEASE WAIT REMOVED
-*/
-
+/* Hide PREPARING DOWNLOAD */
 .countdown-label {
     display: none !important;
 }
 
-.countdown-small {
-    display: none !important;
-}
-
+/* BIG CENTER NUMBER */
 .countdown-number {
-    margin-top: 0;
+    width: 100%;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
 
     font-size: 78px;
     font-weight: 900;
@@ -307,8 +317,13 @@ body {
     color: #ffffff;
 
     text-shadow:
-        0 0 25px rgba(168, 85, 247, 0.75),
-        0 0 50px rgba(168, 85, 247, 0.35);
+        0 0 25px rgba(168, 85, 247, 0.65),
+        0 0 45px rgba(168, 85, 247, 0.25);
+}
+
+/* Hide PLEASE WAIT */
+.countdown-small {
+    display: none !important;
 }
 
 /* =========================
@@ -443,18 +458,24 @@ body {
         font-size: 21px !important;
     }
 
-    /* BIG COUNTDOWN */
+    /* =========================
+       MOBILE COUNTDOWN
+    ========================= */
 
     .countdown {
-        padding: 8px 8px 16px !important;
-    }
+        width: 100% !important;
 
-    .countdown-number {
-        font-size: 78px !important;
+        padding: 12px 0 18px !important;
 
-        line-height: 0.95 !important;
+        display: flex !important;
 
-        margin: 0 !important;
+        flex-direction: column !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        text-align: center !important;
     }
 
     .countdown-label,
@@ -462,12 +483,34 @@ body {
         display: none !important;
     }
 
+    .countdown-number {
+        width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        text-align: center !important;
+
+        font-size: 82px !important;
+
+        line-height: 0.95 !important;
+    }
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
     .message {
         margin-top: 10px !important;
     }
 
     /* =========================
-       GUIDE MESSAGE
+       SINHALA DESCRIPTION
     ========================= */
 
     .sinhala-description {
@@ -480,9 +523,9 @@ body {
         line-height: 1.7 !important;
     }
 
-    /*
+    /* =========================
        POWERED BY MACO
-    */
+    ========================= */
 
     .download-footer {
         position: absolute !important;
@@ -526,7 +569,16 @@ body {
     }
 
     .countdown-number {
-        font-size: 72px !important;
+        width: 100% !important;
+
+        font-size: 76px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        text-align: center !important;
     }
 
     .download-footer {
@@ -559,7 +611,16 @@ body {
     }
 
     .countdown-number {
-        font-size: 68px !important;
+        width: 100% !important;
+
+        font-size: 70px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        text-align: center !important;
     }
 
     .download-footer {
@@ -591,6 +652,10 @@ body {
 
     .download-card {
         top: 90px !important;
+    }
+
+    .countdown-number {
+        font-size: 70px !important;
     }
 
     .download-footer {
