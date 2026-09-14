@@ -279,21 +279,27 @@ body {
 ========================= */
 
 .countdown {
-    padding: 18px 10px;
+    padding: 12px 10px 18px;
     text-align: center;
 }
 
+/*
+   PREPARING DOWNLOAD REMOVED
+   PLEASE WAIT REMOVED
+*/
+
 .countdown-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #bfa8d8;
+    display: none !important;
+}
+
+.countdown-small {
+    display: none !important;
 }
 
 .countdown-number {
-    margin-top: 8px;
+    margin-top: 0;
 
-    font-size: 48px;
+    font-size: 78px;
     font-weight: 900;
 
     line-height: 1;
@@ -301,15 +307,8 @@ body {
     color: #ffffff;
 
     text-shadow:
-        0 0 25px rgba(168, 85, 247, 0.65);
-}
-
-.countdown-small {
-    margin-top: 8px;
-
-    font-size: 12px;
-
-    color: #a99ab7;
+        0 0 25px rgba(168, 85, 247, 0.75),
+        0 0 50px rgba(168, 85, 247, 0.35);
 }
 
 /* =========================
@@ -382,12 +381,6 @@ body {
 
 @media (max-width: 520px) {
 
-    /*
-       IMPORTANT:
-       Monetag can insert its own elements into the page flow.
-       Therefore the WALAWWA card is positioned independently.
-    */
-
     .download-page {
         position: relative !important;
 
@@ -450,13 +443,32 @@ body {
         font-size: 21px !important;
     }
 
+    /* BIG COUNTDOWN */
+
     .countdown {
-        padding: 15px 8px !important;
+        padding: 8px 8px 16px !important;
     }
 
     .countdown-number {
-        font-size: 42px !important;
+        font-size: 78px !important;
+
+        line-height: 0.95 !important;
+
+        margin: 0 !important;
     }
+
+    .countdown-label,
+    .countdown-small {
+        display: none !important;
+    }
+
+    .message {
+        margin-top: 10px !important;
+    }
+
+    /* =========================
+       GUIDE MESSAGE
+    ========================= */
 
     .sinhala-description {
         margin-top: 17px !important;
@@ -470,13 +482,12 @@ body {
 
     /*
        POWERED BY MACO
-       This is intentionally positioned just below the card.
     */
 
     .download-footer {
         position: absolute !important;
 
-        top: 0 !important;
+        top: 650px !important;
 
         left: 50% !important;
 
@@ -496,15 +507,6 @@ body {
 
         z-index: 21 !important;
     }
-
-    /*
-       The footer's position is calculated from the card area.
-       Adjust this value if the card becomes taller.
-    */
-
-    .download-footer {
-        top: 650px !important;
-    }
 }
 
 /* =========================================================
@@ -521,6 +523,10 @@ body {
         max-width: 350px !important;
 
         padding: 18px 12px 16px !important;
+    }
+
+    .countdown-number {
+        font-size: 72px !important;
     }
 
     .download-footer {
@@ -552,6 +558,10 @@ body {
         width: calc(100% - 32px) !important;
     }
 
+    .countdown-number {
+        font-size: 68px !important;
+    }
+
     .download-footer {
         width: calc(100% - 32px) !important;
 
@@ -562,6 +572,10 @@ body {
 
     .logo {
         font-size: 24px !important;
+    }
+
+    .sinhala-description {
+        font-size: 11px !important;
     }
 }
 
