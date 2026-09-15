@@ -26,22 +26,15 @@ def _initialize_firebase():
             "FIREBASE_DATABASE_URL is not configured."
         )
 
-    service_account_path = (
-        FIREBASE_SERVICE_ACCOUNT
-    )
+    service_account_path = FIREBASE_SERVICE_ACCOUNT
 
-    if not os.path.exists(
-        service_account_path
-    ):
-
+    if not os.path.exists(service_account_path):
         raise FileNotFoundError(
             "Firebase service account file not found: "
             f"{service_account_path}"
         )
 
-    credential = credentials.Certificate(
-        service_account_path
-    )
+    credential = credentials.Certificate(service_account_path)
 
     firebase_admin.initialize_app(
         credential,
@@ -59,7 +52,6 @@ _initialize_firebase()
 # ======================================
 
 def _ref(path: str):
-
     return db.reference(path)
 
 
@@ -81,29 +73,19 @@ def save_file(
     }
 
     if unlock_channel_id is not None:
-
-        data[
-            "unlock_channel_id"
-        ] = unlock_channel_id
+        data["unlock_channel_id"] = unlock_channel_id
 
     if unlock_join_link:
+        data["unlock_join_link"] = unlock_join_link
 
-        data[
-            "unlock_join_link"
-        ] = unlock_join_link
-
-    _ref(
-        f"files/{code}"
-    ).set(data)
+    _ref(f"files/{code}").set(data)
 
 
 def get_file(
     code: str,
 ) -> Optional[List[int]]:
 
-    data = _ref(
-        f"files/{code}"
-    ).get()
+    data = _ref(f"files/{code}").get()
 
     if not data:
         return None
@@ -111,27 +93,20 @@ def get_file(
     if isinstance(data, list):
         return data
 
-    return data.get(
-        "message_ids"
-    )
+    return data.get("message_ids")
 
 
 def get_post_type(
     code: str,
 ) -> Optional[str]:
 
-    data = _ref(
-        f"files/{code}"
-    ).get()
+    data = _ref(f"files/{code}").get()
 
     if not data:
         return None
 
     if isinstance(data, dict):
-
-        return data.get(
-            "post_type"
-        )
+        return data.get("post_type")
 
     return None
 
@@ -140,32 +115,34 @@ def get_unlock_channel_id(
     code: str,
 ) -> Optional[int]:
 
-    data = _ref(
-        f"files/{code}"
-    ).get()
+    data = _ref(f"files/{code}").get()
 
     if not data:
         return None
 
-    return data.get(
-        "unlock_channel_id"
-    )
+    return data.get("unlock_channel_id")
 
 
 def get_unlock_join_link(
     code: str,
 ) -> Optional[str]:
 
-    data = _ref(
-        f"files/{code}"
-    ).get()
+    data = _ref(f"files/{code}").get()
 
     if not data:
         return None
 
-    return data.get(
-        "unlock_join_link"
-    )
+    return data.get("unlock_join_link")
+
+
+def delete_file(
+    code: str,
+):
+
+    # IMPORTANT:
+    # This only removes the Firebase metadata/download code.
+    # It does NOT delete the Telegram message in CHANNEL_ID.
+    _ref(f"files/{code}").delete()
 
 
 # ======================================
@@ -176,9 +153,7 @@ def add_vip(
     user_id: int,
 ):
 
-    _ref(
-        f"vip_users/{user_id}"
-    ).set(
+    _ref(f"vip_users/{user_id}").set(
         {
             "user_id": user_id,
         }
@@ -189,27 +164,21 @@ def remove_vip(
     user_id: int,
 ):
 
-    _ref(
-        f"vip_users/{user_id}"
-    ).delete()
+    _ref(f"vip_users/{user_id}").delete()
 
 
 def is_vip(
     user_id: int,
 ) -> bool:
 
-    result = _ref(
-        f"vip_users/{user_id}"
-    ).get()
+    result = _ref(f"vip_users/{user_id}").get()
 
     return result is not None
 
 
 def get_vip_list() -> List[int]:
 
-    data = _ref(
-        "vip_users"
-    ).get()
+    data = _ref("vip_users").get()
 
     if not data:
         return []
@@ -219,14 +188,9 @@ def get_vip_list() -> List[int]:
     for key in data.keys():
 
         try:
-            users.append(
-                int(key)
-            )
+            users.append(int(key))
 
-        except (
-            ValueError,
-            TypeError,
-        ):
+        except (ValueError, TypeError):
             continue
 
     return sorted(users)
@@ -241,16 +205,12 @@ def save_schedule(
     data: Dict[str, Any],
 ):
 
-    _ref(
-        f"schedules/{schedule_id}"
-    ).set(data)
+    _ref(f"schedules/{schedule_id}").set(data)
 
 
 def get_schedules() -> Dict[str, Any]:
 
-    data = _ref(
-        "schedules"
-    ).get()
+    data = _ref("schedules").get()
 
     if not data:
         return {}
@@ -262,22 +222,47 @@ def delete_schedule(
     schedule_id: str,
 ):
 
-    _ref(
-        f"schedules/{schedule_id}"
-    ).delete()
+    _ref(f"schedules/{schedule_id}").delete()
 
 
 # ======================================
-# OPTIONAL FILE DELETE
+# EXPIRY / DELETION JOBS
+# ======================================
+#
+# These are separate from schedules.
+# A schedule is the job that waits for the
+# original posting time.
+# An expiry job is the persistent job that
+# waits for the 48-hour deletion time.
+#
+# Keeping them separate prevents the existing
+# scheduler from treating an expiry job as a
+# scheduled post.
 # ======================================
 
-def delete_file(
-    code: str,
+def save_expiry_job(
+    job_id: str,
+    data: Dict[str, Any],
 ):
 
-    _ref(
-        f"files/{code}"
-    ).delete()
+    _ref(f"expiry_jobs/{job_id}").set(data)
+
+
+def get_expiry_jobs() -> Dict[str, Any]:
+
+    data = _ref("expiry_jobs").get()
+
+    if not data:
+        return {}
+
+    return data
+
+
+def delete_expiry_job(
+    job_id: str,
+):
+
+    _ref(f"expiry_jobs/{job_id}").delete()
 
 
 # ======================================
