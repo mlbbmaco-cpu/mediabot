@@ -2,7 +2,7 @@ import asyncio
 import secrets
 import telegram
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from types import SimpleNamespace
 
@@ -43,6 +43,10 @@ from firebase import (
     save_schedule,
     get_schedules,
     delete_schedule,
+    save_expiry_job,
+    get_expiry_jobs,
+    delete_expiry_job,
+    delete_file,
 )
 
 
@@ -139,6 +143,7 @@ public_send_tasks = {}
 # ======================================
 
 scheduled_tasks = set()
+expiry_tasks = set()
 
 
 # ======================================
@@ -478,6 +483,258 @@ async def viplist_command(
 
 
 # ======================================
+# PERSISTENT EXPIRY JOBS
+# ======================================
+
+async def save_expiry_task(
+    application,
+    *,
+    job_id,
+    job_type,
+    chat_id,
+    message_id,
+    expires_at,
+    code=None,
+):
+
+    data = {
+        "type": job_type,
+        "chat_id": int(chat_id),
+        "message_id": int(message_id),
+        "expires_at": float(expires_at),
+    }
+
+    if code:
+        data["code"] = str(code)
+
+    save_expiry_job(
+        job_id,
+        data,
+    )
+
+    task = application.create_task(
+        run_expiry_job(
+            application,
+            job_id,
+            data,
+        )
+    )
+
+    expiry_tasks.add(task)
+
+    return task
+
+
+async def run_expiry_job(
+    application,
+    job_id,
+    data,
+):
+
+    task = asyncio.current_task()
+
+    try:
+
+        expires_at = float(
+            data.get("expires_at", 0)
+        )
+
+        while True:
+
+            remaining = (
+                expires_at
+                - datetime.now(timezone.utc).timestamp()
+            )
+
+            if remaining <= 0:
+                break
+
+            await asyncio.sleep(
+                min(remaining, 60)
+            )
+
+        chat_id = int(data["chat_id"])
+        message_id = int(data["message_id"])
+        job_type = data.get("type", "unknown")
+
+        print(
+            f"⏰ Expiry reached: {job_id} "
+            f"({job_type})"
+        )
+
+        try:
+
+            await application.bot.delete_message(
+                chat_id=chat_id,
+                message_id=message_id,
+            )
+
+            print(
+                f"🗑 Telegram message deleted: "
+                f"{chat_id}/{message_id}"
+            )
+
+        except telegram.error.BadRequest as e:
+
+            # Already deleted / inaccessible messages should not
+            # keep the Firebase job forever.
+            print(
+                f"⚠️ Telegram message already unavailable: "
+                f"{chat_id}/{message_id}: {e}"
+            )
+
+        except Exception as e:
+
+            print(
+                f"⚠️ Telegram deletion failed for "
+                f"{chat_id}/{message_id}: {e}"
+            )
+
+        # The channel-post expiry is the lifetime of the
+        # download code. Removing the Firebase file here makes
+        # the public link expire permanently.
+        if job_type == "channel_post":
+
+            code = data.get("code")
+
+            if code:
+
+                try:
+
+                    delete_file(code)
+
+                    print(
+                        f"🗑 Firebase download code deleted: "
+                        f"{code}"
+                    )
+
+                except Exception as e:
+
+                    print(
+                        f"⚠️ Firebase code deletion failed "
+                        f"for {code}: {e}"
+                    )
+
+        try:
+
+            delete_expiry_job(
+                job_id
+            )
+
+            print(
+                f"🗑 Firebase expiry job deleted: "
+                f"{job_id}"
+            )
+
+        except Exception as e:
+
+            print(
+                f"⚠️ Could not delete expiry job "
+                f"{job_id}: {e}"
+            )
+
+    except asyncio.CancelledError:
+
+        print(
+            f"⚠️ Expiry task cancelled: {job_id}"
+        )
+
+        raise
+
+    except Exception as e:
+
+        print(
+            f"❌ Expiry task failed {job_id}: {e}"
+        )
+
+    finally:
+
+        if task:
+            expiry_tasks.discard(task)
+
+
+async def restore_expiry_jobs(
+    application,
+):
+
+    print(
+        "================================"
+    )
+
+    print(
+        "🧹 RESTORING FIREBASE EXPIRY JOBS"
+    )
+
+    print(
+        "================================"
+    )
+
+    try:
+
+        jobs = get_expiry_jobs()
+
+    except Exception as e:
+
+        print(
+            f"❌ Could not load expiry jobs: {e}"
+        )
+
+        return
+
+    if not jobs:
+
+        print(
+            "ℹ️ No saved expiry jobs."
+        )
+
+        return
+
+    restored = 0
+
+    for job_id, data in jobs.items():
+
+        try:
+
+            if not isinstance(data, dict):
+                continue
+
+            if not data.get("chat_id"):
+                continue
+
+            if not data.get("message_id"):
+                continue
+
+            if not data.get("expires_at"):
+                continue
+
+            task = application.create_task(
+                run_expiry_job(
+                    application,
+                    str(job_id),
+                    dict(data),
+                )
+            )
+
+            expiry_tasks.add(task)
+            restored += 1
+
+            print(
+                f"✅ Restored expiry job {job_id}"
+            )
+
+        except Exception as e:
+
+            print(
+                f"❌ Failed restoring expiry job "
+                f"{job_id}: {e}"
+            )
+
+    print(
+        f"🧹 Restored {restored} expiry job(s)"
+    )
+
+
+# ======================================
 # DOWNLOAD FILES
 # ======================================
 
@@ -490,6 +747,7 @@ async def send_download_files(
     delete_after_48h,
     protect_content=True,
     label="download",
+    code=None,
 ):
 
     sent = []
@@ -525,37 +783,45 @@ async def send_download_files(
                 f"❌ Send error: {e}"
             )
 
-    if delete_after_48h:
+    if delete_after_48h and sent:
 
-        async def delete_later():
-
-            print(
-                f"⏳ Delete task started for "
-                f"{len(sent)} messages"
-            )
-
-            await asyncio.sleep(
-                CONTENT_DELETE_AFTER_SECONDS
-            )
-
-            for msg in sent:
-
-                try:
-
-                    await bot.delete_message(
-                        chat_id=chat_id,
-                        message_id=msg,
-                    )
-
-                except Exception as e:
-
-                    print(
-                        f"Delete error: {e}"
-                    )
-
-        application.create_task(
-            delete_later()
+        expires_at = (
+            datetime.now(timezone.utc).timestamp()
+            + CONTENT_DELETE_AFTER_SECONDS
         )
+
+        for msg in sent:
+
+            job_id = (
+                f"user_download_"
+                f"{chat_id}_"
+                f"{msg}_"
+                f"{secrets.token_hex(4)}"
+            )
+
+            try:
+
+                await save_expiry_task(
+                    application,
+                    job_id=job_id,
+                    job_type="user_download",
+                    chat_id=chat_id,
+                    message_id=msg,
+                    expires_at=expires_at,
+                    code=code,
+                )
+
+                print(
+                    f"⏳ Persistent user deletion saved: "
+                    f"{job_id}"
+                )
+
+            except Exception as e:
+
+                print(
+                    f"⚠️ Could not save user expiry job "
+                    f"{job_id}: {e}"
+                )
 
 
 # ======================================
@@ -1254,6 +1520,7 @@ async def start(
                 delete_after_48h=False,
                 protect_content=False,
                 label="vip",
+                code=real_code,
             )
 
             return
@@ -1484,6 +1751,7 @@ async def unlock_video(
                 delete_after_48h=True,
                 protect_content=True,
                 label="unlock",
+                code=code,
             )
 
             return
@@ -1689,35 +1957,65 @@ async def send_post_to_channel(
                 f"{result.message_id}"
             )
 
-            # Delete the public channel post automatically after 48 hours.
-            async def delete_post_later():
-                print(
-                    f"⏳ Channel post {result.message_id} "
-                    f"will be deleted after 48 hours."
-                )
+            # Persist the public post's 48-hour expiry in Firebase.
+            # This survives Northflank/container restarts.
+            expires_at = (
+                datetime.now(timezone.utc).timestamp()
+                + POST_DELETE_AFTER_SECONDS
+            )
 
-                await asyncio.sleep(
-                    POST_DELETE_AFTER_SECONDS
-                )
+            expiry_job_id = (
+                f"channel_post_"
+                f"{POST_CHANNEL_ID}_"
+                f"{result.message_id}"
+            )
+
+            await save_expiry_task(
+                context.application,
+                job_id=expiry_job_id,
+                job_type="channel_post",
+                chat_id=POST_CHANNEL_ID,
+                message_id=result.message_id,
+                expires_at=expires_at,
+                code=code,
+            )
+
+            # Save the published post details into the schedule record
+            # before the scheduled record is removed. This gives Firebase
+            # a complete record of what was actually published.
+            schedule_id = data.get("schedule_id")
+
+            if schedule_id:
 
                 try:
-                    await context.bot.delete_message(
-                        chat_id=POST_CHANNEL_ID,
-                        message_id=result.message_id,
-                    )
-                    print(
-                        f"🗑 Channel post deleted: "
-                        f"{result.message_id}"
-                    )
-                except Exception as e:
-                    print(
-                        f"⚠️ Channel post deletion failed "
-                        f"for {result.message_id}: {e}"
+
+                    published_data = dict(data)
+                    published_data.pop("media_message", None)
+                    published_data["status"] = "published"
+                    published_data["published_message_id"] = result.message_id
+                    published_data["published_chat_id"] = POST_CHANNEL_ID
+                    published_data["published_at"] = datetime.now(timezone.utc).isoformat()
+                    published_data["expires_at"] = datetime.fromtimestamp(
+                        expires_at,
+                        tz=timezone.utc,
+                    ).isoformat()
+                    published_data["expiry_job_id"] = expiry_job_id
+
+                    save_schedule(
+                        str(schedule_id),
+                        published_data,
                     )
 
-            context.application.create_task(
-                delete_post_later()
-            )
+                    print(
+                        f"💾 Published scheduled-post details saved: "
+                        f"{schedule_id}"
+                    )
+
+                except Exception as e:
+
+                    print(
+                        f"⚠️ Could not update scheduled-post details: {e}"
+                    )
 
             return result
 
@@ -3495,6 +3793,10 @@ async def post_init(
 ):
 
     await restore_saved_schedules(
+        application
+    )
+
+    await restore_expiry_jobs(
         application
     )
 
