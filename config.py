@@ -19,14 +19,20 @@ def get_env(name, default=""):
     Get an environment variable safely.
     Removes leading/trailing whitespace.
     """
-    return os.getenv(name, default).strip()
+    return os.getenv(
+        name,
+        default,
+    ).strip()
 
 
 def get_int_env(name, default=0):
     """
     Get an integer environment variable safely.
     """
-    value = get_env(name, str(default))
+    value = get_env(
+        name,
+        str(default),
+    )
 
     try:
         return int(value)
@@ -109,18 +115,15 @@ if not FIREBASE_DATABASE_URL:
 # FIREBASE SERVICE ACCOUNT
 # ======================================
 
-# IMPORTANT:
-#
-# This should be the PATH to the Firebase
-# service-account JSON file mounted by
-# Northflank.
+# Path to the Firebase service-account
+# JSON file mounted by Northflank.
 #
 # Example:
 #
-# /app/secrets/walwwa-firebase-adminsdk-fbsvc-eaad228f68.json
+# /app/secrets/firebase-service-account.json
 #
 # Do NOT put the JSON contents here.
-#
+
 FIREBASE_SERVICE_ACCOUNT = get_env(
     "FIREBASE_SERVICE_ACCOUNT",
     "firebase-service-account.json",
@@ -144,6 +147,59 @@ WEB_URL = get_env(
 SCHEDULE_TIMEZONE = get_env(
     "SCHEDULE_TIMEZONE",
     "Asia/Colombo",
+)
+
+
+# ======================================
+# CONTENT / POST EXPIRY
+# ======================================
+
+# Files sent to users expire after 48 hours.
+CONTENT_DELETE_AFTER_HOURS = get_int_env(
+    "CONTENT_DELETE_AFTER_HOURS",
+    48,
+)
+
+
+# Public channel posts expire after 48 hours.
+POST_DELETE_AFTER_HOURS = get_int_env(
+    "POST_DELETE_AFTER_HOURS",
+    48,
+)
+
+
+# Convert hours to seconds for asyncio.sleep()
+CONTENT_DELETE_AFTER_SECONDS = (
+    CONTENT_DELETE_AFTER_HOURS * 60 * 60
+)
+
+POST_DELETE_AFTER_SECONDS = (
+    POST_DELETE_AFTER_HOURS * 60 * 60
+)
+
+
+# Caption automatically added to every post.
+POST_EXPIRY_TEXT = (
+    '" පැය 48 කින් පසු වීඩියෝ ඩිලීට් වනු ඇත "'
+)
+
+
+# ======================================
+# VIP
+# ======================================
+
+VIP_ENABLED = (
+    get_env(
+        "VIP_ENABLED",
+        "false",
+    ).lower()
+    == "true"
+)
+
+
+VIP_TAG = get_env(
+    "VIP_TAG",
+    "💎 VIP CONTENT",
 )
 
 
@@ -172,11 +228,13 @@ print(
 )
 
 print(
-    f"UPLOAD_CHANNEL_ID: {UPLOAD_CHANNEL_ID}"
+    f"UPLOAD_CHANNEL_ID: "
+    f"{UPLOAD_CHANNEL_ID}"
 )
 
 print(
-    f"POST_CHANNEL_ID: {POST_CHANNEL_ID}"
+    f"POST_CHANNEL_ID: "
+    f"{POST_CHANNEL_ID}"
 )
 
 print(
@@ -196,6 +254,21 @@ print(
 print(
     f"SCHEDULE_TIMEZONE: "
     f"{SCHEDULE_TIMEZONE}"
+)
+
+print(
+    f"CONTENT_DELETE_AFTER_HOURS: "
+    f"{CONTENT_DELETE_AFTER_HOURS}"
+)
+
+print(
+    f"POST_DELETE_AFTER_HOURS: "
+    f"{POST_DELETE_AFTER_HOURS}"
+)
+
+print(
+    f"VIP_ENABLED: "
+    f"{VIP_ENABLED}"
 )
 
 print(
