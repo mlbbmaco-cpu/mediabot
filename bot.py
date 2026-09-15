@@ -64,6 +64,17 @@ VIP_TAG = "💎 VIP CONTENT"
 WATCH_BUTTON_TEXT = "🎬 Watch Free ▶️"
 VIP_BUTTON_TEXT = "👑 VIP Access"
 
+# ======================================
+# CONTENT EXPIRATION
+# ======================================
+
+# Both downloaded copies sent to users and public channel posts
+# expire after 48 hours.
+CONTENT_DELETE_AFTER_SECONDS = 48 * 60 * 60
+POST_DELETE_AFTER_SECONDS = 48 * 60 * 60
+
+POST_EXPIRY_TEXT = "\" පැය 48 කින් පසු වීඩියෝ ඩිලීට් වනු ඇත \""
+
 STOP_UPLOAD_BUTTON_TEXT = "🛑 Stop Uploading"
 
 SCHEDULE_TIMEZONE = ZoneInfo("Asia/Colombo")
@@ -476,7 +487,7 @@ async def send_download_files(
     chat_id,
     message_ids,
     application,
-    delete_after_24h,
+    delete_after_48h,
     protect_content=True,
     label="download",
 ):
@@ -514,7 +525,7 @@ async def send_download_files(
                 f"❌ Send error: {e}"
             )
 
-    if delete_after_24h:
+    if delete_after_48h:
 
         async def delete_later():
 
@@ -524,7 +535,7 @@ async def send_download_files(
             )
 
             await asyncio.sleep(
-                86400
+                CONTENT_DELETE_AFTER_SECONDS
             )
 
             for msg in sent:
@@ -1240,7 +1251,7 @@ async def start(
                 chat_id=update.effective_chat.id,
                 message_ids=message_ids,
                 application=context.application,
-                delete_after_24h=False,
+                delete_after_48h=False,
                 protect_content=False,
                 label="vip",
             )
@@ -1307,7 +1318,7 @@ async def start(
             chat_id=update.effective_chat.id,
             message_ids=message_ids,
             application=context.application,
-            delete_after_24h=False,
+            delete_after_48h=False,
             protect_content=False,
             label="vip user",
         )
@@ -1380,7 +1391,7 @@ async def start(
         chat_id=update.effective_chat.id,
         message_ids=message_ids,
         application=context.application,
-        delete_after_24h=True,
+        delete_after_48h=True,
         protect_content=True,
         label="normal",
     )
@@ -1431,7 +1442,7 @@ async def unlock_video(
             chat_id=query.message.chat.id,
             message_ids=message_ids,
             application=context.application,
-            delete_after_24h=False,
+            delete_after_48h=False,
             protect_content=False,
             label="vip unlock",
         )
@@ -1470,7 +1481,7 @@ async def unlock_video(
                 chat_id=query.message.chat.id,
                 message_ids=message_ids,
                 application=context.application,
-                delete_after_24h=True,
+                delete_after_48h=True,
                 protect_content=True,
                 label="unlock",
             )
@@ -1522,13 +1533,22 @@ def build_post_caption(data):
         data.get("post_type") == "vip"
         and VIP_ENABLED
     ):
-
-        return (
+        base_caption = (
             f"{VIP_TAG}\n\n"
             f"{caption}"
         )
+    else:
+        base_caption = caption
 
-    return caption
+    # Automatically add the 48-hour expiry notice to EVERY post.
+    if base_caption.strip():
+        return (
+            f"{base_caption.strip()}\n\n"
+            f"{POST_EXPIRY_TEXT}"
+        )
+
+    return POST_EXPIRY_TEXT
+
 
 
 # ======================================
@@ -1667,6 +1687,36 @@ async def send_post_to_channel(
             print(
                 f"Telegram message ID: "
                 f"{result.message_id}"
+            )
+
+            # Delete the public channel post automatically after 48 hours.
+            async def delete_post_later():
+                print(
+                    f"⏳ Channel post {result.message_id} "
+                    f"will be deleted after 48 hours."
+                )
+
+                await asyncio.sleep(
+                    POST_DELETE_AFTER_SECONDS
+                )
+
+                try:
+                    await context.bot.delete_message(
+                        chat_id=POST_CHANNEL_ID,
+                        message_id=result.message_id,
+                    )
+                    print(
+                        f"🗑 Channel post deleted: "
+                        f"{result.message_id}"
+                    )
+                except Exception as e:
+                    print(
+                        f"⚠️ Channel post deletion failed "
+                        f"for {result.message_id}: {e}"
+                    )
+
+            context.application.create_task(
+                delete_post_later()
             )
 
             return result
